@@ -1,0 +1,31 @@
+import assert from "node:assert/strict";
+import { createElement as h } from "react";
+import { renderToStaticMarkup as render } from "react-dom/server";
+import { createServer } from "vite";
+const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
+try {
+  const base = "/src/_components/common/ohmygui/input/";
+  const { snapNumber, rangeBounds, rangePercent } = await server.ssrLoadModule(base + "_number.ts");
+  assert.equal(snapNumber(.35, .05, .95, .1), .35);
+  assert.equal(snapNumber(.95, .05, .95, .1), .95);
+  assert.equal(snapNumber(.99, 0, 1, .3), .9);
+  assert.equal(snapNumber(NaN, 0, 100, 1), 0);
+  assert.equal(snapNumber(3, -Infinity, Infinity, 1, 0), 3);
+  assert.equal(snapNumber(.0000003, 0, .000001, .0000001), .0000003);
+  assert.deepEqual(rangeBounds(NaN, -5, 0), { min: 0, max: 0, step: 1 });
+  assert.equal(rangePercent(5, 5, 5), 0);
+  const { Slider } = await server.ssrLoadModule(base + "Slider.tsx");
+  const slider = render(h(Slider, { label: "Volume", defaultValue: 40, showValue: true, name: "volume" }));
+  assert.match(slider, /value="40"/); assert.match(slider, /<output[^>]*>40<\/output>/);
+  const { RangeSlider } = await server.ssrLoadModule(base + "RangeSlider.tsx");
+  const range = render(h(RangeSlider, { low: 150, high: 200, min: 0, max: 100, lowName: "low", highName: "high" }));
+  assert.equal((range.match(/value="100"/g) ?? []).length, 2);
+  assert.match(range, /aria-valuemax="100"/); assert.match(range, /name="low"/); assert.match(range, /name="high"/);
+  const { Stepper } = await server.ssrLoadModule(base + "Stepper.tsx");
+  const stepper = render(h(Stepper, { label: "Amount", defaultValue: .25, min: .05, max: .95, step: .1, readOnly: true }));
+  assert.equal((stepper.match(/<button[^>]*disabled=""/g) ?? []).length, 2);
+  assert.match(stepper, /value="0.25"/);
+  assert.doesNotMatch(render(h(Stepper, { defaultValue: 3 })), /Infinity|NaN/);
+  assert.doesNotMatch(stepper, /<label[^>]*>[\s\S]*?<button[\s\S]*?<\/label>/);
+  console.log("PASS numeric inputs: finite bounds, min-anchored decimal/scientific steps, SSR defaults/output, named thumbs, no crossover, read-only steppers and no invalid numeric attributes");
+} finally { await server.close(); }

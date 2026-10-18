@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Catalog from "./_components/catalog/index.astro";
+import { catalog, type CatalogEntry } from "./_components/catalog/catalog";
+
+export function getStaticPaths() {
+  return [
+    { params: { component: undefined }, props: { entry: null } },
+    ...catalog.map((entry) => ({ params: { component: entry.slug }, props: { entry } })),
+  ];
+}
+interface Props { entry: CatalogEntry | null }
+const { entry } = Astro.props;
+---
+<BaseLayout title={entry ? entry.name + " · OhMyGUI" : "OhMyGUI · The component library"} description={entry?.description ?? "Explore every OhMyGUI component with an example and copyable source."}>
+  <Catalog entry={entry} />
+</BaseLayout>

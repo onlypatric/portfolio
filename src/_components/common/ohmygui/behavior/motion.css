@@ -1,0 +1,11 @@
+@layer components {
+  .ui-motion, .ui-motion-content { min-inline-size: 0; }
+  .ui-motion[data-motion-visible="false"]:not([data-motion-enhanced]) > .ui-motion-content { opacity: 0; visibility: hidden; }
+  .ui-motion[data-motion-state="exited"] > .ui-motion-content { pointer-events: none; }
+  .ui-motion[data-motion-effect="collapse"] > .ui-motion-content { overflow: hidden; }
+  .ui-motion[data-motion-effect="collapse"][data-motion-state="entered"] > .ui-motion-content { overflow: visible; }
+  .ui-motion[data-motion-effect="collapse"][data-motion-state="pending"] { min-block-size: 1px; }
+  .ui-motion[data-motion-effect="collapse"][data-motion-visible="false"]:not([data-motion-enhanced]) > .ui-motion-content,
+  .ui-motion[data-motion-unmount][data-motion-visible="false"]:not([data-motion-enhanced]) > .ui-motion-content { block-size: 0; overflow: hidden; }
+  .ui-motion[data-motion-effect="flip"] > .ui-motion-content { backface-visibility: hidden; }
+}

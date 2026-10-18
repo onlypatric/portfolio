@@ -1,0 +1,31 @@
+# OhMyGUI showcase
+
+- URLs: /ohmygui and /ohmygui/<component-slug>.
+- Entry: src/pages/ohmygui/[...component].astro; static getStaticPaths enumerates the overview and every component.
+- UI owner: ../../_components/catalog/index.astro. The public entry stays thin.
+- Coverage: 145 category exports plus ModalSurface, the lower-level presentation primitive (146 separate component views).
+- Fourteen motion views demonstrate visibility-aware entrances, looping/pausable attention effects, staggered sequences and managed exits; replay controls preserve child identity and Collapse preserves a draft field.
+- All seven modal examples wire triggerRef and retain the wrapper while toggling open, demonstrating scale/travel opening and short return-to-trigger exits with native focus/scroll restoration after settling; reduced motion skips motion.
+- ButtonGroup demonstrates joined actions and group disabling; Tab, TabBar, and TabView demonstrate icon/selected-icon slots and floating rounded navigation, with a route badge example.
+- Tab selection uses a shared travelling/scaling lens with rapid retargeting and reduced-motion fallback. MaterialSurface/Popover demonstrate configurable materials; Background/AsyncImage/Overlay demonstrate isolated decorative blur. Overlay has its own static catalog view.
+- Data: a local typed catalog and one executable example module per component, under the private catalog topic.
+- The 29-component input family is refined and verified in Chrome: core fields demonstrate labeled validation/adornments/constraints and safe password reveal; numeric examples add reset/decimal/read-only states; selection examples add descriptions/unavailable choices; combobox/file/color examples explain native behavior and limits. MultiDatePicker demonstrates deterministic month anchoring and cross-month selections. The acceptance record maps every export to focused SSR/browser coverage; representative mounts alone are not the evidence. OS permission flows, other browsers/mobile and screen readers remain separately untested.
+- Action examples demonstrate async pending/failure recovery, pointer holds with native keyboard alternatives, rename draft/cancel, ordered text/HTML-source paste and explicit share/copy fallbacks. Indicators demonstrate determinate/visibility-aware indeterminate progress and interactive gauge thresholds; forms include native reset, metadata wraps long values, and help links demonstrate new-tab/disabled states. The family runner verifies all 29 exports separately from the general showcase mounts.
+- DatePicker demonstrates a custom Gregorian calendar and a language selector: browser preference or explicit locale, translated controls, locale week starts/numerals/RTL, ISO form values and hydration-safe native fallback. Native time/datetime-local modes remain available; no preference is persisted by the component.
+- Picker now demonstrates custom animated single/multiple choice lists with a native form/reset owner. Menu, tooltip, popover, suggestion/calendar, breadcrumb and transient feedback examples inherit retained opening/closing motion. See the blueprint popup audit; verification of this follow-up is typecheck/source review only, not the earlier full-library browser record.
+- Every component view has one interactive example, its full copyable source, a short description, and previous/next links. Preview panels contain the example; source panels contain only the source and copy action.
+- Source panels use CodeText's unified full-mode surface with a filename/language label and top-right actions. The CodeText example demonstrates multiple actions, caller-controlled wrapping, legacy snippet copyButton and header-free code. Clipboard behavior stays caller-owned.
+- Source uses Vite raw imports of the exact example file. No duplicated handwritten snippet, remote code execution, or runtime eval.
+- The shell is built with OhMyGUI NavigationSplitView, Sidebar, Searchable, NavigationTitle, Breadcrumbs, GroupBox, CodeText, and other primitives.
+- Showcase.tsx authors only OhMyGUI components; polymorphic Group/HStack/Text and Link preserve semantic landmarks, fallback content, and the skip link. The close button shares the brand row and floats within the existing content header when collapsed, without a dedicated control strip.
+- Rendering: prerendered HTML includes the actual initial example and source. The Showcase client:load island enables immediate navigation controls.
+- Only the selected example module is loaded in the browser, replacing its prerendered preview with interactive React. Errors have readable fallback/retry states.
+- Leaf imports keep the large icon registry out of the shared shell; Icon/Label examples load it only when needed.
+- Native URL navigation gives every component a reload-safe, linkable view. Unknown component slugs are not generated.
+- Split sidebar scroll and expanded directory groups persist within the tab across these native navigations. Group geometry is restored before enabling keyed scroll restoration; search temporarily expands matches without overwriting saved disclosure choices. Content enters on load, while the split example demonstrates keyed detail motion without remounts. No client router or navigation interception is added.
+- Search filters the directory; theme and density are local preferences persisted when browser storage is available.
+- Mobile: the shared adaptive split offers Components/Showcase pane controls. Without JavaScript, narrow layouts stack their content; interactive examples require hydration.
+- Assets: a local SVG illustration supports image examples; no remote image dependency.
+- Access: public, no authentication or server mutation. Form and collection examples use local sample data only; file selection never uploads files.
+- Clipboard reads, copying, native sharing, drag-and-drop, and view transitions depend on browser support and permissions; those examples explain the constraint.
+- Verification: `node tests/showcase.verify.mjs` audits every built view and source; `tests/showcase.browser.tsx` mounts all 146 examples and checks representative stateful interactions and the shell. `tests/material-tabs.browser.tsx` adds focused material/tab checks; `tests/animation.browser.tsx` checks the motion family.

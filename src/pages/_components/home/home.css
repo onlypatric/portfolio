@@ -1,0 +1,82 @@
+
+header{
+  background-image: url("/index/INTRO-BG.png");
+  background-position: center;
+  background-size: cover;
+}
+
+/* Cover the area behind translucent browser chrome as well as the visible viewport. */
+.site-menu-backdrop,
+.site-menu-panel {
+  bottom: auto;
+  height: calc(100vh + env(safe-area-inset-bottom, 0px));
+  height: calc(100lvh + env(safe-area-inset-bottom, 0px));
+}
+
+.site-menu-backdrop {
+  background-color: rgb(0 0 0 / 0%);
+  backdrop-filter: blur(0px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: backdrop-filter 1s linear, background-color 1s linear, visibility 0s 1s;
+}
+
+.site-menu-panel {
+  --menu-ease: cubic-bezier(0.76, 0, 0.98, 0.7);
+  box-sizing: border-box;
+  /* Keep content centered above the extra browser-chrome coverage. */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-bottom: calc(100lvh - 100dvh + env(safe-area-inset-bottom, 0px));
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  transform: translateY(-100%);
+  overflow: hidden;
+  border-radius: 0 0 50% 50% / 0 0 12vh 12vh;
+  box-shadow: 0 24px 64px -24px rgb(0 0 0 / 35%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 500ms var(--menu-ease), border-radius 500ms var(--menu-ease), visibility 0s 750ms;
+}
+
+.site-menu-backdrop[data-open="true"] {
+  background-color: rgb(0 0 0 / 12%);
+  backdrop-filter: blur(24px);
+  visibility: visible;
+  pointer-events: auto;
+  transition: backdrop-filter 500ms linear, background-color 500ms linear, visibility 0s;
+}
+
+.site-menu-panel[data-open="true"] {
+  transform: translateY(0);
+  border-radius: 0;
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 500ms var(--menu-ease), border-radius 500ms var(--menu-ease), visibility 0s;
+}
+
+.site-menu-content {
+  transform: translateY(-48px) scale(0.96);
+  transition: transform 750ms var(--menu-ease);
+}
+
+.site-menu-panel[data-open="true"] .site-menu-content {
+  transform: translateY(0) scale(1);
+}
+
+.site-menu-caret {
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-menu-caret[data-open="true"] {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-menu-backdrop,
+  .site-menu-panel,
+  .site-menu-content,
+  .site-menu-caret {
+    transition-duration: 0s;
+    transition-delay: 0s;
+  }
+}

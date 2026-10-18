@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+@import 'tailwindcss';
+@import '@heroui/styles';
+
+@theme {
+  --font-serif: "Fraunces", serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-serif);
+  }
+}
+
+*{
+  box-sizing: border-box;
+}
+
+html,body{
+  margin:0;
+  padding: 0;
+}
+
+body{
+  background-color: black;
+  color: whitesmoke;
+}
+/*
+ * HeroUI Theme Customization
+ * Add this to your global.css after importing @heroui/styles
+ * Only includes variables users need to customize
+ * @see https://heroui.com/docs/react/getting-started/theming
+ */
+
+:root,
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"] {
+  /* Theme Colors (Light Mode) */
+  --accent: oklch(60.16% 0.0826 112.77);
+  --accent-foreground: oklch(99.11% 0 0);
+  --background: oklch(97.02% 0.0015 112.77);
+  --border: oklch(90.00% 0.0015 112.77);
+  --danger: oklch(65.32% 0.2335 8.81);
+  --danger-foreground: oklch(99.11% 0 0);
+  --default: oklch(94.00% 0.0015 112.77);
+  --default-foreground: oklch(21.03% 0.0059 112.77);
+  --field-background: oklch(100.00% 0.0008 112.77);
+  --field-border: transparent;
+  --field-foreground: oklch(21.03% 0.0015 112.77);
+  --field-placeholder: oklch(55.17% 0.0030 112.77);
+  --focus: oklch(60.16% 0.0826 112.77);
+  --foreground: oklch(21.03% 0.0015 112.77);
+  --muted: oklch(55.17% 0.0030 112.77);
+  --overlay: oklch(100.00% 0.0004 112.77);
+  --overlay-foreground: oklch(21.03% 0.0015 112.77);
+  --scrollbar: oklch(87.10% 0.0015 112.77);
+  --segment: oklch(100.00% 0.0015 112.77);
+  --segment-foreground: oklch(21.03% 0.0015 112.77);
+  --separator: oklch(92.00% 0.0015 112.77);
+  --success: oklch(73.29% 0.1941 133.88);
+  --success-foreground: oklch(21.03% 0.0059 133.88);
+  --surface: oklch(100.00% 0.0008 112.77);
+  --surface-foreground: oklch(21.03% 0.0015 112.77);
+  --surface-secondary: oklch(95.24% 0.0012 112.77);
+  --surface-secondary-foreground: oklch(21.03% 0.0015 112.77);
+  --surface-tertiary: oklch(93.73% 0.0012 112.77);
+  --surface-tertiary-foreground: oklch(21.03% 0.0015 112.77);
+  --warning: oklch(78.19% 0.1590 55.40);
+  --warning-foreground: oklch(21.03% 0.0059 55.40);
+
+  /* Border Radius */
+  --radius: 0.75rem;
+  --field-radius: 0.75rem;
+
+}
+
+.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+  /* Theme Colors (Dark Mode) */
+  --accent: oklch(60.16% 0.0826 112.77);
+  --accent-foreground: oklch(99.11% 0 0);
+  --background: oklch(12.00% 0.0015 112.77);
+  --border: oklch(28.00% 0.0015 112.77);
+  --danger: oklch(59.40% 0.1973 7.70);
+  --danger-foreground: oklch(99.11% 0 0);
+  --default: oklch(27.40% 0.0015 112.77);
+  --default-foreground: oklch(99.11% 0 0);
+  --field-background: oklch(21.03% 0.0030 112.77);
+  --field-border: transparent;
+  --field-foreground: oklch(99.11% 0.0015 112.77);
+  --field-placeholder: oklch(70.50% 0.0030 112.77);
+  --focus: oklch(60.16% 0.0826 112.77);
+  --foreground: oklch(99.11% 0.0015 112.77);
+  --muted: oklch(70.50% 0.0030 112.77);
+  --overlay: oklch(21.03% 0.0030 112.77);
+  --overlay-foreground: oklch(99.11% 0.0015 112.77);
+  --scrollbar: oklch(70.50% 0.0015 112.77);
+  --segment: oklch(39.64% 0.0015 112.77);
+  --segment-foreground: oklch(99.11% 0.0015 112.77);
+  --separator: oklch(25.00% 0.0015 112.77);
+  --success: oklch(73.29% 0.1941 133.88);
+  --success-foreground: oklch(21.03% 0.0059 133.88);
+  --surface: oklch(21.03% 0.0030 112.77);
+  --surface-foreground: oklch(99.11% 0.0015 112.77);
+  --surface-secondary: oklch(25.70% 0.0023 112.77);
+  --surface-secondary-foreground: oklch(99.11% 0.0015 112.77);
+  --surface-tertiary: oklch(27.21% 0.0023 112.77);
+  --surface-tertiary-foreground: oklch(99.11% 0.0015 112.77);
+  --warning: oklch(82.03% 0.1392 59.41);
+  --warning-foreground: oklch(21.03% 0.0059 59.41);
+}
+
+@keyframes menu-dropdown-enter {
+  from {
+    transform: scale(0.15, 0.18);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes menu-dropdown-exit {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.15, 0.18);
+  }
+}
+
+@keyframes menu-dropdown-item-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes menu-dropdown-item-exit {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.menu-dropdown__popover {
+  transform-origin: var(--trigger-anchor-point, top left);
+}
+
+.menu-dropdown__popover[data-entering="true"] {
+  animation: menu-dropdown-enter 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.menu-dropdown__popover[data-exiting="true"] {
+  animation: menu-dropdown-exit 240ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+.menu-dropdown__menu > [data-slot="menu-item"]:nth-child(1) {
+  --menu-enter-delay: 55ms;
+  --menu-exit-delay: 75ms;
+}
+
+.menu-dropdown__menu > [data-slot="menu-item"]:nth-child(2) {
+  --menu-enter-delay: 90ms;
+  --menu-exit-delay: 50ms;
+}
+
+.menu-dropdown__menu > [data-slot="menu-item"]:nth-child(3) {
+  --menu-enter-delay: 125ms;
+  --menu-exit-delay: 25ms;
+}
+
+.menu-dropdown__menu > [data-slot="menu-item"]:nth-child(4) {
+  --menu-enter-delay: 160ms;
+  --menu-exit-delay: 0ms;
+}
+
+.menu-dropdown__menu > [data-slot="menu-item"]:nth-child(n + 5) {
+  --menu-enter-delay: 195ms;
+  --menu-exit-delay: 0ms;
+}
+
+.menu-dropdown__popover[data-entering="true"] > .menu-dropdown__menu > [data-slot="menu-item"] {
+  animation: menu-dropdown-item-enter 140ms ease-out var(--menu-enter-delay, 55ms) both;
+}
+
+.menu-dropdown__popover[data-exiting="true"] > .menu-dropdown__menu > [data-slot="menu-item"] {
+  animation: menu-dropdown-item-exit 95ms ease-in var(--menu-exit-delay, 0ms) both;
+}
+
+.menu-dropdown__menu [data-slot="menu-item"] {
+  transition: background-color 150ms ease, transform 250ms var(--ease-out-quart), box-shadow 150ms var(--ease-out);
+}
+
+.menu-dropdown__menu [data-slot="menu-item"]:is(:hover, [data-hovered="true"], [data-focused="true"], [data-pressed="true"], [data-selected="true"]) {
+  background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-dropdown__popover:is([data-entering="true"], [data-exiting="true"]) {
+    animation: none;
+  }
+
+  .menu-dropdown__popover:is([data-entering="true"], [data-exiting="true"]) > .menu-dropdown__menu > [data-slot="menu-item"] {
+    animation: none;
+  }
+
+  .menu-dropdown__menu [data-slot="menu-item"] {
+    transition: none;
+  }
+}

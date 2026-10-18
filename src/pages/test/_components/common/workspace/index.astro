@@ -1,0 +1,12 @@
+---
+import { Workspace, type WorkspaceSection } from "./Workspace";
+import "./workspace.css";
+
+interface Props {
+  section: WorkspaceSection;
+}
+
+const { section } = Astro.props;
+---
+
+<Workspace section={section} client:load />

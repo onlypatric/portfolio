@@ -1,0 +1,37 @@
+---
+import { Link, Typography } from "@heroui/react";
+import InfoPopover from "./info-popover/InfoPopover";
+import SiteMenu from "./navigation/SiteMenu";
+import "./home.css";
+---
+
+<SiteMenu client:load />
+
+<header
+  id="home"
+  class="w-dvw h-dvh overflox-x-hidden grid place-items-center relative"
+>
+  <div>
+    <Typography type="h2">
+      Building the future,<br />one feature at a time
+    </Typography>
+    <div class="flex flex-row items-center">
+      <Typography type="h1" className="text-xl font-sans">
+        I'm Patric and this is <span class="text-olive-300">my portfolio.</span>
+      </Typography>
+      <InfoPopover client:load />
+    </div>
+    <Typography type="body" className="font-sans">
+      Email me <Link href="#">
+        here
+        <Link.Icon />
+      </Link>
+    </Typography>
+  </div>
+</header>
+
+<main id="current" class="min-h-dvh">
+  <Typography className="m-auto max-w-3xl" type="h2">
+    What I'm up to these days
+  </Typography>
+</main>
