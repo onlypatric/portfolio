@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "npm run build && wrangler dev",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^14.4.0",
     "@astrojs/react": "^7.0.1",
     "@heroui/react": "^3.2.6",
     "@heroui/styles": "^3.2.6",
@@ -24,7 +27,8 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "tailwindcss": "^4.3.3",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "wrangler": "^4.151.1"
   },
   "allowScripts": {
     "fsevents@2.3.3": true

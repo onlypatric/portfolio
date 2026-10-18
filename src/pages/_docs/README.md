@@ -1,9 +1,23 @@
 # Home route
 
-- URL: `/`
-- Entry: `src/pages/index.astro`
-- Rendering: static/prerendered with the default Astro output.
-- UI owner: `src/pages/_components/home/index.astro` and its route-local React islands.
+- URL: `/`; entry: `src/pages/index.astro`.
+- Rendering: static/prerendered with the default Astro output; no request-time data.
+- UI owner: `src/pages/_components/home/index.astro`, hydrating `Portfolio.tsx`, which owns `Playground.tsx`.
 - Shared shell: `src/layouts/BaseLayout.astro`.
-- Access: public; no request-time data or authentication.
-- State: the menu and information popover are client-hydrated React islands; page content is available in the initial HTML.
+- Design: warm charcoal, cream, sage, and clay; spacious two-column illustrated project cards collapse to one column on mobile.
+- Uses ohmygui layout/content primitives and one prerendered `client:load` React island for immediate entrance motion and the playground.
+- Motion uses `Fade`, `Slide`, `Stagger`, and `HoverEffect`: finite viewport entrances, short stagger delays, gentle artwork hover scale, and no continuous loops.
+- Library motion honors reduced motion and visibility; route CSS also removes hover scaling for touch/reduced-motion users.
+- Playground: a miniature landscape studio with Moss/Clay/Dusk palettes, day/night lighting, depth, corner radius, and animation duration. Ohmygui Animation supports Glide/Bloom/Turn, replay, curated surprise presets, and full reset; the heart toggles a local saved state.
+- Controls use ohmygui SegmentedPicker, Slider, Toggle, and Button. State lasts only while the page is mounted; animations honor reduced motion.
+- Hero, freelance entry, and footer link directly to `mailto:patric@pintescul.com`; the footer displays the email and per-project engagement terms.
+- Navigation uses native anchors; the existing `#home` and `#current` targets remain available.
+- Featured project links to `/ohmygui`. Selected projects cover OCPP, charger management, Teltonika tracking, Next.js operations, custom AI, Minecraft plugins, and a past Instagram automation experiment.
+- Project descriptions and scale figures come from the owner; proxy latency/throughput are design targets, not measured benchmarks.
+- Experience includes ongoing Computer Engineering studies at Politecnico di Torino (year 2, semester 1), freelance work with an Italian Partita IVA, and delivered systems. Engagements are exclusively per-project contracts.
+- Degree naming and L-8 classification were verified against [PoliTo’s official course page](https://www.polito.it/didattica/corsi-di-laurea/ingegneria-informatica). Study stage and freelance status are owner-provided; update the semester manually as studies progress. Writing retains an unpublished state.
+- Edit homepage copy and writing topics in `Portfolio.tsx`; styling lives in `home.css`.
+- [Project image prompts](PROJECT-IMAGE-PROMPTS.md) cover all nine cards. Optional art in `src/assets/projects/` is discovered at build time by filename stem; absent images use decorative CSS/icon artwork. Images are lazy-loaded with reserved aspect ratios.
+- Public access; no API, authentication, content collection, or added dependency.
+- Core page content, artwork, and navigation remain visible without JavaScript; animations and playground effects require hydration.
+- Verification: TypeScript, production build, existing animation SSR suite, page markup checks, and optional image rendering check pass. Browser visual/interaction review is unavailable because no browser is connected.
