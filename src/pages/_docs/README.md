@@ -10,13 +10,14 @@
 - Library motion honors reduced motion and visibility; route CSS also removes hover scaling for touch/reduced-motion users.
 - Playground: a miniature landscape studio with Moss/Clay/Dusk palettes, day/night lighting, depth, corner radius, and animation duration. Ohmygui Animation supports Glide/Bloom/Turn, replay, curated surprise presets, and full reset; the heart toggles a local saved state.
 - Controls use ohmygui SegmentedPicker, Slider, Toggle, and Button. State lasts only while the page is mounted; animations honor reduced motion.
-- Hero, freelance entry, and footer link directly to `mailto:patric@pintescul.com`; the footer displays the email and per-project engagement terms.
+- Hero, freelance entry, and footer link directly to `mailto:patric@pintescul.com`; the footer displays the email; per-project engagement terms appear once in Experience.
 - Navigation uses native anchors; the existing `#home` and `#current` targets remain available.
 - Featured project links to `/ohmygui`. Selected projects cover OCPP, charger management, Teltonika tracking, Next.js operations, custom AI, Minecraft plugins, and a past Instagram automation experiment.
 - Project descriptions and scale figures come from the owner; proxy latency/throughput are design targets, not measured benchmarks.
-- Experience includes ongoing Computer Engineering studies at Politecnico di Torino (year 2, semester 1), freelance work with an Italian Partita IVA, and delivered systems. Engagements are exclusively per-project contracts.
+- Experience includes ongoing Computer Engineering studies at Politecnico di Torino (year 2, semester 1), freelance work with an Italian Partita IVA, and work under compute/memory constraints. Engagements are exclusively per-project contracts.
 - Degree naming and L-8 classification were verified against [PoliTo’s official course page](https://www.polito.it/didattica/corsi-di-laurea/ingegneria-informatica). Study stage and freelance status are owner-provided; update the semester manually as studies progress. Writing retains an unpublished state.
-- Edit homepage copy and writing topics in `Portfolio.tsx`; styling lives in `home.css`.
+- Copy is concise: one description per project, a single writing empty state, and three experience entries. Repeated slogans, metadata, and project summaries were removed.
+- Edit homepage copy in `Portfolio.tsx`; styling lives in `home.css`.
 - [Project image prompts](PROJECT-IMAGE-PROMPTS.md) cover all nine cards. Optional art in `src/assets/projects/` is discovered at build time by filename stem; absent images use decorative CSS/icon artwork. Images are lazy-loaded with reserved aspect ratios.
 - Public access; no API, authentication, content collection, or added dependency.
 - Core page content, artwork, and navigation remain visible without JavaScript; animations and playground effects require hydration.

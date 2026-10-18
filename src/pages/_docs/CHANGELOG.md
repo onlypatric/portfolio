@@ -38,3 +38,9 @@
 - Added direct email links in the hero, freelance entry, and footer, with visible contact details and engagement terms.
 - Updated the route README. TypeScript, production build, existing animation SSR checks, rendered control/contact checks, and `git diff --check` passed.
 - Browser interaction and visual review remain unavailable because no browser is connected.
+
+## 2026-10-18 — Reduced homepage reading load
+- Cut rendered body copy from 653 to 253 words by removing slogans, repeated metadata, project recaps, and redundant empty-state messaging.
+- Kept nine projects and their key facts, education/study stage, freelance terms, NDA labels, contact links, and all playground controls.
+- Condensed writing to one line and experience to three entries; simplified playground copy while preserving accessible labels and feedback.
+- Checks: TypeScript, production build, rendered word count/fact/link/control checks, and `git diff --check` passed. Browser visual review was not performed.

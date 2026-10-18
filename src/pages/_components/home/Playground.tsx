@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { ArrowClockwiseIcon, ShuffleIcon, HeartIcon, PlayIcon, MoonIcon, SunIcon } from '@phosphor-icons/react';
+import { ArrowClockwiseIcon, ShuffleIcon, HeartIcon, PlayIcon } from '@phosphor-icons/react';
 import { HStack, VStack } from '@/_components/common/ohmygui/layout';
 import { Text } from '@/_components/common/ohmygui/content';
 import { Toggle, Slider, Button, SegmentedPicker } from '@/_components/common/ohmygui/input';
@@ -38,21 +38,20 @@ export default function Playground() {
     '--scene-sky': palette.sky, '--scene-hill': palette.hill, '--scene-front': palette.front,
     '--scene-glow': palette.glow, '--scene-radius': `${settings.radius}px`,
   } as UIStyle}>
-    <HStack align="center" justify="between" className="studio-toolbar"><HStack gap="xs" aria-hidden="true"><i /><i /><i /></HStack><Text variant="caption">The little design studio</Text><span className="studio-live"><span />Live</span></HStack>
+    <HStack align="center" justify="between" className="studio-toolbar"><HStack gap="xs" aria-hidden="true"><i /><i /><i /></HStack><Text variant="caption">Playground</Text></HStack>
     <div className="studio-stage">
-      <span className="studio-stage-label">YOUR LITTLE ESCAPE</span>
       <Animation effect={settings.effect} duration={settings.duration} distance={28} replayKey={replay} className="studio-preview-motion">
         <div className="studio-postcard" data-depth={settings.depth}>
           <div className="studio-landscape" aria-hidden="true"><div className="studio-stars" /><div className="studio-sun" /><div className="studio-hill studio-hill--back" /><div className="studio-hill studio-hill--front" /><div className="studio-water" /></div>
-          <HStack align="center" justify="between" className="studio-postcard-caption"><div><Text as="h4">Somewhere quieter.</Text><Text as="p">{settings.night ? 'A little moonlight. A slower pace.' : 'Fresh air. A little room to breathe.'}</Text></div><Button variant="unstyled" iconOnly aria-label={saved ? 'Unsave this scene' : 'Save this scene'} aria-pressed={saved} onClick={() => { setSaved(value => !value); setNotice(saved ? 'Scene unsaved.' : 'Scene saved for this visit.'); }} className="studio-save"><HeartIcon size={20} weight={saved ? 'fill' : 'regular'} /></Button></HStack>
+          <HStack align="center" justify="between" className="studio-postcard-caption"><div><Text as="h4">Somewhere quieter.</Text></div><Button variant="unstyled" iconOnly aria-label={saved ? 'Unsave this scene' : 'Save this scene'} aria-pressed={saved} onClick={() => { setSaved(value => !value); setNotice(saved ? 'Scene unsaved.' : 'Scene saved for this visit.'); }} className="studio-save"><HeartIcon size={20} weight={saved ? 'fill' : 'regular'} /></Button></HStack>
         </div>
       </Animation>
-      <div className="studio-scene-caption"><span>{settings.night ? <MoonIcon aria-hidden="true" /> : <SunIcon aria-hidden="true" />}{palette.label} / {settings.night ? 'Moonlight' : 'Daylight'}</span><span>{saved ? 'Saved for this visit' : 'Made to be played with'}</span></div>
+      {saved && <div className="studio-scene-caption">Saved for this visit</div>}
     </div>
     <VStack gap="lg" align="stretch" className="studio-controls">
-      <SegmentedPicker name={`${id}-palette`} label="Pick a mood" value={settings.palette} choices={Object.entries(palettes).map(([value, item]) => ({ value, label: <span className="studio-palette-label"><span style={{ background: item.accent }} />{item.label}</span> }))} onChange={value => { if (value in palettes) update({ palette: value as Palette }); }} />
-      <div className="studio-control-grid"><Slider label="Roundness" min={0} max={36} value={settings.radius} onValueChange={radius => update({ radius })} showValue formatValue={value => `${value}px`} /><Slider label="Motion duration" min={300} max={1500} step={100} value={settings.duration} onValueChange={duration => update({ duration })} showValue formatValue={value => `${(value / 1000).toFixed(1)}s`} /></div>
-      <SegmentedPicker name={`${id}-motion`} label="Make an entrance" value={settings.effect} choices={effects} onChange={value => { if (effects.some(effect => effect.value === value)) { update({ effect: value as MotionEffect }); replayMotion(); } }} />
+      <SegmentedPicker name={`${id}-palette`} label="Palette" value={settings.palette} choices={Object.entries(palettes).map(([value, item]) => ({ value, label: <span className="studio-palette-label"><span style={{ background: item.accent }} />{item.label}</span> }))} onChange={value => { if (value in palettes) update({ palette: value as Palette }); }} />
+      <div className="studio-control-grid"><Slider label="Roundness" min={0} max={36} value={settings.radius} onValueChange={radius => update({ radius })} showValue formatValue={value => `${value}px`} /><Slider label="Duration" min={300} max={1500} step={100} value={settings.duration} onValueChange={duration => update({ duration })} showValue formatValue={value => `${(value / 1000).toFixed(1)}s`} /></div>
+      <SegmentedPicker name={`${id}-motion`} label="Animation" value={settings.effect} choices={effects} onChange={value => { if (effects.some(effect => effect.value === value)) { update({ effect: value as MotionEffect }); replayMotion(); } }} />
       <div className="studio-control-grid"><Toggle label="Moonlight" checked={settings.night} onChange={event => update({ night: event.target.checked })} /><Toggle label="Soft depth" checked={settings.depth} onChange={event => update({ depth: event.target.checked })} /></div>
       <HStack gap="sm" className="studio-actions"><Button onClick={() => { replayMotion(); setNotice('Entrance replayed. Motion follows your device preferences.'); }} className="studio-replay"><PlayIcon weight="fill" size={14} aria-hidden="true" />Replay</Button><Button variant="secondary" onClick={shuffle} aria-label="Surprise me with a new mood"><ShuffleIcon size={17} aria-hidden="true" />Surprise me</Button><Button variant="ghost" iconOnly onClick={reset} aria-label="Reset playground"><ArrowClockwiseIcon size={18} aria-hidden="true" /></Button></HStack>
     </VStack>
