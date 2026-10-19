@@ -108,3 +108,9 @@
 ## 2026-10-18 — NavigationSplitView continuity
 - Added shared keyed sidebar scroll restoration and lightweight existing-pane destination/reveal motion; the showcase retains expanded directory groups across real URL navigation and demonstrates keyed detail selection.
 - Updated shared navigation and route contracts/history, with focused SSR/browser fixtures. TypeScript and SSR passed; native Chrome navigation retained group layout and a 3,200px sidebar offset. No dependencies, routes, configuration, client router, production build or full-library test run.
+
+## 2026-10-19 — Revalidate static assets instead of caching missing chunks indefinitely
+- Diagnosed the production dashboard hydration failure as a browser-disk-cached 404 for a shared module. The dependency now returns 200; production also confirmed that genuinely missing `/_astro/*` paths receive the adapter’s one-year immutable wildcard header.
+- Added `public/_headers` with `Cache-Control: public, max-age=0, must-revalidate` for `/_astro/*`. The installed adapter recognizes this explicit policy and skips its automatic immutable rule. Existing assets remain browser-cacheable with revalidation; missing responses cannot be reused as fresh for a year.
+- Documented delivery behavior and recovery of already cached immutable failures. Updated the affected dashboard README. Previously cached failures still require a cache-bypassing reload; deployment is needed to publish the new policy.
+- Verification: production entry and all 35 imported JavaScript modules returned 200 with JavaScript content types; the entry matched the local build byte-for-byte. Production build passed (152 pages); local Wrangler HTTP checks returned the new header on both 200 and 404 asset responses. `git diff --check` passed. No deployment, browser session or test suites were run.

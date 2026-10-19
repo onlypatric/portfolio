@@ -1,0 +1,3 @@
+# Apply to missing chunks too: never reuse an asset response without revalidation.
+/_astro/*
+  Cache-Control: public, max-age=0, must-revalidate

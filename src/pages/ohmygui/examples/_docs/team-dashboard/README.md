@@ -13,3 +13,5 @@
 - The shared OhMyGUI preferences facade applies saved theme/density synchronously before page content, preventing a conflicting first paint. Invalid/unavailable storage uses light/comfortable. This page inherits the palette and does not write preferences.
 - Initial HTML includes the Home view and chart totals; responsive charts render after hydration. Controls require JavaScript.
 - The Examples catalog links here through native navigation, and the dashboard header links back to Examples. Chart/dashboard code is loaded only on this page.
+
+- Production hydration imports the dashboard’s entire dependency graph. A cached 404 for a shared chunk prevents loading even if the dashboard entry returns 200. Site-wide `public/_headers` requires asset revalidation; previously cached immutable failures require a cache-bypassing reload once. See `src/_docs/README.md` for delivery policy.
