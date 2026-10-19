@@ -20,13 +20,18 @@ import { Sidebar } from "@/_components/common/ohmygui/navigation/Sidebar";
 import type { NavigationPane } from "@/_components/common/ohmygui/navigation/NavigationSplitView";
 import { catalog, categories, type CatalogEntry } from "./catalog";
 import { ExamplePreview } from "./ExamplePreview";
-import { HouseIcon, MagnifyingGlassIcon } from "@phosphor-icons/react";
-import { Divider } from "@/_components/common/ohmygui/layout";
+import { useShowcaseNavigation } from "./useShowcaseNavigation";
+import { HouseIcon, MagnifyingGlassIcon, SquaresFourIcon } from "@phosphor-icons/react";
+import { Divider, ViewFrame } from "@/_components/common/ohmygui/layout";
 
 const titleCase = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
 type DirectoryState = Record<(typeof categories)[number], boolean>;
 const directoryStorageKey = "ohmygui-showcase-directory:v1";
-export function Showcase({ entry, source, children }: { entry: CatalogEntry | null; source: string; children?: ReactNode }) {
+export function Showcase({ entry: initialEntry, source: initialSource, examples: initialExamples = false, children }: { entry: CatalogEntry | null; source: string; examples?: boolean; children?: ReactNode }) {
+  const root = useRef<HTMLDivElement>(null);
+  const navigation = useShowcaseNavigation(initialEntry, initialSource, initialExamples);
+  const { entry, source, examples } = navigation;
+  const destinationKey = examples ? "examples" : entry?.slug ?? "overview";
   const [query, setQuery] = useState(""), [dark, setDark] = useState(false), [compact, setCompact] = useState(false);
   const [settingsReady, setSettingsReady] = useState(false), [mobilePane, setMobilePane] = useState<NavigationPane>("content");
   const [copyState, setCopyState] = useState(""), copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -41,16 +46,61 @@ export function Showcase({ entry, source, children }: { entry: CatalogEntry | nu
       typeof stored[category] === "boolean" ? stored[category] : !!entry && entry.category !== category,
     ])) as DirectoryState;
     setDirectoryCollapsed(next);
-  }, [entry?.category]);
+  }, []);
+  useEffect(() => {
+    if (!navigation.revision) return;
+    const split = root.current?.querySelector<HTMLElement>('.showcase-split');
+    const sidebar = split?.querySelector<HTMLElement>(':scope > [data-slot="sidebar"]');
+    if (split?.dataset.compact === "true" && sidebar?.contains(document.activeElement)) {
+      // Transfer focus before React marks the old pane inert/aria-hidden.
+      split.querySelector<HTMLButtonElement>(':scope > [data-slot="controls"] > [data-slot="paneButton"][aria-controls$="-content"]')?.focus();
+    }
+    setMobilePane("content");
+    setCopyState("");
+    clearTimeout(copyTimer.current);
+    if (entry) setDirectoryCollapsed(current => current && ({ ...current, [entry.category]: false }));
+  }, [navigation.revision, entry?.category]);
+  useEffect(() => {
+    if (!navigation.revision || mobilePane !== "content") return;
+    const frame = requestAnimationFrame(() => {
+      const pane = root.current?.querySelector<HTMLElement>('.showcase-split > [data-slot="content"]');
+      pane?.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      root.current?.querySelector<HTMLElement>("#component-content")?.focus({ preventScroll: true });
+      if (navigation.hash) {
+        try {
+          const target = document.getElementById(decodeURIComponent(navigation.hash.slice(1)));
+          if (target && root.current?.contains(target)) target.scrollIntoView({ block: "start", behavior: "instant" });
+        } catch { /* Malformed fragments do not stop navigation. */ }
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [navigation.revision, navigation.hash, mobilePane]);
   useLayoutEffect(() => {
     if (!directoryCollapsed) return;
     try { sessionStorage.setItem(directoryStorageKey, JSON.stringify(directoryCollapsed)); } catch { /* Best effort. */ }
   }, [directoryCollapsed]);
-  useEffect(() => {
-    try { setDark(localStorage.getItem("ohmygui-showcase-theme") === "dark"); setCompact(localStorage.getItem("ohmygui-showcase-density") === "compact"); } catch { /* Private browsing may disallow persistence. */ }
+  useLayoutEffect(() => {
+    const documentRoot = document.documentElement;
+    if (documentRoot.dataset.ohmyguiTheme) {
+      setDark(documentRoot.dataset.ohmyguiTheme === "dark");
+      setCompact(documentRoot.dataset.uiDensity === "compact");
+    } else {
+      try { setDark(localStorage.getItem("ohmygui-showcase-theme") === "dark"); setCompact(localStorage.getItem("ohmygui-showcase-density") === "compact"); } catch { /* Standalone fixtures may have no bootstrap or storage. */ }
+    }
     setSettingsReady(true);
     return () => clearTimeout(copyTimer.current);
   }, []);
+  useLayoutEffect(() => {
+    if (!settingsReady) return;
+    // Keep the inherited palette synchronized as the switches change.
+    const documentRoot = document.documentElement;
+    documentRoot.classList.toggle("dark", dark);
+    documentRoot.classList.toggle("light", !dark);
+    documentRoot.dataset.theme = documentRoot.dataset.ohmyguiTheme = dark ? "dark" : "light";
+    documentRoot.dataset.uiDensity = compact ? "compact" : "comfortable";
+    if (dark) delete documentRoot.dataset.uiTheme;
+    else documentRoot.dataset.uiTheme = "studio";
+  }, [dark, compact, settingsReady]);
   useEffect(() => {
     if (!settingsReady) return;
     try { localStorage.setItem("ohmygui-showcase-theme", dark ? "dark" : "light"); localStorage.setItem("ohmygui-showcase-density", compact ? "compact" : "comfortable"); } catch { /* Settings still work for this page. */ }
@@ -67,11 +117,12 @@ export function Showcase({ entry, source, children }: { entry: CatalogEntry | nu
     clearTimeout(copyTimer.current);
     copyTimer.current = setTimeout(() => setCopyState(""), 4000);
   }
-  return <Group as="div" className={"ohmy-showcase " + (dark ? "dark" : "light")} data-theme={dark ? "dark" : "light"} data-ui-theme={dark ? undefined : "studio"} data-ui-density={compact ? "compact" : "comfortable"}>
+  return <ViewFrame ref={root} onClick={navigation.onClick} data-showcase-route={destinationKey} data-settings-ready={settingsReady || undefined} className={"ohmy-showcase" + (settingsReady ? dark ? " dark" : " light" : "")} data-theme={settingsReady ? dark ? "dark" : "light" : undefined} data-ui-theme={settingsReady && !dark ? "studio" : undefined} data-ui-density={settingsReady ? compact ? "compact" : "comfortable" : undefined}>
     <Link className="showcase-skip" href="#component-content" onClick={() => { setMobilePane("content"); requestAnimationFrame(() => document.getElementById("component-content")?.focus()); }}>Skip to component content</Link>
+    {navigation.pending && <Text as="p" role="status" className="showcase-navigation-status">Loading component…</Text>}
     <NavigationSplitView className="showcase-split" sidebarWidth="19rem" mobilePane={mobilePane} onMobilePaneChange={setMobilePane}
-      sidebarScrollKey={directoryCollapsed ? "ohmygui-catalog" : undefined} contentTransitionKey={entry?.slug ?? "overview"}
-      paneLabels={{ sidebar: "Components", content: "Showcase" }} paneProps={{ sidebar: { "aria-label": "Component library" }, content: { "aria-label": "Showcase content" } }}
+      sidebarScrollKey={directoryCollapsed ? "ohmygui-catalog" : undefined} contentTransitionKey={navigation.revision + ":" + destinationKey}
+      paneLabels={{ sidebar: "Components", content: "Showcase" }} paneProps={{ sidebar: { "aria-label": "Component library" }, content: { "aria-label": "Showcase content", "aria-busy": navigation.pending || undefined } }}
       sidebar={<Group as="div" className="showcase-sidebar">
         <VStack gap="sm">
           <VStack gap="sm" className="showcase-brand-block">
@@ -81,7 +132,8 @@ export function Showcase({ entry, source, children }: { entry: CatalogEntry | nu
           <Text variant="caption" color="muted">{catalog.length} components · React + TypeScript</Text>
           <Divider/>
           <Searchable className="w-full" label="Find a component" placeholder="Search the library…" debounce={100} onQueryChange={setQuery} endContent={<MagnifyingGlassIcon/>} onSubmit={(event) => event.preventDefault()} />
-          <NavigationLink href="/ohmygui" className="gap-1" state={!entry ? "active" : "inactive"}><HouseIcon /> <Text variant="subheadline" className="font-bold">Library Overview</Text></NavigationLink>
+          <NavigationLink href="/ohmygui" className="gap-1" state={!entry && !examples ? "active" : "inactive"}><HouseIcon /> <Text variant="subheadline" className="font-bold">Library Overview</Text></NavigationLink>
+          <NavigationLink href="/ohmygui/examples" className="gap-1" state={examples ? "active" : "inactive"}><SquaresFourIcon aria-hidden="true" /><Text variant="subheadline" className="font-bold">Examples</Text></NavigationLink>
         </VStack>
         <Group as="nav" aria-label="All components" className="showcase-directory">
           {categories.map((category) => {
@@ -97,20 +149,21 @@ export function Showcase({ entry, source, children }: { entry: CatalogEntry | nu
           })}
           {!filtered.length && <Text as="p" role="status">No components match “{query}”. Clear search to see them all.</Text>}
         </Group>
-        <Group as="footer" className="showcase-sidebar-footer"><Link href="/test">Open the workspace lab ↗</Link></Group>
+        <Group as="footer" className="showcase-sidebar-footer"><Link href="/">Back to portfolio ↗</Link></Group>
       </Group>}
       content={<Group as="main" id="component-content" tabIndex={-1} className="showcase-main">
-        <HStack as="header" align="center" justify="between" wrap className="showcase-topbar"><Breadcrumbs items={entry ? [{ label: "OhMyGUI", href: "/ohmygui" }, { label: titleCase(entry.category), href: "/ohmygui#" + entry.category }, { label: entry.name }] : [{ label: "OhMyGUI" }, { label: "Overview" }]} /><HStack gap="md" wrap><Toggle label="Dark theme" checked={dark} onChange={(event) => setDark(event.target.checked)} /><Toggle label="Compact" checked={compact} onChange={(event) => setCompact(event.target.checked)} /></HStack></HStack>
+        <HStack as="header" align="center" justify="between" wrap className="showcase-topbar"><Breadcrumbs items={examples ? [{ label: "OhMyGUI", href: "/ohmygui" }, { label: "Examples" }] : entry ? [{ label: "OhMyGUI", href: "/ohmygui" }, { label: titleCase(entry.category), href: "/ohmygui#" + entry.category }, { label: entry.name }] : [{ label: "OhMyGUI" }, { label: "Overview" }]} /><HStack gap="md" wrap><Toggle label="Dark theme" checked={dark} onChange={(event) => setDark(event.target.checked)} /><Toggle label="Compact" checked={compact} onChange={(event) => setCompact(event.target.checked)} /></HStack></HStack>
         <Group as="div" className="showcase-body">
+          {navigation.failure && <Group as="div" role="alert" className="showcase-navigation-error"><Text as="p">This component could not load.</Text><Link href={navigation.failure} data-astro-reload>Open its page to retry ↗</Link></Group>}
           {entry ? <>
             <FlowLayout gap="sm"><Badge variant="accent" tone="soft">{titleCase(entry.category)}</Badge><Badge tone="outline">{String(index + 1).padStart(3, "0")} / {catalog.length}</Badge>{entry.name === "ModalSurface" && <Badge tone="outline">Lower-level primitive</Badge>}</FlowLayout>
             <NavigationTitle title={entry.name} subtitle={entry.description} className="showcase-component-title" />
             <Group as="div" className="showcase-example-panels">
-              <GroupBox title="Example" className="showcase-preview-panel"><ExamplePreview name={entry.name}>{children}</ExamplePreview><Group as="noscript"><Text as="p">Enable JavaScript to interact.</Text></Group></GroupBox>
+              <GroupBox title="Example" className="showcase-preview-panel"><ExamplePreview key={entry.slug} name={entry.name} component={navigation.Example}>{navigation.revision === 0 ? children : undefined}</ExamplePreview><Group as="noscript"><Text as="p">Enable JavaScript to interact.</Text></Group></GroupBox>
               <GroupBox title="Source" className="showcase-source-panel">{copyState && <Text as="p" role="status" variant="caption" color="muted">{copyState}</Text>}<CodeText mode="full" filename={entry.name + ".tsx"} language="tsx" wrap actions={<Button variant="ghost" size="sm" onClick={() => void copySource()}>Copy</Button>}>{source}</CodeText></GroupBox>
             </Group>
             <HStack as="nav" justify="between" wrap aria-label="Adjacent components" className="showcase-pagination">{previous ? <NavigationLink href={"/ohmygui/" + previous.slug}>← {previous.name}</NavigationLink> : <Group as="span" />}{next ? <NavigationLink href={"/ohmygui/" + next.slug}>{next.name} →</NavigationLink> : <NavigationLink href="/ohmygui">Back to overview</NavigationLink>}</HStack>
-          </> : <>
+          </> : examples ? <><NavigationTitle title="Example usage of this library" className="showcase-examples-title" /><GroupBox title="Team dashboard"><VStack gap="md"><Text as="p" color="muted">A team workspace with charts, chat, tickets and settings.</Text><NavigationLink href="/ohmygui/examples/team-dashboard" data-astro-reload>Open full-page example ↗</NavigationLink></VStack></GroupBox></> : <>
             <Group as="div" className="showcase-hero"><NavigationTitle title={"Components for\nreal interfaces."} subtitle={`Browse ${catalog.length} components, try them, and copy the source.`} /><NavigationLink href="/ohmygui/button" className="showcase-start">Browse components →</NavigationLink></Group>
             <Grid columns="auto" minColumnWidth={250} gap="lg">{categories.map((category) => {
               const items = catalog.filter((item) => item.category === category);
@@ -121,5 +174,5 @@ export function Showcase({ entry, source, children }: { entry: CatalogEntry | nu
         </Group>
       </Group>}
     />
-  </Group>;
+  </ViewFrame>;
 }

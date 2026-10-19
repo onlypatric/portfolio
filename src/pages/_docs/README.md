@@ -5,7 +5,8 @@
 - UI owner: `src/pages/_components/home/index.astro`, hydrating `Portfolio.tsx`, which owns `Playground.tsx`.
 - Shared shell: `src/layouts/BaseLayout.astro`.
 - Design: warm charcoal, cream, sage, and clay; spacious two-column illustrated project cards collapse to one column on mobile.
-- Uses ohmygui layout/content primitives and one prerendered `client:load` React island for immediate entrance motion and the playground.
+- `Portfolio.tsx` composes ohmygui components exclusively, plus its route-local Playground. Group preserves CSS-owned containers and semantic landmarks through `as`; Image and Icon own media. No intrinsic HTML JSX or direct Phosphor elements are authored in Portfolio.
+- Uses one prerendered `client:load` React island for immediate entrance motion and the playground.
 - Motion uses `Fade`, `Slide`, `Stagger`, and `HoverEffect`: finite viewport entrances, short stagger delays, gentle artwork hover scale, and no continuous loops.
 - Library motion honors reduced motion and visibility; route CSS also removes hover scaling for touch/reduced-motion users.
 - Playground: a miniature landscape studio with Moss/Clay/Dusk palettes, day/night lighting, depth, corner radius, and animation duration. Ohmygui Animation supports Glide/Bloom/Turn, replay, curated surprise presets, and full reset; the heart toggles a local saved state.
@@ -14,11 +15,11 @@
 - Navigation uses native anchors; the existing `#home` and `#current` targets remain available.
 - Featured project links to `/ohmygui`. Selected projects cover OCPP, charger management, Teltonika tracking, Next.js operations, custom AI, Minecraft plugins, and a past Instagram automation experiment.
 - Project descriptions and scale figures come from the owner; proxy latency/throughput are design targets, not measured benchmarks.
-- Experience includes ongoing Computer Engineering studies at Politecnico di Torino (year 2, semester 1), freelance work with an Italian Partita IVA, and work under compute/memory constraints. Engagements are exclusively per-project contracts.
-- Degree naming and L-8 classification were verified against [PoliTo’s official course page](https://www.polito.it/didattica/corsi-di-laurea/ingegneria-informatica). Study stage and freelance status are owner-provided; update the semester manually as studies progress. Writing retains an unpublished state.
-- Copy is concise: one description per project, a single writing empty state, and three experience entries. Repeated slogans, metadata, and project summaries were removed.
+- Experience includes ongoing Y3K work since March 2025, independent UI/UX contracting, Computer Engineering studies (year 2, semester 1), a June 2025 high-school diploma with 100/100, and a recent focus on embedded/protocol work in C/C++/Rust, including a Rust HTTP/1.1–3 server. Engagements are exclusively per-project contracts with Italian Partita IVA.
+- Degree naming and L-8 classification were verified against [PoliTo’s official course page](https://www.polito.it/didattica/corsi-di-laurea/ingegneria-informatica). Study stage and freelance status are owner-provided; update the semester manually as studies progress. Writing cards use shared `blogPosts` metadata and link to `/blog/<key>/`; the first article has a public draft preview. See [blog authoring instructions](../blog/_docs/[key]/README.md).
+- Copy is concise: one description per project, a single upcoming blog post card, and concise experience entries. Repeated slogans, metadata, and project summaries were removed.
 - Edit homepage copy in `Portfolio.tsx`; styling lives in `home.css`.
 - [Project image prompts](PROJECT-IMAGE-PROMPTS.md) cover all nine cards. Optional art in `src/assets/projects/` is discovered at build time by filename stem; absent images use decorative CSS/icon artwork. Images are lazy-loaded with reserved aspect ratios.
 - Public access; no API, authentication, content collection, or added dependency.
 - Core page content, artwork, and navigation remain visible without JavaScript; animations and playground effects require hydration.
-- Verification: TypeScript, production build, existing animation SSR suite, page markup checks, and optional image rendering check pass. Browser visual/interaction review is unavailable because no browser is connected.
+- Latest blog integration verification: production build and route/link checks pass. TypeScript is blocked by `tests/workspace.browser.tsx` importing the owner-deleted test workspace. Astro checker is not installed; browser visual review was not performed.

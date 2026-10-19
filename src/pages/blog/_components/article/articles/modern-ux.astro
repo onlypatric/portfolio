@@ -1,0 +1,182 @@
+---
+import { HStack, VStack } from "@/_components/common/ohmygui/layout";
+import { Badge, Text } from "@/_components/common/ohmygui/content";
+import { Circle } from "@/_components/common/ohmygui/drawing/Circle";
+import {
+  CaretRightIcon,
+} from "@phosphor-icons/react";
+import { Button } from "@/_components/common/ohmygui/control/button/Button";
+import ModernUXFaultActions from "./ModernUXFaultActions";
+// Write the article body here using Astro/HTML and imported components.
+// The article facade supplies the title, author, topic, and draft status.
+// Set status to 'published' in the shared posts.ts metadata when it is ready.
+---
+
+<p>
+  As we move into an era of shorter and shorter content & attention span, it's
+  becoming harder to appeal to users.
+</p>
+<h2>Design principle</h2>
+<p>
+  With a short attention span the first idea would be to pack as much
+  information as possible in a single view, but that would overwhelm many users,
+  so we can't even have a gigantic wall of text.
+</p>
+<h3>So what?</h3>
+<p>Well, we need:</p>
+<ul>
+  <li>Show as much as possible</li>
+  <li>Use as little text as possible</li>
+</ul>
+<p>
+  With this in mind, I got to work in September 2026, I started by asking anyone
+  I knew the following:
+</p>
+<ul>
+  <li class="italic">"What's the app you open most often?"</li>
+  <li class="italic">"What makes you use that app?"</li>
+  <li class="italic">"Which parts of the app you like the least?"</li>
+</ul>
+<p>From this pool of people:</p>
+<ul>
+  <li>10 office workers</li>
+  <li>8 developers</li>
+  <li>25 students</li>
+</ul>
+<p>
+  I got reviews of the whole "Office365" suite, VSCode, Atom (unfortunately
+  gone), GitHub, Instagram, TikTok, and many more apps;<br />one thing became
+  clear: the bigger the task, the harder the interface is to use.
+</p>
+<p>
+  So I got to work, and I discovered different techniques of packing data, down
+  here I've divided it by end-target.
+</p>
+<h2>Critical infrastructure reporting</h2>
+<p>
+  On any infrastructure we need to handle faults, warnings and incidents
+  efficiently, and in 99% of cases you want something immediate that tells you
+  either "it's all good" or "something's wrong"
+</p>
+<p>
+  The end goal therefore is something along the lines of having this starting
+  view:
+</p>
+
+<VStack
+  as="section"
+  aria-label="Example infrastructure fault interface"
+  align="center"
+  justify="center"
+  style={{
+    minHeight: "320px",
+    padding: "32px 20px",
+    marginBlock: "24px",
+    borderRadius: "16px",
+    backgroundColor: "#000",
+  }}
+>
+  <HStack align="center" justify="center" gap="md">
+    <Circle diameter={24} fill="oklch(64.5% 0.246 16.439)" />
+    <Text
+      color="#fff"
+      className="flex"
+      style={{
+        fontFamily: "var(--ui-font-family)",
+        fontSize: "clamp(2rem, 6vw, 3.5rem)",
+        fontWeight: 600,
+        lineHeight: 1.1,
+        textAlign: "center",
+      }}
+    >
+      1 Fault detected</Text
+    >
+  </HStack>
+  <p>On <Badge tone="soft" variant="danger">main-prod-server-01</Badge></p>
+  <Button client:load variant="secondary" radius="full"
+    ><HStack align="center" justify="center">Details <CaretRightIcon /></HStack
+    ></Button
+  >
+</VStack>
+
+<p>
+  It's simple, straight to the point, it can be fitted anywhere in a dashboard
+  and doesn't overwhelm the user, only when he actually needs to know what's
+  going on the "Details" button helps him get there
+</p>
+<p>
+  This is especially useful when a non technical user accesses the platform,
+  it's not telling him exactly what's wrong, but in his mind he'll think "I
+  better call IT for this".
+</p>
+<p>Similarly, when everything is going fine:</p>
+
+<VStack
+  as="section"
+  aria-label="Example infrastructure fault interface"
+  align="center"
+  justify="center"
+  style={{
+    minHeight: "320px",
+    padding: "32px 20px",
+    marginBlock: "24px",
+    borderRadius: "16px",
+    backgroundColor: "#000",
+  }}
+>
+  <HStack align="center" justify="center" gap="md">
+    <Circle diameter={24} fill="oklch(69.6% 0.17 162.48)" />
+    <Text
+      color="#fff"
+      className="flex"
+      style={{
+        fontFamily: "var(--ui-font-family)",
+        fontSize: "clamp(2rem, 6vw, 3.5rem)",
+        fontWeight: 600,
+        lineHeight: 1.1,
+        textAlign: "center",
+      }}
+    >
+      No issues</Text
+    >
+  </HStack>
+</VStack>
+<p>
+  If a user sees a whole wall of text of what's wrong, it might confuse him,
+  this is crucial especially in real-time systems, for example on a chargepoint
+  management system (CPMS):
+</p>
+
+<VStack
+  as="section"
+  aria-label="Example infrastructure fault interface"
+  align="center"
+  justify="center"
+  style={{
+    minHeight: "320px",
+    padding: "32px 20px",
+    marginBlock: "24px",
+    borderRadius: "16px",
+    backgroundColor: "#000",
+  }}
+>
+  <HStack align="center" justify="center" gap="md">
+    <Circle diameter={24} fill="oklch(64.5% 0.246 16.439)" />
+    <Text
+      color="#fff"
+      className="flex"
+      style={{
+        fontFamily: "var(--ui-font-family)",
+        fontSize: "clamp(2rem, 6vw, 3.5rem)",
+        fontWeight: 600,
+        lineHeight: 1.1,
+        textAlign: "center",
+      }}
+    >
+      1 Fault detected</Text
+    >
+  </HStack>
+  <p>On <Badge tone="soft" variant="danger">hq-charger-14</Badge></p>
+  <ModernUXFaultActions client:visible />
+</VStack>
+<p><Badge variant="danger" tone="soft">WARNING</Badge> This is an ongoing research project from me, I'm writing it as I learn more, for now, this is the end.</p>

@@ -263,7 +263,7 @@ export function Button({
       )}
     >
       {loading && <span data-slot="spinner" aria-hidden="true" className="relative z-10" />}
-      {variant === "unstyled" ? children : <span data-slot="label" className="relative z-10 min-w-0 break-words">{children}</span>}
+      {variant === "unstyled" ? children : <span data-slot="label" className="relative z-10 inline-flex min-w-0 items-center gap-[inherit] break-words [&>svg]:shrink-0">{children}</span>}
       {pressError && <span id={errorId} role="alert" className="sr-only">Action failed. Please try again.</span>}
       {longPress !== undefined ? (
         <span

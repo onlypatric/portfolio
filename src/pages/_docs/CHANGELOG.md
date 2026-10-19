@@ -44,3 +44,25 @@
 - Kept nine projects and their key facts, education/study stage, freelance terms, NDA labels, contact links, and all playground controls.
 - Condensed writing to one line and experience to three entries; simplified playground copy while preserving accessible labels and feedback.
 - Checks: TypeScript, production build, rendered word count/fact/link/control checks, and `git diff --check` passed. Browser visual review was not performed.
+
+## 2026-10-19 — Added the first blog post preview
+- Replaced the Writing empty state with a responsive, animated card for “Why I don't let AI design a ground-up system”.
+- Marked the post Coming soon because no article body or destination has been provided; added no broken link or fabricated article text.
+- Updated the route README. Production build, rendered title/unique-ID checks, removed-test-route output check, and `git diff --check` passed.
+- TypeScript checking is blocked by the existing `tests/workspace.browser.tsx` import of the removed test workspace. Browser review was not performed.
+
+## 2026-10-19 — Connected Writing to keyed blog components
+- Homepage cards now come from shared blog metadata and link to the matching `/blog/<key>/` route; the unfinished first article is labeled Preview draft.
+- Added article route ownership and authoring instructions under `blog/_docs/[key]/` and updated the home README.
+- Checks: production build, homepage/article destination checks, registered/unknown HTTP route checks, and `git diff --check` passed. TypeScript remains blocked by the existing deleted-workspace test import.
+
+## 2026-10-19 — Expanded experience and education
+- Added owner-provided ongoing company collaboration, independent UI/UX work, school completion, and recent embedded/protocol interests, including the Rust HTTP server.
+- Retained concise descriptions, existing university details, freelance terms, contact link, and animated responsive experience layout; updated the route README.
+- Checks: production build, rendered experience-content check, and `git diff --check` passed. TypeScript reports only the existing deleted-workspace test import.
+
+## 2026-10-19 — Composed Portfolio entirely from ohmygui components
+- Replaced native HTML JSX with Group containers/semantic elements and Image; routed all project/writing icons through ohmygui Icon.
+- Preserved the CSS-driven layout, content, native landmark output, navigation, image attributes, and animation/island boundaries.
+- Checks: production build, source scan for intrinsic JSX/direct icon imports, rendered landmark/link/image comparisons, unique IDs, nine project cards, and `git diff --check` passed.
+- TypeScript still reports only the pre-existing deleted-workspace test import. Browser visual review was not performed.

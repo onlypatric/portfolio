@@ -92,3 +92,29 @@
 - Removed recurring preview reassurance, source-count/status filler, the per-page “Using this example” block, and the self-description wall from the overview.
 - Reworked examples across motion, forms, navigation, overlays, menus, gestures, scrolling, and layout with concrete project content and visible state changes. Kept exact executable source alongside each preview.
 - Verification: `npx tsc --noEmit --pretty false` passed; `npm run build` passed and generated 151 pages. Vite emitted a large-chunk advisory. No browser or separate test suites were run.
+
+## 2026-10-19 — Added continuous showcase navigation
+- Kept the React showcase shell mounted while switching registered component URLs, with lazy example/source loading before commit and the existing NavigationSplitView keyed pane animation.
+- Preserved directory/search/preferences/sidebar state; added Back/Forward support, current URL/document metadata updates, content focus/fragment scrolling, loading feedback, latest-request protection, and a native retry link for failures.
+- Updated ExamplePreview to accept a preloaded component and remount only the selected example. Mobile selections move focus out of the sidebar before it hides, then focus visible content.
+- Replaced the link to the removed workspace lab with a portfolio link. Updated authoring/runtime documentation and focused navigation tests; adjusted the full showcase audit for current Cloudflare output and existing overview copy.
+- Checks: production build; navigation URL/module/source verification; all 146 generated showcase views and exact-source audit; split-view SSR checks; and `git diff --check` passed.
+- Chrome live checks passed for persistent DOM/search/sidebar/preferences, example interaction, pane motion, source/title/URL updates, rapid selection, Back/Forward, reduced-motion suppression, and 375px mobile focus/pane switching without settled overflow. Other browsers were not tested.
+- `npx tsc --noEmit --pretty false` reports only the existing stale deleted-workspace import in `tests/workspace.browser.tsx`.
+
+## 2026-10-19 — Theme before first paint and Examples destination
+- Apply stored theme/density synchronously before parsing showcase markup; let SSR inherit the palette and adopt that snapshot during hydration to avoid a light-theme flash. Keep document palette attributes synchronized when settings change, with safe storage fallback.
+- Added prerendered `/ohmygui/examples`, an Examples sidebar link and the initial heading “Example usage of this library”, integrated with existing animated navigation, history and metadata.
+- Checks: production build (151 total pages), prepaint preference verification across all 148 showcase pages, navigation URL/module/source checks, all 146 component/source checks plus Examples output, and `git diff --check` passed. No browser was opened for this task, as requested.
+- `npx tsc --noEmit --pretty false` still reports only the existing stale deleted-workspace import in `tests/workspace.browser.tsx`.
+
+## 2026-10-19 — Interactive Team dashboard example
+- Installed Recharts 3.10.1 and expanded Examples with a responsive Team dashboard authored with OhMyGUI interface components. Home includes weekly activity/workload charts, metrics, teammates, a goal and ticket summaries; TabView composes Home, Chat, Tickets and Settings tabs with existing keyboard/pane motion, plus Stagger metric entrances.
+- Added local channel messages, ticket creation/search/status filters and transitions, workspace/contact editing, notification preferences, default-view navigation and save confirmation. State stays inside the example and resets on leaving/reloading; no backend or external messaging was added.
+- Kept the route prerendered and the existing catalog facade as owner. DashboardPreview retains initial HTML and dynamically loads dashboard/chart code with a retry state; charts reserve dimensions and adopt responsive rendering after hydration. Updated README and verification notes.
+- Verification: `npm run build` passed (151 pages); `git diff --check` passed. TypeScript reports only the existing deleted-workspace test import. Vite emits its large-chunk advisory. No browser or test suites were run for this task.
+
+## 2026-10-19 — Linked standalone dashboard example
+- Replaced the embedded Team dashboard with an Examples card linking to `/ohmygui/examples/team-dashboard` through native navigation. Moved its code/styles to the new route’s private owner and removed DashboardPreview.
+- Extracted the existing synchronous theme/density bootstrap into the OhMyGUI common preferences facade, used by both pages; the catalog no longer imports dashboard/chart code or styles.
+- Updated current route documentation. Production build passed (152 pages), generated HTML inspection confirmed the standalone dashboard has no NavigationSplitView, and `git diff --check` passed. TypeScript still reports only the existing deleted-workspace test import. No browser or test suites were run.

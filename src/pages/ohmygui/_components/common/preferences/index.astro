@@ -1,0 +1,17 @@
+<!-- Runs synchronously before the page content is parsed or painted. -->
+<script is:inline data-ohmygui-preferences>
+  (() => {
+    let theme = "light", density = "comfortable";
+    try {
+      theme = localStorage.getItem("ohmygui-showcase-theme") === "dark" ? "dark" : "light";
+      density = localStorage.getItem("ohmygui-showcase-density") === "compact" ? "compact" : "comfortable";
+    } catch { /* Stored preferences are optional. */ }
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    root.classList.toggle("light", theme === "light");
+    root.dataset.theme = root.dataset.ohmyguiTheme = theme;
+    root.dataset.uiDensity = density;
+    if (theme === "light") root.dataset.uiTheme = "studio";
+    else delete root.dataset.uiTheme;
+  })();
+</script>

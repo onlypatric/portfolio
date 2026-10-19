@@ -6,12 +6,13 @@ import { catalog, type CatalogEntry } from "./_components/catalog/catalog";
 export function getStaticPaths() {
   return [
     { params: { component: undefined }, props: { entry: null } },
+    { params: { component: "examples" }, props: { entry: null, examples: true } },
     ...catalog.map((entry) => ({ params: { component: entry.slug }, props: { entry } })),
   ];
 }
-interface Props { entry: CatalogEntry | null }
-const { entry } = Astro.props;
+interface Props { entry: CatalogEntry | null; examples?: boolean }
+const { entry, examples = false } = Astro.props;
 ---
-<BaseLayout title={entry ? entry.name + " · OhMyGUI" : "OhMyGUI · The component library"} description={entry?.description ?? "Explore every OhMyGUI component with an example and copyable source."}>
-  <Catalog entry={entry} />
+<BaseLayout title={examples ? "Examples · OhMyGUI" : entry ? entry.name + " · OhMyGUI" : "OhMyGUI · The component library"} description={examples ? "Example usage of this library" : entry?.description ?? "Explore every OhMyGUI component with an example and copyable source."}>
+  <Catalog entry={entry} examples={examples} />
 </BaseLayout>

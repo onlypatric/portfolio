@@ -13,17 +13,18 @@ class PreviewBoundary extends Component<{ children: ReactNode }, { error: boolea
 }
 
 /** Retain prerendered markup, then replace only this preview with its interactive React example. */
-export function ExamplePreview({ name, children }: { name: string; children?: ReactNode }) {
-  const [Example, setExample] = useState<ComponentType | null>(null);
+export function ExamplePreview({ name, children, component }: { name: string; children?: ReactNode; component?: ComponentType }) {
+  const [Example, setExample] = useState<ComponentType | null>(() => component ?? null);
   const [error, setError] = useState(false), [attempt, setAttempt] = useState(0);
   useEffect(() => {
+    if (component) { setExample(() => component); setError(false); return; }
     let cancelled = false;
     setExample(null); setError(false);
     const load = exampleModules["./examples/" + name + ".tsx"];
     if (!load) { setError(true); return; }
     load().then((module) => { if (!cancelled) setExample(() => module.default); }).catch(() => { if (!cancelled) setError(true); });
     return () => { cancelled = true; };
-  }, [name, attempt]);
+  }, [name, attempt, component]);
   return <div className="showcase-preview" data-example={name} data-preview-state={error ? "error" : Example ? "ready" : "static"}>
     {error ? <div role="alert"><Text as="p">The interactive example could not load.</Text><Button variant="outline" onClick={() => setAttempt((value) => value + 1)}>Retry example</Button></div> :
       Example ? <PreviewBoundary key={name + attempt}><Example /></PreviewBoundary> : children}

@@ -178,3 +178,25 @@ npx astro check
 ```
 
 The installed Astro checker currently rejects TypeScript 7.0. This is an existing tooling limitation; do not change dependencies just to hide it.
+
+## Showcase navigation without document reloads
+
+Run `node tests/showcase-navigation.verify.mjs` for registered URL resolution, paired lazy example/source loading, and missing-module failure behavior. After `npm run build`, `node tests/showcase.verify.mjs` supports the current Cloudflare `dist/client` output and audits all 146 static views.
+
+On a live `/ohmygui/<component>` page, run:
+
+```js
+import('/tests/showcase-navigation.browser.ts').then(m => m.runShowcaseNavigationChecks())
+```
+
+This exercises the actual showcase and its history, retaining the shell/search/sidebar/settings while switching examples, checking source/focus/pane animation and latest-only rapid selection. Rerun with DevTools reduced-motion emulation to check animation suppression. At a 375px viewport, run `runShowcaseMobileNavigationChecks()` from the same module for directory-to-content selection, focus, and settled overflow. Use a disposable browser tab; the main runner restores the initial destination but leaves navigation entries in history.
+
+## Showcase theme before first paint and Examples
+
+After `npm run build`, run `node tests/showcase-theme.verify.mjs`. It checks the synchronous bootstrap precedes visible SSR markup on all 148 showcase pages, then executes the built script with saved dark/light, density, invalid and unavailable storage. It also verifies the initial island inherits the document palette for consistent hydration. This is a static/script check; it does not measure browser paint timing.
+
+`node tests/showcase-navigation.verify.mjs` includes the Examples destination. `node tests/showcase.verify.mjs` verifies its title, heading, active sidebar link and the absence of a component source panel alongside the component inventory. Examples links to the standalone Team dashboard at `/ohmygui/examples/team-dashboard`.
+
+## Motion inside animated tab panes
+
+Run `node tests/motion-visibility.verify.mjs` for the shared controller regression where four Stagger cards mount while a parent WAAPI fade is at opacity zero. Controlled API substitutes advance the fade without DOM/intersection notifications and check repeated remounts, preserved delays, no polling of static/paused/unrelated/offscreen parents, cleanup and reduced motion. This is deterministic controller coverage, not a browser paint test. `node tests/animation.verify.mjs` checks existing motion SSR/presets.

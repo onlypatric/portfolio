@@ -1,11 +1,12 @@
 ---
 import type { ComponentType } from "react";
 import { Showcase } from "./Showcase";
+import Preferences from "../common/preferences/index.astro";
 import type { CatalogEntry } from "./catalog";
 import "./showcase.css";
 
-interface Props { entry: CatalogEntry | null }
-const { entry } = Astro.props;
+interface Props { entry: CatalogEntry | null; examples?: boolean }
+const { entry, examples = false } = Astro.props;
 const sources = import.meta.glob<string>("./examples/*.tsx", { query: "?raw", import: "default", eager: true });
 const modules = import.meta.glob<{ default: ComponentType }>("./examples/*.tsx");
 const key = entry ? "./examples/" + entry.name + ".tsx" : "";
@@ -13,6 +14,7 @@ const source = entry ? sources[key] : "";
 if (entry && (!source || !modules[key])) throw new Error("Missing showcase example for " + entry.name);
 const Example = entry ? (await modules[key]()).default : null;
 ---
-<Showcase entry={entry} source={source} client:load>
+<Preferences />
+<Showcase entry={entry} source={source} examples={examples} client:load>
   {Example && <Example />}
 </Showcase>

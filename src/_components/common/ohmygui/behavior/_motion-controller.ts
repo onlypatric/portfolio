@@ -18,6 +18,10 @@ export function createMotionController(host: HTMLDivElement, content: HTMLDivEle
   let intersecting = false, played = false, completed = false, focused = false, disposed = false, skipped = false;
   let wasVisible = true, initialized = false, observedRoot: Element | null | undefined;
   let state: State = "pending";
+  let visibilityFrame = 0;
+  const retryVisibility = () => {
+    if (!visibilityFrame) visibilityFrame = requestAnimationFrame(() => { visibilityFrame = 0; reconcile(); });
+  };
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const supports = typeof IntersectionObserver !== "undefined" && typeof content.animate === "function";
   const ancestors = new MutationObserver(() => reconcile());
@@ -30,7 +34,17 @@ export function createMotionController(host: HTMLDivElement, content: HTMLDivEle
     for (let element: HTMLElement | null = host; element; element = element.parentElement) {
       if (element !== host && element.matches('[inert], [aria-hidden="true"]')) return false;
       const style = getComputedStyle(element);
-      if (element.hidden || style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) return false;
+      if (element.hidden || style.display === "none" || style.visibility === "hidden") return false;
+      if (Number(style.opacity) === 0) {
+        // WAAPI opacity changes do not emit DOM mutations or necessarily change intersection.
+        // Retry only while an active fade can reveal this ancestor; static hidden content stays idle.
+        const revealing = element.getAnimations?.().some(animation =>
+          (animation.playState === "running" || animation.pending) &&
+          (animation.effect as KeyframeEffect | null)?.getKeyframes?.().some(frame => frame.opacity !== undefined && Number(frame.opacity) > 0),
+        );
+        if (revealing) retryVisibility();
+        return false;
+      }
     }
     return true;
   };
@@ -123,7 +137,7 @@ export function createMotionController(host: HTMLDivElement, content: HTMLDivEle
       else reconcile();
     },
     dispose() {
-      disposed = true; ancestors.disconnect(); observer?.disconnect(); clear();
+      disposed = true; cancelAnimationFrame(visibilityFrame); visibilityFrame = 0; ancestors.disconnect(); observer?.disconnect(); clear();
       document.removeEventListener("visibilitychange", reconcile); reduced.removeEventListener("change", reconcile);
       host.removeEventListener("focusin", focusIn); host.removeEventListener("focusout", focusOut);
       delete host.dataset.motionEnhanced; delete host.dataset.motionState;

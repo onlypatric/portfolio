@@ -31,3 +31,8 @@
 - Picker now has a custom single/multiple listbox, rich-label/plain-text fallback, typeahead, active-descendant keyboard navigation/scrolling, disabled/readOnly/inert states, validation recovery and native controlled/default/form/reset/ref/change behavior.
 - Combobox preserves suggestions through its exit. DatePicker retains its custom calendar in a manual native popover until closing settles. All three share openingAnimation/closingAnimation, interruption, immediate inert/aria-hidden exits and accessibility/API fallbacks.
 - Updated Picker's executable form/reset example, styling contracts and exit-aware assertions. Verification: workspace TypeScript passed; browser/build/runtime suites intentionally not run for this goal.
+
+## 2026-10-19 — Horizontal styled-button icon labels
+- Fixed the shared Button label wrapper to use inline flex, center its children, inherit the button’s gap and prevent direct SVG icons shrinking. Direct icon/text children now align horizontally without an HStack wrapper.
+- Retained unstyled direct-child layout so Tab and other composed controls keep their intentional arrangement. Removed the redundant New ticket wrapper from the dashboard and updated the button contract documentation.
+- Verification: production build passed (152 pages) and `git diff --check` passed. TypeScript reports only the existing deleted-workspace test import. No browser or test suites were run.

@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { blogPosts, type BlogPost } from '../_contracts/common/blog/posts';
+import Article from './_components/article/index.astro';
+
+export const prerender = true;
+export const getStaticPaths = (() => blogPosts.map(post => ({
+  params: { key: post.key },
+  props: { post },
+}))) satisfies GetStaticPaths;
+
+interface Props { post: BlogPost }
+const { post } = Astro.props;
+---
+<BaseLayout title={`${post.title} · Patric Pintescul`} description={post.description}>
+  <Article post={post} />
+</BaseLayout>
