@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ArrowCounterClockwiseIcon, CaretRightIcon, CheckIcon } from '@phosphor-icons/react';
-import { Button } from '@/_components/common/ohmygui/control/button/Button';
-import { ButtonGroup } from '@/_components/common/ohmygui/control/button/ButtonGroup';
-import { HStack } from '@/_components/common/ohmygui/layout';
+import { Button } from '@/ohmygui/control/button/Button';
+import { ButtonGroup } from '@/ohmygui/control/button/ButtonGroup';
+import { HStack } from '@/ohmygui/layout';
 
 export default function ModernUXFaultActions() {
   const [restarted, setRestarted] = useState(false);

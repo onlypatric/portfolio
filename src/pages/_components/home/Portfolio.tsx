@@ -1,9 +1,9 @@
 import { blogPosts } from '../../_contracts/common/blog/posts';
-import { Fade, Slide, Stagger, HoverEffect } from '@/_components/common/ohmygui/behavior';
+import { Fade, Slide, Stagger, HoverEffect } from '@/ohmygui/behavior';
 import Playground from './Playground';
-import { Group } from '@/_components/common/ohmygui/collection/Group';
-import { HStack, VStack } from '@/_components/common/ohmygui/layout';
-import { Text, Link, Image, Icon } from '@/_components/common/ohmygui/content';
+import { Group } from '@/ohmygui/collection/Group';
+import { HStack, VStack } from '@/ohmygui/layout';
+import { Text, Link, Image, Icon } from '@/ohmygui/content';
 
 const Arrow = () => <Group as="span" aria-hidden="true">↗</Group>;
 const projectGroups = [

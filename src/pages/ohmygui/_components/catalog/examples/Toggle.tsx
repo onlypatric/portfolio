@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
-import { Toggle } from "@/_components/common/ohmygui/input/Toggle";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { Button, Form, Text, Toggle, VStack } from "@/ohmygui";
 
 export default function Example() {
   const [enabled, setEnabled] = useState(false);
+
   return (
-    <VStack gap="md">
-      <Toggle label="Release alerts" description="Urgent updates only." name="alerts" checked={enabled} onChange={(event) => setEnabled(event.target.checked)} />
-      <Text as="p" role="status">{enabled ? "Alerts on." : "Alerts off."}</Text>
+    <Form onReset={() => setEnabled(false)}>
+      <VStack gap="md" align="stretch">
+        <Toggle label="Release alerts" description="Urgent updates only." controlPlacement="trailing" name="alerts" checked={enabled} onChange={(event) => setEnabled(event.currentTarget.checked)} />
+        <Toggle label="Weekly summary" description="Uncontrolled and enabled by default." controlPlacement="leading" name="summary" defaultChecked />
+        <Toggle label="Managed by your administrator" disabled checked />
+        <Button type="reset" variant="outline">Reset preferences</Button>
+        <Text as="p" variant="metadata" role="status" aria-live="polite">Release alerts {enabled ? "on" : "off"}.</Text>
       </VStack>
+    </Form>
   );
 }

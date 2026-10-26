@@ -66,3 +66,8 @@
 - Preserved the CSS-driven layout, content, native landmark output, navigation, image attributes, and animation/island boundaries.
 - Checks: production build, source scan for intrinsic JSX/direct icon imports, rendered landmark/link/image comparisons, unique IDs, nine project cards, and `git diff --check` passed.
 - TypeScript still reports only the pre-existing deleted-workspace test import. Browser visual review was not performed.
+
+## 2026-10-19 — Updated shared design-system verification notes
+
+- Updated README verification status after retiring the stale fixture that imported the removed /test route. Shared library changes and standalone examples are documented at the OhMyGUI owner.
+- Typecheck/source audit/build pass; no browser verification in this pass.

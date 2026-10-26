@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { Shake } from "@/_components/common/ohmygui/behavior/Shake";
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
-import { Button } from "@/_components/common/ohmygui/control/button/Button";
-import { GroupBox } from "@/_components/common/ohmygui/collection/GroupBox";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { Button, Grid, GroupBox, Picker, Shake, Text, VStack } from "@/ohmygui";
 
 export default function Example() {
+  const [distance, setDistance] = useState("8");
   const [replay, setReplay] = useState(0);
-  return <VStack gap="lg">
-    <Button variant="outline" onClick={() => setReplay(value => value + 1)}>Replay</Button>
-    <Shake replayKey={replay} duration={650}>
-      <GroupBox title="Table for two"><Text as="p">Thursday · 7:30 pm</Text></GroupBox>
-    </Shake>
-  </VStack>;
+
+  return (
+    <VStack gap="md" align="stretch">
+      <Grid columns="auto" minColumnWidth={180} gap="sm">
+        <Picker label="Shake distance" value={distance} onChange={(event) => setDistance(event.currentTarget.value)} items={[{ value: "4", label: "Subtle · 4 px" }, { value: "8", label: "Default · 8 px" }, { value: "16", label: "Strong · 16 px" }]} />
+        <Button variant="outline" onClick={() => setReplay((value) => value + 1)}>Replay</Button>
+      </Grid>
+      <Shake replayKey={replay} duration={450} distance={Number(distance)}>
+        <GroupBox title="Table for two"><Text as="p">Thursday · 7:30 pm</Text></GroupBox>
+      </Shake>
+    </VStack>
+  );
 }

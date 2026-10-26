@@ -17,3 +17,6 @@ swiftui-web-component-blueprint/
 *.log
 *.tsbuildinfo
 coverage/
+
+# Local OhMyGUI design-system implementation plan
+/ohmygui-design-system-blueprint/

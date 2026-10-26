@@ -1,14 +1,34 @@
 import { useState } from "react";
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
-import { Menu } from "@/_components/common/ohmygui/presentation/Menu";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { Menu, Text, VStack } from "@/ohmygui";
 
 export default function Example() {
   const [message, setMessage] = useState("");
+  const [open, setOpen] = useState(false);
   return (
     <VStack gap="md" align="start">
-      <Menu trigger="Field guide actions" items={[{ label: "Duplicate field guide", onSelect: () => setMessage("Copy created.") }, { label: "Publish", disabled: true }, { label: "Archive field guide", onSelect: () => setMessage("Field guide archived.") }]} />
-      {message && <Text as="p" role="status">{message}</Text>}
-      </VStack>
+      <Menu
+        open={open}
+        onOpenChange={setOpen}
+        placement="end"
+        material={{ blur: "14px", opacity: 0.92 }}
+        trigger="Field guide actions"
+        items={[
+          {
+            label: "Duplicate field guide",
+            onSelect: () => setMessage("Copy created."),
+          },
+          { label: "Publish", disabled: true },
+          {
+            label: "Archive field guide",
+            shortcut: "⌘⇧A",
+            destructive: true,
+            onSelect: () => setMessage("Field guide archived."),
+          },
+        ]}
+      />
+      <Text as="p" role="status">
+        {message || (open ? "Menu open." : "Menu closed.")}
+      </Text>
+    </VStack>
   );
 }

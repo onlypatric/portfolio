@@ -1,7 +1,7 @@
 /** Focused real-DOM checks: import('/tests/split-view.browser.tsx').then(m => m.runSplitViewChecks()) */
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { NavigationSplitView } from "../src/_components/common/ohmygui/navigation/NavigationSplitView";
+import { NavigationSplitView } from "../src/ohmygui/navigation/NavigationSplitView";
 
 export async function runSplitViewChecks() {
   const host = document.createElement("section");
@@ -16,16 +16,63 @@ export async function runSplitViewChecks() {
     try { await test(); results.push({ name, passed: true }); }
     catch (error) { results.push({ name, passed: false, error: String(error) }); }
   };
-  const render = async (options: { mount?: string; collapsed?: boolean; mobilePane?: "sidebar" | "content" | "detail"; destination?: number; animation?: boolean; storage?: string; sidebarHeight?: number } = {}) => {
-    flushSync(() => root.render(<NavigationSplitView key={options.mount ?? "a"} viewport={false}
-      style={{ height: 300 }} sidebarScrollKey={options.storage ?? key} collapsed={options.collapsed}
-      mobilePane={options.mobilePane} paneAnimation={options.animation} detailTransitionKey={options.destination}
-      sidebar={<div style={{ height: options.sidebarHeight ?? 1500 }}>Directory</div>}
-      content={<div style={{ height: 1400 }}><input aria-label="Retained draft" defaultValue="Initial" /></div>}
-      detail={<div style={{ height: 1200 }}>Destination {options.destination}</div>} />));
+  const render = async (options: { mount?: string; collapsed?: boolean; mobilePane?: "sidebar" | "content" | "detail"; destination?: number; animation?: boolean; storage?: string; sidebarHeight?: number; dir?: "ltr" | "rtl"; collapsible?: boolean } = {}) => {
+    flushSync(() => root.render(<NavigationSplitView key={options.mount ?? "a"}
+      style={{ height: 300 }} dir={options.dir} collapsible={options.collapsible} sidebarScrollKey={options.storage ?? key} collapsed={options.collapsed}
+      mobilePane={options.mobilePane} paneAnimation={options.animation}>
+      <NavigationSplitView.SideBar label="Directory"><div style={{ height: options.sidebarHeight ?? 1500 }}>Directory</div></NavigationSplitView.SideBar>
+      <NavigationSplitView.Content><div style={{ height: 1400 }}><input aria-label="Retained draft" defaultValue="Initial" /></div></NavigationSplitView.Content>
+      <NavigationSplitView.Detail transitionKey={options.destination}><div style={{ height: 1200 }}>Destination {options.destination}</div></NavigationSplitView.Detail>
+    </NavigationSplitView>));
     await settle();
   };
   try {
+    await check("Embedded mobile menu opens by button, stays bounded and leaves the page usable", async () => {
+      host.style.width = "360px";
+      await render({ mount: "bounded", animation: false });
+      const view = host.querySelector<HTMLElement>('[data-ui="NavigationSplitView"]')!;
+      const opener = host.querySelector<HTMLButtonElement>('[data-pane="sidebar"]')!;
+      const outside = document.createElement("button"); outside.textContent = "Outside split"; document.body.append(outside);
+      const overflow = document.body.style.overflow;
+      try {
+        assert(view.getBoundingClientRect().height === 300, "Default viewport sizing escaped the parent height");
+        opener.focus(); flushSync(() => opener.click()); await settle();
+        const sidebar = pane("sidebar"), bounds = sidebar.getBoundingClientRect(), container = view.getBoundingClientRect();
+        assert(opener.getAttribute("aria-expanded") === "true" && !sidebar.inert, "Sidebar opener did not open menu");
+        assert(Math.abs(bounds.left - container.left) < 1 && Math.abs(bounds.top - container.top) < 1 && Math.abs(bounds.width - container.width) < 1 && Math.abs(bounds.height - container.height) < 1, "Sidebar escaped the split bounds");
+        assert(!sidebar.hasAttribute("popover") && sidebar.getAttribute("aria-modal") !== "true", "Embedded sidebar became a page-modal/top-layer surface");
+        assert(document.body.style.overflow === overflow && !outside.inert && !outside.closest("[inert]"), "Menu locked or isolated the surrounding page");
+        const close = sidebar.querySelector<HTMLButtonElement>('[data-slot="menuClose"]')!;
+        assert(document.activeElement === close, "Opening did not focus close control");
+        flushSync(() => close.click()); await settle();
+        assert(sidebar.inert && document.activeElement === opener, "Closing did not hide sidebar and return focus");
+        flushSync(() => opener.click()); await settle(); outside.focus(); await settle();
+        assert(document.activeElement === outside && sidebar.inert, `Focus could not leave the nonmodal split: active=${document.activeElement?.outerHTML}, inert=${sidebar.inert}, expanded=${opener.getAttribute("aria-expanded")}`);
+      } finally { outside.remove(); host.style.width = "1100px"; }
+    });
+    await check("RTL drawer reverses smoothly inside transformed containers and cleans up on desktop resize", async () => {
+      host.style.width = "360px"; host.style.transform = "translateZ(0)";
+      try {
+        await render({ mount: "rtl-drawer", dir: "rtl", collapsible: false });
+        await new Promise(resolve => setTimeout(resolve, 350));
+        const opener = host.querySelector<HTMLButtonElement>('[data-pane="sidebar"]')!;
+        const sidebar = pane("sidebar"), background = pane("detail");
+        opener.focus(); flushSync(() => opener.click()); await settle();
+        const quiet = matchMedia("(prefers-reduced-motion: reduce)").matches || matchMedia("(forced-colors: active)").matches;
+        const frames = sidebar.getAnimations().flatMap(animation => animation.effect instanceof KeyframeEffect ? animation.effect.getKeyframes() : []);
+        assert(quiet || frames.some(frame => frame.transform === "translateX(100%)"), "RTL menu does not enter from the logical start edge");
+        assert(host.scrollWidth <= host.clientWidth + 1, "Moving drawer enlarged its containing workspace");
+        assert(!background.getAnimations().length, "Opening replayed the background pane animation");
+        const close = sidebar.querySelector<HTMLButtonElement>('[data-slot="menuClose"]')!;
+        flushSync(() => close.click()); await settle();
+        flushSync(() => opener.click()); await new Promise(resolve => setTimeout(resolve, 350));
+        const bounds = sidebar.getBoundingClientRect(), owner = host.querySelector<HTMLElement>('[data-ui="NavigationSplitView"]')!.getBoundingClientRect();
+        assert(!sidebar.inert && Math.abs(bounds.left - owner.left) < 1 && Math.abs(bounds.width - owner.width) < 1, "Rapid reversal escaped or hid the drawer");
+        host.style.width = "1100px"; await new Promise(resolve => setTimeout(resolve, 350));
+        assert(!sidebar.inert && sidebar.dataset.mobileMenu === undefined && sidebar.getAttribute("role") !== "dialog", "Desktop resize retained mobile menu state");
+        assert(!sidebar.getAnimations().length, "Desktop resize left a drawer animation running");
+      } finally { host.style.width = "1100px"; host.style.transform = ""; }
+    });
     await check("Sidebar position survives an actual component remount without scrolling other panes", async () => {
       await render(); pane("sidebar").scrollTop = 475; pane("content").scrollTop = 180;
       // A pagehide flush also covers native link navigation, not only React unmounts.

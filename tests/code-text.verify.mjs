@@ -5,8 +5,8 @@ import { createServer } from "vite";
 
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
 try {
-  const { CodeText } = await server.ssrLoadModule("/src/_components/common/ohmygui/content/CodeText.tsx");
-  const { Button } = await server.ssrLoadModule("/src/_components/common/ohmygui/control/button/Button.tsx");
+  const { CodeText } = await server.ssrLoadModule("/src/ohmygui/content/CodeText.tsx");
+  const { Button } = await server.ssrLoadModule("/src/ohmygui/control/button/Button.tsx");
   const source = 'const html = "<script>not executable</script>";\n\tconst answer = 42;';
   const actions = h(Fragment, null, h(Button, null, "Copy"), h(Button, null, "Expand"));
   const html = render(h(CodeText, { filename: "example.tsx", language: "tsx", actions, ref: createRef(), wrap: true, id: "source", title: "Native title", className: "custom-code", style: { color: "red" }, classNames: { root: "custom-root", actions: "custom-actions" } }, source));

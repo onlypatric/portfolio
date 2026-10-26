@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { Bounce } from "@/_components/common/ohmygui/behavior/Bounce";
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
-import { Button } from "@/_components/common/ohmygui/control/button/Button";
-import { GroupBox } from "@/_components/common/ohmygui/collection/GroupBox";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { Bounce, Button, Grid, GroupBox, Picker, Text, VStack } from "@/ohmygui";
 
 export default function Example() {
+  const [distance, setDistance] = useState("16");
   const [replay, setReplay] = useState(0);
-  return <VStack gap="lg">
-    <Button variant="outline" onClick={() => setReplay(value => value + 1)}>Replay</Button>
-    <Bounce replayKey={replay} duration={650}>
-      <GroupBox title="Table for two"><Text as="p">Thursday · 7:30 pm</Text></GroupBox>
-    </Bounce>
-  </VStack>;
+
+  return (
+    <VStack gap="md" align="stretch">
+      <Grid columns="auto" minColumnWidth={180} gap="sm">
+        <Picker label="Bounce distance" value={distance} onChange={(event) => setDistance(event.currentTarget.value)} items={[{ value: "8", label: "8 px" }, { value: "16", label: "16 px" }, { value: "28", label: "28 px" }]} />
+        <Button variant="outline" onClick={() => setReplay((value) => value + 1)}>Replay</Button>
+      </Grid>
+      <Bounce replayKey={replay} duration={650} distance={Number(distance)}>
+        <GroupBox title="Table for two"><Text as="p">Thursday · 7:30 pm</Text></GroupBox>
+      </Bounce>
+    </VStack>
+  );
 }

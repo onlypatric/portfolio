@@ -4,7 +4,7 @@ import { renderToStaticMarkup as render } from "react-dom/server";
 import { createServer } from "vite";
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
 try {
-  const base = "/src/_components/common/ohmygui/input/";
+  const base = "/src/ohmygui/input/";
   const { Toggle } = await server.ssrLoadModule(base + "Toggle.tsx");
   const toggle = render(h(Toggle, { label: "Quiet mode", description: "Pause alerts", name: "quiet", defaultChecked: true, "aria-describedby": "external", ref: { current: null } }));
   assert.match(toggle, /type="checkbox"/); assert.match(toggle, /role="switch"/); assert.match(toggle, /checked=""/);

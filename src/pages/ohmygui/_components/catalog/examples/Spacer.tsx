@@ -1,13 +1,18 @@
-import { HStack } from "@/_components/common/ohmygui/layout/HStack";
-import { Spacer } from "@/_components/common/ohmygui/layout/Spacer";
-import { Badge } from "@/_components/common/ohmygui/content/Badge";
+import { Badge, HStack, Spacer, VStack } from "@/ohmygui";
 
 export default function Example() {
   return (
-    <HStack style={{ width: "100%" }}>
-      <Badge>Leading</Badge>
-      <Spacer minSize={24} />
-      <Badge variant="accent">Trailing</Badge>
+    <VStack align="stretch" gap="md">
+      <HStack align="center">
+        <Badge>Leading</Badge>
+        <Spacer axis="horizontal" minSize={24} />
+        <Badge variant="accent">Trailing</Badge>
       </HStack>
+      <VStack align="stretch">
+        <Badge>Top</Badge>
+        <Spacer axis="vertical" minSize={16} />
+        <Badge variant="accent">Bottom</Badge>
+      </VStack>
+    </VStack>
   );
 }

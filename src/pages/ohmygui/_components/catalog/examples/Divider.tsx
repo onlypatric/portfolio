@@ -1,13 +1,20 @@
-import { Divider } from "@/_components/common/ohmygui/layout/Divider";
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { Divider, HStack, Text, VStack } from "@/ohmygui";
 
 export default function Example() {
   return (
     <VStack gap="md">
       <Text>Before the divider</Text>
-      <Divider />
+      <Divider decorative={false} inset="sm" />
       <Text>After the divider</Text>
-      </VStack>
+      <HStack gap="md" align="center">
+        <Text>Draft</Text>
+        <Divider
+          orientation="vertical"
+          decorative={false}
+          style={{ height: 48 }}
+        />
+        <Text>Published</Text>
+      </HStack>
+    </VStack>
   );
 }

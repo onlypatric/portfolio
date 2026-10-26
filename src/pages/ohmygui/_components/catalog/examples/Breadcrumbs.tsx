@@ -1,7 +1,13 @@
-import { Breadcrumbs } from "@/_components/common/ohmygui/navigation/Breadcrumbs";
+import { Breadcrumbs } from "@/ohmygui";
 
 export default function Example() {
   return (
-    <Breadcrumbs items={[{ label: "OhMyGUI", href: "/ohmygui" }, { label: "Navigation", href: "/ohmygui/navigation-split-view" }, { label: "Patterns", href: "/ohmygui/sidebar" }, { label: "Components", href: "/ohmygui" }, { label: "Breadcrumbs" }]} />
+    <Breadcrumbs maxItems={4}>
+      <Breadcrumbs.Item href="/ohmygui">OhMyGUI</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="/ohmygui/navigation-split-view">Navigation</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="/ohmygui/sidebar" disabled>Patterns</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="/ohmygui">Components</Breadcrumbs.Item>
+      <Breadcrumbs.Item>Breadcrumbs</Breadcrumbs.Item>
+    </Breadcrumbs>
   );
 }

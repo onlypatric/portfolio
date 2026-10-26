@@ -1,25 +1,40 @@
-import { useEffect, useRef, useState } from "react";
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
-import { Button } from "@/_components/common/ohmygui/control/button/Button";
-import { TextField } from "@/_components/common/ohmygui/input/TextField";
-import { Text } from "@/_components/common/ohmygui/content/Text";
-import { Dialog } from "@/_components/common/ohmygui/presentation/Dialog";
+import { useRef, useState } from "react";
+import { Button, Dialog, HStack, Picker, Text, Toggle, VStack } from "@/ohmygui";
+
+type DialogSize = "sm" | "md" | "lg";
 
 export default function Example() {
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const [created, setCreated] = useState(false);
+  const [size, setSize] = useState<DialogSize>("md");
+  const [dismissable, setDismissable] = useState(true);
   const trigger = useRef<HTMLButtonElement>(null);
-  const field = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (open) field.current?.querySelector("input")?.focus();
-  }, [open]);
+
   return (
-    <VStack gap="md" align="start">
-      <Button ref={trigger} onClick={() => setOpen(true)}>New project</Button>
-      {message && <Text as="p" role="status">{message}</Text>}
-      <Dialog open={open} triggerRef={trigger} onClose={() => setOpen(false)} title="Create a project" description="Give your team a place to work." actions={<><Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button><Button onClick={() => { setMessage("Project created."); setOpen(false); }}>Create project</Button></>}>
-      <div ref={field}><TextField label="Project name" defaultValue="Spring release" /></div>
+    <VStack gap="md" align="stretch">
+      <HStack gap="sm" wrap>
+        <Button ref={trigger} onClick={() => setOpen(true)}>New project</Button>
+        <Picker label="Dialog size" value={size} onChange={(event) => setSize(event.currentTarget.value as DialogSize)} items={[{ value: "sm", label: "Small" }, { value: "md", label: "Medium" }, { value: "lg", label: "Large" }]} />
+        <Toggle label="Dismiss with Escape/backdrop" checked={dismissable} onChange={(event) => setDismissable(event.currentTarget.checked)} />
+      </HStack>
+      <Text as="p" variant="metadata" role="status" aria-live="polite">{created ? "Project created." : "No project created yet."}</Text>
+      <Dialog
+        open={open}
+        triggerRef={trigger}
+        onClose={() => setOpen(false)}
+        dismissable={dismissable}
+        size={size}
+        title="Create a project"
+        description="Start a shared space for your team."
+        actions={
+          <>
+            <Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button>
+            <Button onClick={() => { setCreated(true); setOpen(false); }}>Create project</Button>
+          </>
+        }
+      >
+        <Text as="p">You can add people and details after creating the project.</Text>
       </Dialog>
-      </VStack>
+    </VStack>
   );
 }

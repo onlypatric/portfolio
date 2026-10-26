@@ -1,25 +1,37 @@
-import { useEffect, useRef, useState } from "react";
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
-import { Button } from "@/_components/common/ohmygui/control/button/Button";
-import { TextField } from "@/_components/common/ohmygui/input/TextField";
-import { Text } from "@/_components/common/ohmygui/content/Text";
-import { ModalSurface } from "@/_components/common/ohmygui/presentation/ModalSurface";
+import { useRef, useState } from "react";
+import { Button, Grid, ModalSurface, Picker, Text, Toggle, VStack } from "@/ohmygui";
+
+const placements = ["center", "end", "bottom"] as const;
+const sizes = ["sm", "md", "lg", "full"] as const;
 
 export default function Example() {
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const [placement, setPlacement] = useState<(typeof placements)[number]>("end");
+  const [size, setSize] = useState<(typeof sizes)[number]>("sm");
+  const [blurBackdrop, setBlurBackdrop] = useState(true);
   const trigger = useRef<HTMLButtonElement>(null);
-  const field = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (open) field.current?.querySelector("input")?.focus();
-  }, [open]);
   return (
-    <VStack gap="md" align="start">
-      <Button ref={trigger} onClick={() => setOpen(true)}>New reading list</Button>
-      {message && <Text as="p" role="status">{message}</Text>}
-      <ModalSurface open={open} triggerRef={trigger} onClose={() => setOpen(false)} title="Create a reading list" description="Keep useful links together." actions={<Button onClick={() => { setMessage("Reading list created."); setOpen(false); }}>Create list</Button>}>
-      <div ref={field}><TextField label="List name" defaultValue="Weekend reading" /></div>
+    <VStack gap="md" align="stretch">
+      <Grid columns="auto" minColumnWidth={180} gap="sm">
+        <Picker label="Placement" value={placement} onChange={(event) => setPlacement(event.currentTarget.value as typeof placement)} items={placements.map((value) => ({ value, label: value }))} />
+        <Picker label="Size" value={size} onChange={(event) => setSize(event.currentTarget.value as typeof size)} items={sizes.map((value) => ({ value, label: value }))} />
+        <Toggle label="Blur backdrop" checked={blurBackdrop} onChange={(event) => setBlurBackdrop(event.currentTarget.checked)} />
+      </Grid>
+      <Button ref={trigger} onClick={() => setOpen(true)}>Open modal surface</Button>
+      <ModalSurface
+        open={open}
+        triggerRef={trigger}
+        onClose={() => setOpen(false)}
+        placement={placement}
+        size={size}
+        material={{ blur: "18px", opacity: 0.9 }}
+        backdropMaterial={blurBackdrop ? { blur: "8px", opacity: 0.45, tint: "#000" } : false}
+        title="Reading list"
+        description="The base surface supports placement and material options."
+        actions={<Button onClick={() => setOpen(false)}>Close</Button>}
+      >
+        <Text as="p">Use Dialog or FullScreenCover for their named layouts.</Text>
       </ModalSurface>
-      </VStack>
+    </VStack>
   );
 }

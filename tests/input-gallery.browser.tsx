@@ -1,7 +1,7 @@
 /** Dev-only visual QA: real examples, no new route or production imports. */
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import * as inputs from "../src/_components/common/ohmygui/input";
+import * as inputs from "../src/ohmygui/input";
 import { exampleModules } from "../src/pages/ohmygui/_components/catalog/ExamplePreview";
 
 export async function mountInputGallery() {

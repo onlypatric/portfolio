@@ -2,7 +2,7 @@
 import { type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { MultiDatePicker, Form, FieldGroup } from "../src/_components/common/ohmygui/input";
+import { MultiDatePicker, Form } from "../src/ohmygui/input";
 
 export async function runCalendarInputChecks() {
   const host = document.createElement("section"), stage = document.createElement("div"), report = document.createElement("pre");
@@ -48,7 +48,7 @@ export async function runCalendarInputChecks() {
       await render(<MultiDatePicker key="readonly" initialMonth="2026-10" readOnly defaultSelected={["2026-10-17"]} onSelectedChange={() => calls++} />);
       await click(q('[data-date="2026-10-18"]')); assert(calls === 1 && q('[data-date="2026-10-18"]').getAttribute("aria-pressed") === "false", "Read-only calendar mutated");
       await click(q('[aria-label="Next month"]')); assert(stage.textContent?.includes("November 2026"), "Read-only calendar cannot browse");
-      await render(<Form><FieldGroup legend="Unavailable" disabled><MultiDatePicker initialMonth="2026-10" name="days" defaultSelected={["2026-10-17"]} /></FieldGroup></Form>);
+      await render(<Form><fieldset disabled><MultiDatePicker initialMonth="2026-10" name="days" defaultSelected={["2026-10-17"]} /></fieldset></Form>);
       for (const button of stage.querySelectorAll<HTMLButtonElement>("button")) assert(button.matches(":disabled"), "Inherited disabled calendar button remains available");
       assert(new FormData(q<HTMLFormElement>("form")).getAll("days").length === 0, "Disabled calendar submitted selection");
       await render(<MultiDatePicker key="empty" min="2026-10-31" max="2026-10-01" />); assert(stage.textContent?.includes("No dates available") && !stage.querySelector('[data-date][tabindex="0"]'), "Invalid range lacks empty state");

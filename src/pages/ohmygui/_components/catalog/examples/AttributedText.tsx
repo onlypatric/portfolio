@@ -1,7 +1,24 @@
-import { AttributedText } from "@/_components/common/ohmygui/content/AttributedText";
+import { AttributedText } from "@/ohmygui";
 
 export default function Example() {
   return (
-    <AttributedText as="p" runs={["Build with ", { text: "small pieces", strong: true }, ", add ", { text: "a little emphasis", emphasis: true }, ", then ", { text: "explore the library", href: "/ohmygui" }, "."]} />
+    <AttributedText
+      as="p"
+      runs={[
+        "Compose ",
+        { text: "small pieces", strong: true },
+        ", add ",
+        { text: "emphasis", emphasis: true },
+        " and ",
+        { text: "inline code", code: true },
+        ", then ",
+        {
+          text: "open the library",
+          href: "/ohmygui",
+          target: "_blank",
+        },
+        ".",
+      ]}
+    />
   );
 }

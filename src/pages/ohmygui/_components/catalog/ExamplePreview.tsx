@@ -1,6 +1,6 @@
 import { Component, useEffect, useState, type ComponentType, type ReactNode } from "react";
-import { Button } from "@/_components/common/ohmygui/control/button/Button";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { Button } from "@/ohmygui/control/button/Button";
+import { Text } from "@/ohmygui/content/Text";
 
 export const exampleModules = import.meta.glob<{ default: ComponentType }>("./examples/*.tsx");
 

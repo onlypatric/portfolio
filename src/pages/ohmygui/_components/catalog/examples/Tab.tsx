@@ -1,18 +1,34 @@
-import { useState } from "react";
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
-import { Tab } from "@/_components/common/ohmygui/navigation/Tab";
-import { HouseIcon, HeartIcon } from "@phosphor-icons/react";
+import { useState, type KeyboardEvent } from "react";
+import { Badge, HStack, Tab, Text, VStack, type NavigationTab } from "@/ohmygui";
+import { HeartIcon, HouseIcon } from "@phosphor-icons/react";
+
+const tabs: NavigationTab[] = [
+  { id: "home", label: "Home", content: "Recent updates · 4 items", icon: <HouseIcon aria-hidden="true" />, selectedIcon: <HouseIcon weight="fill" aria-hidden="true" /> },
+  { id: "saved", label: "Saved", content: "Saved articles · 12 items", icon: <HeartIcon aria-hidden="true" />, selectedIcon: <HeartIcon weight="fill" aria-hidden="true" />, badge: <Badge variant="accent">3</Badge> },
+  { id: "private", label: "Private", content: "", disabled: true },
+];
 
 export default function Example() {
-  const [active, setActive] = useState("first");
+  const [active, setActive] = useState("home");
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const enabled = tabs.filter((tab) => !tab.disabled);
+    const index = enabled.findIndex((tab) => tab.id === active);
+    const next = event.key === "Home" ? 0 : event.key === "End" ? enabled.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + enabled.length) % enabled.length;
+    setActive(enabled[next].id);
+    document.getElementById(`sample-tab-${enabled[next].id}`)?.focus();
+  };
+  const current = tabs.find((tab) => tab.id === active)!;
+
   return (
-    <VStack gap="md">
-      <div className="ui-tab-list" role="tablist" aria-label="Example tabs" onKeyDown={(event) => { if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) { event.preventDefault(); const next = event.key === "Home" ? "first" : event.key === "End" ? "second" : active === "first" ? "second" : "first"; setActive(next); document.getElementById("sample-tab-" + next)?.focus(); } }}>
-      <Tab id="sample-tab-first" label="Home" icon={<HouseIcon />} selectedIcon={<HouseIcon weight="fill" />} active={active === "first"} aria-controls="sample-panel-first" onClick={() => setActive("first")} />
-      <Tab id="sample-tab-second" label="Favorites" icon={<HeartIcon />} selectedIcon={<HeartIcon weight="fill" />} active={active === "second"} aria-controls="sample-panel-second" onClick={() => setActive("second")} />
-      </div>
-      <section role="tabpanel" id="sample-panel-first" aria-labelledby="sample-tab-first" hidden={active !== "first"} tabIndex={0}>Recent updates · 4 items</section>
-      <section role="tabpanel" id="sample-panel-second" aria-labelledby="sample-tab-second" hidden={active !== "second"} tabIndex={0}>Saved articles · 12 items</section>
-      </VStack>
+    <VStack gap="md" align="start">
+      <HStack className="ui-tab-list" role="tablist" aria-label="Saved views" onKeyDown={handleKeyDown}>
+        {tabs.map((tab) => <Tab key={tab.id} id={`sample-tab-${tab.id}`} label={tab.label} icon={tab.icon} selectedIcon={tab.selectedIcon} badge={tab.badge} disabled={tab.disabled} active={active === tab.id} tabIndex={active === tab.id ? 0 : -1} aria-controls="sample-panel" onClick={() => setActive(tab.id)} />)}
+      </HStack>
+      <Text as="p" id="sample-panel" role="tabpanel" aria-labelledby={`sample-tab-${active}`} tabIndex={0}>
+        {current.content}
+      </Text>
+    </VStack>
   );
 }

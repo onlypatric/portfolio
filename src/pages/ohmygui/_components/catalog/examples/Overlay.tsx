@@ -1,9 +1,30 @@
-import { Overlay } from "@/_components/common/ohmygui/layout/Overlay";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { useState } from "react";
+import { Badge, Button, Card, HStack, Overlay, Picker, Text, Toggle, VStack } from "@/ohmygui";
 
 export default function Example() {
-  return <Overlay decorativeBlur="18px" align="end" style={{ padding: 32, borderRadius: 20, background: "var(--surface-secondary)" }}
-    overlay={<div style={{ width: 80, height: 80, background: "var(--accent)", borderRadius: "50%", opacity: .45 }} />}>
-    <Text as="p" variant="title">Soft decoration, sharp content.</Text>
-  </Overlay>;
+  const [align, setAlign] = useState<"start" | "center" | "end" | "stretch">("end");
+  const [interactive, setInteractive] = useState(false);
+  const [blur, setBlur] = useState(true);
+  const [message, setMessage] = useState("Overlay is decorative and ignored by assistive technology.");
+
+  return (
+    <VStack gap="md" align="stretch">
+      <HStack gap="md" wrap>
+        <Picker label="Alignment" value={align} onChange={(event) => setAlign(event.currentTarget.value as typeof align)} items={[{ value: "start", label: "Start" }, { value: "center", label: "Center" }, { value: "end", label: "End" }, { value: "stretch", label: "Stretch" }]} />
+        <Toggle label="Interactive overlay" checked={interactive} onChange={(event) => setInteractive(event.currentTarget.checked)} />
+        <Toggle label="Decorative blur" checked={blur} onChange={(event) => setBlur(event.currentTarget.checked)} disabled={interactive} />
+      </HStack>
+      <Overlay
+        align={align}
+        interactive={interactive}
+        decorativeBlur={!interactive && blur ? "10px" : undefined}
+        overlay={interactive
+          ? <Button size="sm" onClick={() => setMessage("Overlay action activated.")}>Open details</Button>
+          : <Badge variant="success" tone="soft">Published</Badge>}
+      >
+        <Card><Text as="p" variant="title">A clear status stays above the content.</Text></Card>
+      </Overlay>
+      <Text as="p" variant="metadata" role="status" aria-live="polite">{message}</Text>
+    </VStack>
+  );
 }

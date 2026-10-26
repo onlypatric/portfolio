@@ -1,9 +1,11 @@
 # OhMyGUI showcase
 
 - URLs: /ohmygui, /ohmygui/examples and /ohmygui/<component-slug>.
+- ColumnBrowser demonstrates nested Item/Detail composition and links to the fullscreen `/ohmygui/examples/column-browser` explorer; this addition was verified without opening a browser.
 - Entry: src/pages/ohmygui/[...component].astro; static getStaticPaths enumerates the overview, Examples and every component.
 - UI owner: ../../_components/catalog/index.astro. The public entry stays thin.
-- Coverage: 145 category exports plus ModalSurface, the lower-level presentation primitive (146 separate component views).
+- Coverage: 156 component views, including Sortable, the theme topic and lower-level ModalSurface primitive.
+- Compact split sidebars stay within their containing split, with a primary sidebar opener, sticky close control, Escape/focus return and retained sidebar scroll. The short compound-pane example shows a bounded project directory with selection returning to its content; the showcase keeps its existing mobilePane state owner. Two-pane views no longer display a redundant content tab.
 - Fourteen motion views demonstrate visibility-aware entrances, looping/pausable attention effects, staggered sequences and managed exits; replay controls preserve child identity and Collapse preserves a draft field.
 - All seven modal examples wire triggerRef and retain the wrapper while toggling open, demonstrating scale/travel opening and short return-to-trigger exits with native focus/scroll restoration after settling; reduced motion skips motion.
 - ButtonGroup demonstrates joined actions and group disabling; Tab, TabBar, and TabView demonstrate icon/selected-icon slots and floating rounded navigation, with a route badge example.
@@ -17,6 +19,8 @@
 - Source panels use CodeText's unified full-mode surface with a filename/language label and top-right actions. The CodeText example demonstrates multiple actions, caller-controlled wrapping, legacy snippet copyButton and header-free code. Clipboard behavior stays caller-owned.
 - Source uses Vite raw imports of the exact example file. No duplicated handwritten snippet, remote code execution, or runtime eval.
 - The shell is built with OhMyGUI NavigationSplitView, Sidebar, Searchable, NavigationTitle, Breadcrumbs, GroupBox, CodeText, and other primitives.
+- Breadcrumbs in the shell and copyable example use Breadcrumbs.Item children; the example includes disabled ancestors and maxItems overflow.
+- Draggable demonstrates task containers with inherited compatibility keys, automatic empty slots, return transfers and an incompatible note. Sortable demonstrates arbitrary keyed field content, controlled ordering, alphabetical sorting/reset and shared drag handles. The generated `/ohmygui/sortable` route is prerendered by the existing catalog entry; no new endpoint or adapter behavior is introduced.
 - Showcase.tsx authors only OhMyGUI components; polymorphic Group/HStack/Text and Link preserve semantic landmarks, fallback content, and the skip link. The close button shares the brand row and floats within the existing content header when collapsed, without a dedicated control strip.
 - Rendering: prerendered HTML includes the actual initial example and source. The Showcase client:load island enables immediate navigation controls.
 - Only the selected example module is loaded in the browser, replacing its prerendered preview with interactive React. Errors have readable fallback/retry states.
@@ -32,4 +36,11 @@
 - Assets: a local SVG illustration supports image examples; no remote image dependency.
 - Access: public, no authentication or server mutation. Form and collection examples use local sample data only; file selection never uploads files.
 - Clipboard reads, copying, native sharing, drag-and-drop, and view transitions depend on browser support and permissions; those examples explain the constraint.
-- Verification: after building, `node tests/showcase-theme.verify.mjs` checks bootstrap ordering and saved/default/invalid/blocked-storage preferences on all 148 showcase pages without a browser. `node tests/showcase-navigation.verify.mjs` covers URL resolution and paired lazy loading. `tests/showcase-navigation.browser.ts` verifies live same-document navigation, state/focus/source, rapid selections, Back/Forward, motion preferences, and 375px pane switching. `node tests/showcase.verify.mjs` audits every built view and source; `tests/showcase.browser.tsx` mounts all 146 examples and checks representative stateful interactions and the shell. `tests/material-tabs.browser.tsx` adds focused material/tab checks; `tests/animation.browser.tsx` checks the motion family.
+- Verification: after building, `node tests/showcase-theme.verify.mjs` checks bootstrap ordering and saved/default/invalid/blocked-storage preferences on all 158 showcase pages without a browser. `node tests/showcase-navigation.verify.mjs` covers URL resolution and paired lazy loading. `tests/showcase-navigation.browser.ts` verifies live same-document navigation, state/focus/source, rapid selections, Back/Forward, motion preferences, and 375px pane switching. `node tests/showcase.verify.mjs` audits every built view and source; `tests/showcase.browser.tsx` mounts the catalog examples and checks representative stateful interactions and the shell. `tests/material-tabs.browser.tsx` adds focused material/tab checks; `tests/animation.browser.tsx` checks the motion family.
+
+- Nine design-system examples demonstrate ThemeScope, Surface, Card, Row, MetricSummary, AvatarGroup, CommandTrigger, AppFrame and ContentRegion; Text/Grid/MaterialSurface examples also use ordinary CSS-free composition. Examples links to both the team dashboard and independent Monochrome workspace. Full existing-example source inventory and follow-up owners are tracked in the shared EXAMPLE-AUDIT.md.
+- This refactor was checked with typecheck, source style audit and production build only; existing browser runners were not run. Use the shared deferred BROWSER-CHECKLIST.md before asserting visual parity.
+
+- TabView exposes an Animation quality picker for auto/basic/enhanced travelling selection effects; TabBar documents the shared prop. Capability checks and downgrade behavior live in the library, not catalog styling.
+
+- ThemeScope compares Modern, Ember and Orchid with the same components and semantic status badges. The retired presets are absent from executable examples.

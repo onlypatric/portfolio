@@ -4,7 +4,7 @@ import { renderToStaticMarkup as render } from "react-dom/server";
 import { createServer } from "vite";
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
 try {
-  const base = "/src/_components/common/ohmygui/input/";
+  const base = "/src/ohmygui/input/";
   const { DatePicker } = await server.ssrLoadModule(base + "DatePicker.tsx");
   const { resolveDateLocale, dateLocaleInfo } = await server.ssrLoadModule(base + "_date-locale.ts");
   assert.equal(resolveDateLocale(["invalid_locale", "zz-ZZ", "it-IT"]), "it-IT");

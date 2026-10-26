@@ -4,7 +4,7 @@ import { renderToStaticMarkup as render } from "react-dom/server";
 import { createServer } from "vite";
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
 try {
-  const base = "/src/_components/common/ohmygui/input/";
+  const base = "/src/ohmygui/input/";
   const { validDate, validMonth, addDays, addMonths, boundedDates, monthDates } = await server.ssrLoadModule(base + "_calendar.ts");
   for (const valid of ["0001-01-01", "0099-12-31", "2000-02-29", "2024-02-29", "9999-12-31"]) assert.equal(validDate(valid), true, valid);
   for (const invalid of ["0000-01-01", "2026-02-29", "2026-04-31", "2026-13-01", "2026-1-01", "not a date"]) assert.equal(validDate(invalid), false, invalid);

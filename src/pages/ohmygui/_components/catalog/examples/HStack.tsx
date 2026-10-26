@@ -1,14 +1,32 @@
-import { HStack } from "@/_components/common/ohmygui/layout/HStack";
-import { Avatar } from "@/_components/common/ohmygui/content/Avatar";
-import { Badge } from "@/_components/common/ohmygui/content/Badge";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { Avatar, Badge, HStack, Surface, Text, VStack } from "@/ohmygui";
 
 export default function Example() {
   return (
-    <HStack gap="md" wrap>
-      <Avatar initials="OG" alt="OhMyGUI" />
-      <Text weight="semibold">Made to compose.</Text>
-      <Badge tone="soft">Horizontal stack</Badge>
+    <VStack align="stretch" gap="sm">
+      <Surface appearance="soft" padding="sm">
+        <HStack
+          as="section"
+          aria-label="Team member summary"
+          gap="md"
+          align="center"
+          justify="between"
+          wrap
+        >
+          <HStack gap="sm" align="center">
+            <Avatar initials="MC" alt="Mira Chen" />
+            <VStack gap="none">
+              <Text weight="semibold">Mira Chen</Text>
+              <Text variant="metadata" color="muted">Product design</Text>
+            </VStack>
+          </HStack>
+          <Badge tone="soft">Available</Badge>
+        </HStack>
+      </Surface>
+      <HStack gap={12} align="baseline" justify="center" role="group" aria-label="Baseline alignment">
+        <Text variant="metadata" color="muted">Today</Text>
+        <Text weight="semibold">3 updates</Text>
+        <Badge>Latest</Badge>
       </HStack>
+    </VStack>
   );
 }

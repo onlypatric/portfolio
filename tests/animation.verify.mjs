@@ -5,7 +5,7 @@ import { createServer } from "vite";
 
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
 try {
-  const base = "/src/_components/common/ohmygui/behavior/";
+  const base = "/src/ohmygui/behavior/";
   const { motionFrames, motionEffect } = await server.ssrLoadModule(base + "_motion-presets.ts");
   const names = ["Fade", "Slide", "Scale", "Rotate", "Flip", "Reveal", "Collapse", "Bounce", "Shake", "Pulse", "Float", "Stagger", "Animation", "Transition"];
   for (const name of names) {

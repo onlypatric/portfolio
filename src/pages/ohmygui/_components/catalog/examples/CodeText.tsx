@@ -1,31 +1,28 @@
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
 import { useState } from "react";
-import { Button } from "@/_components/common/ohmygui/control/button/Button";
-import { CodeText } from "@/_components/common/ohmygui/content/CodeText";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { Button, CodeText, Text, VStack } from "@/ohmygui";
+
+const source = `import { Badge } from "@/ohmygui";\n\n<Badge variant="success">Published</Badge>`;
 
 export default function Example() {
-  const [status, setStatus] = useState("");
   const [wrap, setWrap] = useState(false);
-  const source = `import { Badge } from "@/_components/common/ohmygui/content/Badge";
-
-export function Welcome() {
-  return <Badge tone="soft">Small pieces. Big possibilities.</Badge>;
-}`;
+  const [status, setStatus] = useState("");
   const copy = async (value: string) => {
     try { await navigator.clipboard.writeText(value); setStatus("Copied."); }
-    catch { setStatus("Clipboard unavailable. Select and copy the code."); }
+    catch { setStatus("Clipboard unavailable."); }
   };
+
   return (
-    <VStack gap="md">
-      <Text as="p">Style with <CodeText mode="snippet">className</CodeText>. Copy actions are caller supplied.</Text>
-      <CodeText mode="snippet" copyButton={<Button size="sm" iconOnly aria-label="Copy command" onClick={() => void copy("npm run dev")}>⧉</Button>}>npm run dev</CodeText>
-      <CodeText mode="full" filename="Welcome.tsx" language="tsx" wrap={wrap} actions={<>
-        <Button size="sm" variant="ghost" aria-pressed={wrap} onClick={() => setWrap(value => !value)}>Wrap lines</Button>
+    <VStack gap="md" align="stretch">
+      <CodeText mode="snippet" copyButton={<Button size="sm" variant="outline" onClick={() => void copy("npm run dev")}>Copy</Button>}>
+        npm run dev
+      </CodeText>
+      <CodeText mode="full" filename="Badge.tsx" language="tsx" wrap={wrap} actions={<>
+        <Button size="sm" variant="ghost" aria-pressed={wrap} onClick={() => setWrap((value) => !value)}>Wrap</Button>
         <Button size="sm" variant="outline" onClick={() => void copy(source)}>Copy</Button>
-      </>}>{source}</CodeText>
-      <CodeText mode="full">{"const minimal = true;\n// No header when no metadata or actions are supplied."}</CodeText>
-      <Text as="p" role="status">{status}</Text>
-      </VStack>
+      </>}>
+        {source}
+      </CodeText>
+      <Text as="p" role="status" variant="caption">{status || "Choose wrapping or copy an example."}</Text>
+    </VStack>
   );
 }

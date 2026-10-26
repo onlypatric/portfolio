@@ -9,8 +9,8 @@ import { flushSync } from "react-dom";
 import type { ReactNode } from "react";
 import {
   Breadcrumbs, NavigationLink, NavigationSplitView, NavigationStack, NavigationTitle,
-  ResizableSplitPane, Searchable, Sidebar, Tab, TabBar, TabView, Toolbar, ToolbarItem,
-} from "../src/_components/common/ohmygui/navigation";
+  ResizableSplitPane, Searchable, Sidebar, Tab, TabBar, TabView,
+} from "../src/ohmygui/navigation";
 
 export async function runNavigationChecks() {
   document.getElementById("navigation-checks")?.dispatchEvent(new Event("navigation-checks:dispose"));
@@ -88,7 +88,9 @@ export async function runNavigationChecks() {
       await click(button);
       const panes = Array.from(stage.querySelectorAll<HTMLElement>("[data-split-pane]"));
       assert(panes.filter((pane) => !pane.inert && getComputedStyle(pane).display !== "none").length === 1, "Only the selected pane should be interactive");
-      assert(view.scrollWidth <= view.clientWidth + 1, "Mobile split overflows horizontally");
+      // Entrance transforms intentionally travel from outside; measure resting layout.
+      await settle(300);
+      assert(view.scrollWidth <= view.clientWidth + 1, `Mobile split overflows horizontally: ${view.scrollWidth}/${view.clientWidth}, pane=${button.dataset.pane}`);
     }
     const detail = query('[data-split-pane][data-slot="detail"]'); detail.scrollTop = 110;
     await click(buttons[0]); await click(buttons[2]);
@@ -101,7 +103,7 @@ export async function runNavigationChecks() {
     await render(<NavigationSplitView viewport={false} style={{ height: 300 }} collapsed={false} onCollapsedChange={(value) => { changed = value; }} sidebar={long} content={long} />, 1100);
     await click(query('[data-slot="toggle"]'));
     assert(changed && query('[data-slot="toggle"]').getAttribute("aria-expanded") === "true", "Controlled state should request, not mutate");
-    const sideButton = query<HTMLButtonElement>('[data-slot="sidebar"] button'); sideButton.focus();
+    const sideButton = query<HTMLButtonElement>('[data-slot="sidebar"] button:not([data-slot="menuClose"])'); sideButton.focus();
     await render(<NavigationSplitView viewport={false} style={{ height: 300 }} collapsed sidebar={long} content={long} />, 1100);
     assert(document.activeElement === query('[data-slot="toggle"]'), "Focus stranded in hidden sidebar");
     await render(<NavigationSplitView viewport={false} collapsed style={{ height: 350 }} sidebar={long} content={<NavigationSplitView viewport={false} mobileBreakpoint={0} style={{ height: 200 }} sidebar={long} content={long} />} />, 1200);
@@ -109,7 +111,7 @@ export async function runNavigationChecks() {
     const views = stage.querySelectorAll<HTMLElement>('[data-ui="NavigationSplitView"]');
     assert(views[1].querySelector<HTMLElement>('[data-slot="sidebar"]')!.getBoundingClientRect().width > 100, "Outer collapse leaked into nested view");
     await render(<NavigationSplitView viewport={false} style={{ height: 300 }} content={long} />, 320);
-    assert(stage.querySelectorAll('[data-slot="paneButton"]').length === 1, "Missing panes must not leave dead controls");
+    assert(stage.querySelectorAll('[data-slot="paneButton"]').length === 0, "A single pane must not leave redundant controls");
     let requestedPane = "";
     await render(<NavigationSplitView viewport={false} style={{ height: 300 }} mobilePane="content" onMobilePaneChange={(pane) => { requestedPane = pane; }} content={long} detail={long} />, 320);
     const controls = stage.querySelectorAll<HTMLButtonElement>('[data-slot="paneButton"]');
@@ -132,7 +134,7 @@ export async function runNavigationChecks() {
   });
   await check("Breadcrumbs and TabBar: all ancestors available, disabled routes, narrow overflow", async () => {
     const items = Array.from({ length: 7 }, (_, index) => ({ id: String(index), label: "Destination " + index, href: "#page-" + index, current: index === 6, disabled: index === 2 }));
-    await render(<><Breadcrumbs items={items} /><TabBar items={items} /></>, 320);
+    await render(<><Breadcrumbs>{items.map(item => <Breadcrumbs.Item key={item.id} href={item.href} disabled={item.disabled}>{item.label}</Breadcrumbs.Item>)}</Breadcrumbs><TabBar items={items} /></>, 320);
     assert(stage.querySelectorAll('[data-ui="Breadcrumbs"] li a, [data-ui="Breadcrumbs"] li span[aria-current]').length === 7, "Collapsed breadcrumbs lost ancestors");
     await click(query("summary")); assert(query<HTMLDetailsElement>("details").open, "Native breadcrumb disclosure failed");
     assert(!query<HTMLAnchorElement>('[data-ui="TabBar"] a[aria-disabled]').hasAttribute("href"), "Disabled tab-bar link retains href");
@@ -208,15 +210,6 @@ export async function runNavigationChecks() {
     flushSync(() => query<HTMLFormElement>("form").reset()); await settle();
     assert(query<HTMLInputElement>("input").value === "" && changes.at(-1) === "", "Native reset failed");
   });
-  await check("Toolbar and ToolbarItem: wrapping, keyboard navigation, disabled skip, input key ownership", async () => {
-    await render(<Toolbar overflow={<button>Overflow</button>}><ToolbarItem placement="leading"><button>First</button><button disabled>Disabled</button></ToolbarItem><ToolbarItem placement="trailing"><button>Last</button><input aria-label="Edit" /></ToolbarItem></Toolbar>, 320);
-    const buttons = stage.querySelectorAll<HTMLButtonElement>("button"); buttons[0].focus();
-    await key(buttons[0], "ArrowRight"); assert(document.activeElement === buttons[2], "Toolbar did not skip disabled button");
-    await key(buttons[2], "End"); assert(document.activeElement === buttons[3], "Toolbar End failed");
-    query<HTMLInputElement>("input").focus(); await key(query("input"), "ArrowLeft");
-    assert(document.activeElement === query("input"), "Toolbar intercepted input arrow keys");
-    assert(getComputedStyle(query('[data-slot="items"]')).flexWrap === "wrap", "Toolbar items should wrap");
-  });
   await check("ResizableSplitPane: container adaptation, separator semantics, bounds, reset and RTL", async () => {
     let changed = 0;
     await render(<ResizableSplitPane style={{ height: 300 }} onRatioChange={(value) => { changed = value; }}><div>Primary</div><div>Secondary</div></ResizableSplitPane>, 320);
@@ -243,9 +236,10 @@ export async function runNavigationChecks() {
   await check("Split: 320–1024px layout matrix and motion preferences", async () => {
     for (const width of [320, 375, 600, 760, 768, 1024]) {
       await render(split, width);
+      await settle(300);
       const view = query('[data-ui="NavigationSplitView"]');
       assert(view.dataset.compact === String(width <= 760), "Incorrect breakpoint at " + width);
-      assert(view.scrollWidth <= view.clientWidth + 1, "Horizontal overflow at " + width);
+      assert(view.scrollWidth <= view.clientWidth + 1, `Horizontal overflow at ${width}: ${view.scrollWidth}/${view.clientWidth}`);
       const active = Array.from(stage.querySelectorAll<HTMLElement>("[data-split-pane]")).filter((pane) => !pane.inert);
       assert(active.length === (width <= 760 ? 1 : 3), "Incorrect active panes at " + width);
     }

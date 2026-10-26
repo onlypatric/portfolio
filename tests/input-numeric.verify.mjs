@@ -4,7 +4,7 @@ import { renderToStaticMarkup as render } from "react-dom/server";
 import { createServer } from "vite";
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
 try {
-  const base = "/src/_components/common/ohmygui/input/";
+  const base = "/src/ohmygui/input/";
   const { snapNumber, rangeBounds, rangePercent } = await server.ssrLoadModule(base + "_number.ts");
   assert.equal(snapNumber(.35, .05, .95, .1), .35);
   assert.equal(snapNumber(.95, .05, .95, .1), .95);

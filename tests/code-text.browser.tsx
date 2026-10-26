@@ -2,9 +2,9 @@
 import { useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { CodeText } from "../src/_components/common/ohmygui/content/CodeText";
-import { Button } from "../src/_components/common/ohmygui/control/button/Button";
-import { ButtonGroup } from "../src/_components/common/ohmygui/control/button/ButtonGroup";
+import { CodeText } from "../src/ohmygui/content/CodeText";
+import { Button } from "../src/ohmygui/control/button/Button";
+import { ButtonGroup } from "../src/ohmygui/control/button/ButtonGroup";
 
 export async function runCodeTextChecks() {
   const host = document.createElement("section"), stage = document.createElement("div"), report = document.createElement("pre");

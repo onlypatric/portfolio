@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { renderToString } from "react-dom/server";
 import { flushSync } from "react-dom";
-import { DatePicker, Form, Button, FieldGroup } from "../src/_components/common/ohmygui/input";
+import { DatePicker, Form, Button } from "../src/ohmygui/input";
 
 /** Schedule, then focus the page. Keep DevTools open when emulating media features. */
 export async function runDatePickerChecks() {
@@ -35,7 +35,7 @@ export async function runDatePickerChecks() {
     const form = q<HTMLFormElement>("form"), stop = (event: Event) => event.preventDefault(); form.addEventListener("reset", stop); form.reset(); await wait(); assert(q<HTMLInputElement>("input").value === "2026-10-20", "Prevented reset changed value");
     form.removeEventListener("reset", stop); form.reset(); await wait(); assert(q('[data-slot="dateTrigger"]').textContent?.includes("17"), "Display not reset");
     await render(<Form><DatePicker key="required" label="Required" required /><Button type="submit">Submit</Button></Form>); assert(!q<HTMLFormElement>("form").checkValidity(), "Required empty value valid"); await wait(); assert(stage.querySelector('[role="dialog"]'), "Invalid native field did not reveal correction UI");
-    await render(<FieldGroup disabled legend="Unavailable"><DatePicker label="Disabled" /></FieldGroup>); await open(); assert(!stage.querySelector('[role="dialog"]:not([aria-hidden="true"])'), "Inherited disabled opened");
+    await render(<fieldset disabled><DatePicker label="Disabled" /></fieldset>); await open(); assert(!stage.querySelector('[role="dialog"]:not([aria-hidden="true"])'), "Inherited disabled opened");
     await render(<DatePicker key="readonly" label="Read only" readOnly defaultValue="2026-10-17" />); await open(); assert(!stage.querySelector('[role="dialog"]:not([aria-hidden="true"])'), "Readonly opened");
     await render(<DatePicker key="autofocus" label="Focus" autoFocus tabIndex={-1} />); assert(document.activeElement === q('[data-slot="dateTrigger"]') && q('[data-slot="dateTrigger"]').tabIndex === -1, "Focus remained on hidden native field or tabIndex lost");
     await render(<DatePicker key="hidden" hidden label="Hidden" />); assert(!stage.querySelector('[data-slot="dateTrigger"]'), "Hidden input gained a visible trigger");

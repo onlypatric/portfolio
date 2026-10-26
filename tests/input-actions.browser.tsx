@@ -2,7 +2,7 @@
 import { Fragment, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { Button, ButtonGroup, RenameButton, PasteButton, ShareLink, Form, TextField } from "../src/_components/common/ohmygui/input";
+import { Button, ButtonGroup, PasteButton, ShareLink, Form, TextField } from "../src/ohmygui/input";
 
 export async function runActionInputChecks() {
   const host = document.createElement("section"), stage = document.createElement("div"), report = document.createElement("pre");
@@ -61,24 +61,6 @@ export async function runActionInputChecks() {
       for (const dir of ["ltr", "rtl"]) { stage.dir = dir; await wait(); const group = q<HTMLElement>('[data-ui="ButtonGroup"]'); assert(group.scrollWidth <= group.clientWidth + 1, "ButtonGroup overflows narrow view"); const first = getComputedStyle(q("button")); assert(parseFloat(first.borderStartStartRadius) > 0 && first.borderStartEndRadius === "0px", "Logical outer corners lost"); }
       stage.dir = "ltr"; stage.style.width = "500px";
     });
-    await check("Rename stays form-safe, selects current draft, validates, cancels, handles rejection/pending and refreshes controlled drafts", async () => {
-      const task = deferred(); let commits: string[] = [];
-      await render(<Form><RenameButton defaultValue="Studio" onCommit={name => { commits.push(name); return task.promise; }} /></Form>);
-      const trigger = q<HTMLButtonElement>('[data-slot="trigger"]'); await click(trigger); const input = q<HTMLInputElement>("input");
-      assert(stage.querySelectorAll("form").length === 1 && document.activeElement === input && input.selectionStart === 0 && input.selectionEnd === 6, "Rename nested form or did not select name");
-      await fill(input, "  "); await key(input, "Enter"); assert(commits.length === 0 && stage.textContent?.includes("Enter a name"), "Blank rename committed");
-      await fill(input, "  Garden  "); await key(input, "Enter"); assert(commits.join() === "Garden" && input.readOnly && button("Cancel").disabled, "Pending rename is mutable or duplicated");
-      task.reject(new Error("sample")); await wait(); assert(input.value === "  Garden  " && stage.textContent?.includes("draft is safe"), "Failure lost draft or feedback");
-      await key(input, "Escape"); assert(!stage.querySelector("input") && document.activeElement === trigger && commits.length === 1, "Escape did not cancel/restore trigger");
-      await render(<RenameButton key="controlled" value="Latest name" onCommit={() => {}} />); await click(q('[data-slot="trigger"]')); assert(q<HTMLInputElement>("input").value === "Latest name", "Controlled draft stale on open");
-      await fill(q("input"), "Rejected by parent"); await click(button("Save")); await click(q('[data-slot="trigger"]')); assert(q<HTMLInputElement>("input").value === "Latest name", "Reopen ignored parent-controlled value");
-    });
-    await check("Blur rename does not commit Cancel/internal focus, commits external blur once and does not steal outside focus", async () => {
-      let commits: string[] = [];
-      await render(<><RenameButton commitStrategy="blur" defaultValue="Studio" onCommit={name => { commits.push(name); }} /><Button>Outside</Button></>);
-      await click(q('[data-slot="trigger"]')); await fill(q("input"), "Cancelled"); button("Cancel").focus(); await wait(); assert(commits.length === 0, "Internal Tab focus committed rename"); await click(button("Cancel")); assert(commits.length === 0, "Cancel committed rename");
-      await click(q('[data-slot="trigger"]')); await fill(q("input"), "Garden"); flushSync(() => button("Outside").focus()); await wait(); assert(commits.join() === "Garden" && document.activeElement === button("Outside"), "Blur commit duplicated or stole focus");
-    });
     await check("Paste handles text/HTML format choice, callback failure, denied/unavailable/empty content and pending without real clipboard access", async () => {
       let value = "", format = "", reads = 0;
       mock("clipboard", { readText: async () => { reads++; return "local sample"; } });
@@ -107,8 +89,8 @@ export async function runActionInputChecks() {
     });
     await check("Action surfaces stay within 240px light/dark/RTL and retain labelled keyboard targets", async () => {
       mock("share", undefined); mock("clipboard", undefined);
-      await render(<><Button longPress={400} onPress={() => {}}>Keyboard hold alternative</Button><RenameButton defaultValue="Studio" /><PasteButton>Paste</PasteButton><ShareLink url="https://example.com/a-long-link-for-local-layout-only">Share</ShareLink></>);
-      await click(button("Share")); await click(q('[data-slot="trigger"]')); stage.style.width = "240px";
+      await render(<><Button longPress={400} onPress={() => {}}>Keyboard hold alternative</Button><PasteButton>Paste</PasteButton><ShareLink url="https://example.com/a-long-link-for-local-layout-only">Share</ShareLink></>);
+      await click(button("Share")); stage.style.width = "240px";
       for (const theme of ["light", "dark"]) for (const dir of ["ltr", "rtl"]) { stage.className = theme; stage.dir = dir; await wait(); for (const element of stage.querySelectorAll<HTMLElement>('.ui-action-flow')) assert(element.scrollWidth <= element.clientWidth + 1, "Action surface overflows narrow layout"); }
       assert(!errors.length, errors.join("; "));
     });

@@ -4,7 +4,7 @@ import { renderToStaticMarkup as render } from "react-dom/server";
 import { createServer } from "vite";
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
 try {
-  const base = "/src/_components/common/ohmygui/input/";
+  const base = "/src/ohmygui/input/";
   const { Combobox } = await server.ssrLoadModule(base + "Combobox.tsx");
   const combo = render(h(Combobox, { label: "Workspace", name: "workspace", defaultValue: "Studio", options: [], helperText: "Choose one", required: true, autocomplete: "both" }));
   assert.match(combo, /role="combobox"/); assert.match(combo, /aria-expanded="false"/); assert.match(combo, /aria-autocomplete="both"/);

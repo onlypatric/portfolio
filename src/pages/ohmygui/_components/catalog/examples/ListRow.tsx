@@ -1,11 +1,23 @@
-import { ListRow } from "@/_components/common/ohmygui/collection/ListRow";
-import { Avatar } from "@/_components/common/ohmygui/content/Avatar";
-import { Badge } from "@/_components/common/ohmygui/content/Badge";
+import { Avatar, Badge, ListRow, VStack } from "@/ohmygui";
+
+const workspaces = [
+  { name: "Personal studio", detail: "A place for the next idea.", initials: "OG", state: "Ready" },
+  { name: "Component garden", detail: "A shared space for experiments.", initials: "MC", state: "In progress" },
+];
 
 export default function Example() {
   return (
-    <ul style={{ padding: 0, listStyle: "none" }}>
-      <ListRow leading={<Avatar initials="OG" alt="OhMyGUI" />} primary="Personal studio" secondary="A place for the next idea." trailing={<Badge variant="success" tone="soft">Ready</Badge>} />
-      </ul>
+    <VStack as="ul" gap="xs" align="stretch" aria-label="Workspaces">
+      {workspaces.map((workspace, index) => (
+        <ListRow
+          key={workspace.name}
+          selected={index === 0}
+          leading={<Avatar initials={workspace.initials} alt={workspace.name} />}
+          primary={workspace.name}
+          secondary={workspace.detail}
+          trailing={<Badge tone="soft">{workspace.state}</Badge>}
+        />
+      ))}
+    </VStack>
   );
 }

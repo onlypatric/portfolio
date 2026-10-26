@@ -7,8 +7,8 @@ import { flushSync } from "react-dom";
 import { catalog } from "../src/pages/ohmygui/_components/catalog/catalog";
 import { exampleModules } from "../src/pages/ohmygui/_components/catalog/ExamplePreview";
 import { Showcase } from "../src/pages/ohmygui/_components/catalog/Showcase";
-import { RadioGroup } from "../src/_components/common/ohmygui/input/RadioGroup";
-import { SegmentedPicker } from "../src/_components/common/ohmygui/input/SegmentedPicker";
+import { RadioGroup } from "../src/ohmygui/input/RadioGroup";
+import { SegmentedPicker } from "../src/ohmygui/input/SegmentedPicker";
 import "../src/pages/ohmygui/_components/catalog/showcase.css";
 
 export async function runShowcaseChecks() {
@@ -83,7 +83,7 @@ export async function runShowcaseChecks() {
     assert(stage.textContent?.includes("revision 2"), "Refresh example state");
     note("PASS button, checkbox, toggle, form, tabs, list and async refresh interactions");
 
-    for (const name of ["Dialog", "Sheet", "FullScreenCover", "ModalSurface"]) {
+    for (const name of ["Dialog", "FullScreenCover", "ModalSurface"]) {
       await mount(name); const trigger = button("Open " + name); trigger.focus(); await click(trigger);
       assert(query<HTMLDialogElement>("dialog").matches(":modal"), name + ": native modal");
       assert(document.activeElement === query("dialog input"), name + ": initial field focus");

@@ -2,7 +2,7 @@
 import { type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { Combobox, ColorPicker, FilePicker, Form, FieldGroup } from "../src/_components/common/ohmygui/input";
+import { Combobox, ColorPicker, FilePicker, Form } from "../src/ohmygui/input";
 
 export async function runPickerInputChecks() {
   const host = document.createElement("section"), stage = document.createElement("div"), report = document.createElement("pre");
@@ -48,7 +48,7 @@ export async function runPickerInputChecks() {
       assert(panel.scrollTop > 0 && active.getBoundingClientRect().bottom <= panel.getBoundingClientRect().bottom + 1, "Keyboard highlight stayed outside scroll viewport");
       await render(<Combobox label="Parent controlled" value="" options={options} onValueChange={() => {}} />); await focus(q("input")); await key(q("input"), "ArrowDown"); await key(q("input"), "Enter"); assert(q<HTMLInputElement>("input").value === "", "Parent-controlled selection was overwritten");
       await render(<Combobox label="Read only" readOnly options={options} />); await focus(q("input")); await key(q("input"), "ArrowDown"); assert(!stage.querySelector('[role="listbox"]:not([aria-hidden="true"])'), "Read-only combobox opens");
-      await render(<FieldGroup legend="Unavailable" disabled><Combobox label="Disabled" options={options} /></FieldGroup>); const disabled = q<HTMLInputElement>("input"); assert(disabled.matches(":disabled"), "Inherited disabled input lost native state"); await key(disabled, "ArrowDown"); assert(!stage.querySelector('[role="listbox"]:not([aria-hidden="true"])'), "Disabled combobox opened from keys");
+      await render(<fieldset disabled><Combobox label="Disabled" options={options} /></fieldset>); const disabled = q<HTMLInputElement>("input"); assert(disabled.matches(":disabled"), "Inherited disabled input lost native state"); await key(disabled, "ArrowDown"); assert(!stage.querySelector('[role="listbox"]:not([aria-hidden="true"])'), "Disabled combobox opened from keys");
       await render(<><Combobox label="No filter" autocomplete="none" defaultValue="not matched" options={options} /><ColorPicker label="Outside" /></>); await focus(q("input")); assert(stage.querySelectorAll('[role="option"]').length === 3, "No-autocomplete filtered options");
       await focus(q('input[type="color"]')); assert(!stage.querySelector('[role="listbox"]:not([aria-hidden="true"])'), "Blur did not close popup");
     });

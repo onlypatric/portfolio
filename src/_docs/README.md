@@ -1,7 +1,7 @@
 # Shared UI components
 
-- Owner: `src/_components/common/`.
-- The `ohmygui` tree contains reusable React UI primitives and their theme styles.
+- Library owner: `src/ohmygui/`; public entry: `@/ohmygui` (`index.tsx`).
+- The library contains reusable React UI primitives and theme styles, with root, topic and leaf imports.
 - Route-specific demos remain under the owning page, while reusable primitives stay isolated from route entry points.
 
 ## Static asset delivery

@@ -5,16 +5,16 @@ import { createServer } from "vite";
 import { readFileSync } from "node:fs";
 
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
-const base = "/src/_components/common/ohmygui/";
+const base = "/src/ohmygui/";
 const load = async (family, name) => (await server.ssrLoadModule(base + family + "/" + name + ".tsx"))[name];
 try {
   const material = { blur: "17px", opacity: .8, tint: "#224433" };
   for (const [family, name, props] of [
-    ["drawing", "MaterialSurface", {}], ["navigation", "Sidebar", { items: [] }], ["navigation", "Toolbar", {}],
+    ["drawing", "MaterialSurface", {}], ["navigation", "Sidebar", { items: [] }],
     ["navigation", "TabBar", { items: [] }], ["navigation", "TabView", { tabs: [] }],
     ["presentation", "Popover", { open: true, trigger: "Open" }], ["presentation", "Menu", { open: true, trigger: "Open", items: [] }],
     ["presentation", "Toast", { message: "Saved", duration: 0 }], ["presentation", "Banner", { title: "Status" }],
-    ...["ModalSurface", "Dialog", "Sheet", "Inspector", "ConfirmationDialog", "CommandPalette", "FullScreenCover"].map(name => ["presentation", name, { open: true, title: "Modal", choices: [], commands: [] }]),
+    ...["ModalSurface", "Dialog", "ConfirmationDialog", "CommandPalette", "FullScreenCover"].map(name => ["presentation", name, { open: true, title: "Modal", choices: [], commands: [] }]),
   ]) {
     const Component = await load(family, name);
     const html = render(h(Component, { ...props, material }));
@@ -42,7 +42,7 @@ try {
   const Background = await load("layout", "Background"), Overlay = await load("layout", "Overlay");
   assert.match(render(h(Background, { image: "/photo.jpg", decorativeBlur: "12px" }, "Sharp")), /data-slot="background"/);
   assert.doesNotMatch(render(h(Overlay, { interactive: true, decorativeBlur: "12px", overlay: "Interactive" }, "Sharp")), /ui-decorative-blur/);
-  const css = readFileSync("src/_components/common/ohmygui/theme.css", "utf8");
+  const css = readFileSync("src/ohmygui/theme.css", "utf8");
   assert.match(css, /@supports \(\(backdrop-filter: blur/);
   assert.match(css, /prefers-reduced-transparency: reduce/);
   assert.match(css, /forced-colors: active/);

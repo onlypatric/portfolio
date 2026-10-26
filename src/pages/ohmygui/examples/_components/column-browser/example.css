@@ -1,0 +1,11 @@
+.column-browser-example { height: 100dvh; min-height: 0; overflow: hidden; background: var(--background); color: var(--foreground); }
+.column-browser-example > header { flex-shrink: 0; padding: var(--ui-space-4) var(--ui-space-6); border-bottom: 1px solid var(--border); }
+.column-browser-example > [data-ui="ColumnBrowser"] { flex: 1; height: auto; border: 0; border-radius: 0; }
+.column-browser-example .ui-browser-item > [data-slot="label"] { white-space: normal; }
+.column-browser-example .ui-browser-item [data-slot="label"] [data-ui="Text"] { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.column-browser-example .ui-browser-resource { display: flex; align-items: center; gap: var(--ui-space-2); padding-block-end: var(--ui-space-2); }
+.column-browser-example .ui-browser-resource > .ui-browser-item { flex: 1; min-width: 0; }
+.column-browser-example .ui-browser-resource > [data-slot="controls"] { flex: 0 0 auto; padding: 0; padding-inline-end: var(--ui-space-3); }
+.column-browser-example > footer { flex-shrink: 0; padding: var(--ui-space-3) var(--ui-space-6); border-top: 1px solid var(--border); }
+.column-browser-example > footer > [data-ui="HStack"] { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 600px) { .column-browser-example > header, .column-browser-example > footer { padding: var(--ui-space-3); } }

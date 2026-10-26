@@ -2,7 +2,7 @@
 import { createRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { TextField, SecureField, TextEditor, SearchField, DatePicker, Picker, FieldGroup, Form, Button } from "../src/_components/common/ohmygui/input";
+import { TextField, SecureField, TextEditor, DatePicker, Picker, Form, Button } from "../src/ohmygui/input";
 
 export async function runInputFieldChecks() {
   const host = document.createElement("section"), stage = document.createElement("div"), report = document.createElement("pre");
@@ -25,7 +25,7 @@ export async function runInputFieldChecks() {
   };
   await check("Six fields have real labels/native refs and associated error/helper text without nested controls", async () => {
     const refs = Array.from({ length: 6 }, () => createRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>());
-    await render(<><TextField ref={refs[0] as React.Ref<HTMLInputElement>} label="Title" helperText="Hint" /><SecureField ref={refs[1] as React.Ref<HTMLInputElement>} label="Secret" error="Error" /><SearchField ref={refs[2] as React.Ref<HTMLInputElement>} label="Search" suggestions={["One", "Two"]} /><TextEditor ref={refs[3] as React.Ref<HTMLTextAreaElement>} label="Note" /><DatePicker ref={refs[4] as React.Ref<HTMLInputElement>} label="Date" /><Picker ref={refs[5] as React.Ref<HTMLSelectElement>} label="Choice" items={[{ value: "one", label: "One" }]} /></>);
+    await render(<><TextField ref={refs[0] as React.Ref<HTMLInputElement>} label="Title" helperText="Hint" /><SecureField ref={refs[1] as React.Ref<HTMLInputElement>} label="Secret" error="Error" /><TextField ref={refs[2] as React.Ref<HTMLInputElement>} type="search" label="Search" /><TextEditor ref={refs[3] as React.Ref<HTMLTextAreaElement>} label="Note" /><DatePicker ref={refs[4] as React.Ref<HTMLInputElement>} label="Date" /><Picker ref={refs[5] as React.Ref<HTMLSelectElement>} label="Choice" items={[{ value: "one", label: "One" }]} /></>);
     for (const ref of refs) assert(ref.current?.labels?.length === 1, "Native label/ref missing");
     assert(!stage.querySelector("label button, label input"), "Interactive controls are still nested inside labels");
     for (const control of stage.querySelectorAll<HTMLElement>('[aria-describedby]')) for (const id of control.getAttribute("aria-describedby")!.split(" ")) assert(document.getElementById(id), "Missing description target");
@@ -42,7 +42,7 @@ export async function runInputFieldChecks() {
   });
   await check("Password reveal preserves value/caret, keyboard focus, disabled state and form reset", async () => {
     stage.className = "light"; stage.dir = "ltr";
-    await render(<Form><SecureField label="Password" name="secret" defaultValue="demo-password" /><SecureField label="Disabled" disabled defaultValue="not-editable" /><FieldGroup legend="Locked" disabled><SecureField label="Inherited disabled" defaultValue="locked" /></FieldGroup></Form>);
+    await render(<Form><SecureField label="Password" name="secret" defaultValue="demo-password" /><SecureField label="Disabled" disabled defaultValue="not-editable" /><fieldset disabled><SecureField label="Inherited disabled" defaultValue="locked" /></fieldset></Form>);
     const input = q<HTMLInputElement>('input[name="secret"]'), node = input, button = q<HTMLButtonElement>('[data-slot="reveal"]');
     input.focus(); input.setSelectionRange(2, 6); flushSync(() => button.click()); await wait();
     assert(input === node && input.type === "text" && input.value === "demo-password" && input.selectionStart === 2 && input.selectionEnd === 6 && document.activeElement === input, "Reveal loses native value/caret/focus");
@@ -53,7 +53,7 @@ export async function runInputFieldChecks() {
   });
   await check("Native required/bounds/form values and uncontrolled reset remain functional", async () => {
     let submitted = 0;
-    await render(<Form onSubmit={event => { event.preventDefault(); submitted++; }}><TextField label="Name" name="name" required defaultValue="Studio" /><TextEditor label="Note" name="note" defaultValue="Original" maxLength={30} /><SearchField label="Query" name="q" defaultValue="Badge" /><DatePicker label="Date" name="date" defaultValue="2026-10-18" min="2026-01-01" max="2026-12-31" /><Picker label="Space" name="space" defaultValue="one" items={[{ label: "One", value: "one" }, { label: "Two", value: "two" }]} /><TextField label="Disabled" name="disabled" defaultValue="excluded" disabled /><TextField label="Read only" name="readonly" defaultValue="included" readOnly /><Button type="submit">Submit</Button></Form>);
+    await render(<Form onSubmit={event => { event.preventDefault(); submitted++; }}><TextField label="Name" name="name" required defaultValue="Studio" /><TextEditor label="Note" name="note" defaultValue="Original" maxLength={30} /><TextField type="search" label="Query" name="q" defaultValue="Badge" /><DatePicker label="Date" name="date" defaultValue="2026-10-18" min="2026-01-01" max="2026-12-31" /><Picker label="Space" name="space" defaultValue="one" items={[{ label: "One", value: "one" }, { label: "Two", value: "two" }]} /><TextField label="Disabled" name="disabled" defaultValue="excluded" disabled /><TextField label="Read only" name="readonly" defaultValue="included" readOnly /><Button type="submit">Submit</Button></Form>);
     const form = q<HTMLFormElement>("form"), data = new FormData(form);
     assert(data.get("name") === "Studio" && data.get("date") === "2026-10-18" && data.get("space") === "one" && !data.has("disabled") && data.get("readonly") === "included", "Native form values incorrect");
     const name = q<HTMLInputElement>('[name="name"]'); await fill(name, ""); assert(!form.checkValidity(), "Required validation lost");
@@ -63,7 +63,7 @@ export async function runInputFieldChecks() {
     const date = q<HTMLInputElement>('[name="date"]'); await fill(date, "2027-01-01"); assert(date.validity.rangeOverflow, "Date constraints lost");
   });
   await check("Time/local datetime, multiple native selection and deduplicated datalist preserve browser contracts", async () => {
-    await render(<Form><DatePicker mode="time" label="Time" name="time" defaultValue="09:30" min="09:00" max="17:00" step={900} /><DatePicker mode="datetime-local" label="Local date and time" name="local" defaultValue="2026-10-18T10:30" /><Picker label="Several spaces" name="spaces" multiple defaultValue={["a", "b"]} items={[{ value: "a", label: "A" }, { value: "b", label: "B" }, { value: "c", label: "Unavailable", disabled: true }]} /><SearchField label="Suggestions" suggestions={["Studio", "Studio", "Garden"]} /></Form>);
+    await render(<Form><DatePicker mode="time" label="Time" name="time" defaultValue="09:30" min="09:00" max="17:00" step={900} /><DatePicker mode="datetime-local" label="Local date and time" name="local" defaultValue="2026-10-18T10:30" /><Picker label="Several spaces" name="spaces" multiple defaultValue={["a", "b"]} items={[{ value: "a", label: "A" }, { value: "b", label: "B" }, { value: "c", label: "Unavailable", disabled: true }]} /><TextField type="search" label="Suggestions" /></Form>);
     const form = q<HTMLFormElement>("form"), data = new FormData(form);
     assert(data.get("time") === "09:30" && data.get("local") === "2026-10-18T10:30" && data.getAll("spaces").join() === "a,b", "Date modes or multiple values were transformed");
     assert(stage.querySelectorAll("datalist option").length === 2, "Duplicate native suggestions");
@@ -71,7 +71,7 @@ export async function runInputFieldChecks() {
   });
   await check("Controlled validation merges descriptions and group hints preserve native disabling", async () => {
     const groupRef = { current: null as HTMLFieldSetElement | null };
-    function Controlled() { const [value, setValue] = useState("Valid"); return <><p id="field-test-help">External description</p><TextField label="Controlled" value={value} onChange={event => setValue(event.target.value)} helperText="Helpful" error={value.length < 3 ? "Too short" : undefined} aria-describedby="field-test-help" /><FieldGroup ref={groupRef} legend="Disabled fields" hint="Group hint" aria-describedby="field-test-help" disabled><TextField label="Locked" /></FieldGroup></>; }
+    function Controlled() { const [value, setValue] = useState("Valid"); return <><p id="field-test-help">External description</p><TextField label="Controlled" value={value} onChange={event => setValue(event.target.value)} helperText="Helpful" error={value.length < 3 ? "Too short" : undefined} aria-describedby="field-test-help" /><fieldset ref={groupRef} aria-describedby="field-test-help" disabled><TextField label="Locked" /></fieldset></>; }
     await render(<Controlled />); const input = q<HTMLInputElement>("input"); await fill(input, "x");
     assert(input.getAttribute("aria-invalid") === "true" && q('[data-slot="hint"]').textContent === "Too short", "Controlled validation did not update");
     assert(input.getAttribute("aria-describedby")?.startsWith("field-test-help "), "Caller description was overwritten");

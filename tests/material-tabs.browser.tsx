@@ -2,26 +2,25 @@
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
 import { useState, type ReactNode } from "react";
-import { TabView } from "../src/_components/common/ohmygui/navigation/TabView";
-import { TabBar } from "../src/_components/common/ohmygui/navigation/TabBar";
-import { Tab } from "../src/_components/common/ohmygui/navigation/Tab";
-import { MaterialSurface } from "../src/_components/common/ohmygui/drawing/MaterialSurface";
-import { Dialog } from "../src/_components/common/ohmygui/presentation/Dialog";
-import { FullScreenCover } from "../src/_components/common/ohmygui/presentation/FullScreenCover";
-import { Popover } from "../src/_components/common/ohmygui/presentation/Popover";
-import { Menu } from "../src/_components/common/ohmygui/presentation/Menu";
-import { ContextMenu } from "../src/_components/common/ohmygui/presentation/ContextMenu";
-import { Tooltip } from "../src/_components/common/ohmygui/presentation/Tooltip";
-import { Toast } from "../src/_components/common/ohmygui/presentation/Toast";
-import { Banner } from "../src/_components/common/ohmygui/presentation/Banner";
-import { Sidebar } from "../src/_components/common/ohmygui/navigation/Sidebar";
-import { Toolbar } from "../src/_components/common/ohmygui/navigation/Toolbar";
-import { NavigationSplitView } from "../src/_components/common/ohmygui/navigation/NavigationSplitView";
-import { Background } from "../src/_components/common/ohmygui/layout/Background";
-import { Overlay } from "../src/_components/common/ohmygui/layout/Overlay";
-import { Image } from "../src/_components/common/ohmygui/content/Image";
-import { AsyncImage } from "../src/_components/common/ohmygui/content/AsyncImage";
-import { Button } from "../src/_components/common/ohmygui/control/button/Button";
+import { TabView } from "../src/ohmygui/navigation/TabView";
+import { TabBar } from "../src/ohmygui/navigation/TabBar";
+import { Tab } from "../src/ohmygui/navigation/Tab";
+import { MaterialSurface } from "../src/ohmygui/drawing/MaterialSurface";
+import { Dialog } from "../src/ohmygui/presentation/Dialog";
+import { FullScreenCover } from "../src/ohmygui/presentation/FullScreenCover";
+import { Popover } from "../src/ohmygui/presentation/Popover";
+import { Menu } from "../src/ohmygui/presentation/Menu";
+import { ContextMenu } from "../src/ohmygui/presentation/ContextMenu";
+import { Tooltip } from "../src/ohmygui/presentation/Tooltip";
+import { Toast } from "../src/ohmygui/presentation/Toast";
+import { Banner } from "../src/ohmygui/presentation/Banner";
+import { Sidebar } from "../src/ohmygui/navigation/Sidebar";
+import { NavigationSplitView } from "../src/ohmygui/navigation/NavigationSplitView";
+import { Background } from "../src/ohmygui/layout/Background";
+import { Overlay } from "../src/ohmygui/layout/Overlay";
+import { Image } from "../src/ohmygui/content/Image";
+import { AsyncImage } from "../src/ohmygui/content/AsyncImage";
+import { Button } from "../src/ohmygui/control/button/Button";
 
 export async function runMaterialTabChecks() {
   const host = document.createElement("section"), stage = document.createElement("div"), report = document.createElement("pre");
@@ -134,8 +133,8 @@ export async function runMaterialTabChecks() {
     assert(stage.querySelectorAll('.ui-material[data-material="true"]').length === 2, "Notification material missing");
   });
   await check("Navigation material stays on chosen chrome/panes", async () => {
-    await render(<><Sidebar material items={[]} /><Toolbar material><Button>Action</Button></Toolbar><NavigationSplitView viewport={false} style={{ height: 220 }} sidebar="Sidebar" content="Content" paneMaterials={{ sidebar: { blur: "9px" } }} /></>);
-    assert(q('[data-ui="Sidebar"]').dataset.material === "true" && q('[data-ui="Toolbar"]').dataset.material === "true", "Navigation chrome material missing");
+    await render(<><Sidebar material items={[]} /><NavigationSplitView viewport={false} style={{ height: 220 }} sidebar="Sidebar" content="Content" paneMaterials={{ sidebar: { blur: "9px" } }} /></>);
+    assert(q('[data-ui="Sidebar"]').dataset.material === "true", "Navigation chrome material missing");
     assert(q('[data-split-pane][data-slot="sidebar"]').dataset.material === "true" && q('[data-split-pane][data-slot="content"]').dataset.material === "false", "Split applies material outside requested pane");
     assert(getComputedStyle(q('[data-ui="NavigationSplitView"]')).backdropFilter === "none", "Entire split is filtered");
   });

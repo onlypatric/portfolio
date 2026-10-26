@@ -5,8 +5,8 @@
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { Checkbox } from "../src/_components/common/ohmygui/input/Checkbox";
-import { Button } from "../src/_components/common/ohmygui/control/button/Button";
+import { Checkbox } from "../src/ohmygui/input/Checkbox";
+import { Button } from "../src/ohmygui/control/button/Button";
 
 export async function runControlChecks() {
   const host = document.createElement("section");

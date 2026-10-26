@@ -6,8 +6,8 @@ import { createServer } from "vite";
 // Use the installed Vite transformer for TSX/CSS; no added test dependencies.
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
 try {
-  const { Button } = await server.ssrLoadModule("/src/_components/common/ohmygui/control/button/Button.tsx");
-  const { ButtonGroup } = await server.ssrLoadModule("/src/_components/common/ohmygui/control/button/ButtonGroup.tsx");
+  const { Button } = await server.ssrLoadModule("/src/ohmygui/control/button/Button.tsx");
+  const { ButtonGroup } = await server.ssrLoadModule("/src/ohmygui/control/button/ButtonGroup.tsx");
   const render = (props, ...children) => renderToStaticMarkup(h(ButtonGroup, props, ...children));
   const html = render({ "aria-label": "Actions", size: "sm", variant: "secondary", disabled: true },
     h(Fragment, null, h(Button, { disabled: false }, "First"), null, false, h(Button, { size: "lg", variant: "danger" }, "Last")));

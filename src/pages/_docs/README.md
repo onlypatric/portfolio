@@ -22,4 +22,4 @@
 - [Project image prompts](PROJECT-IMAGE-PROMPTS.md) cover all nine cards. Optional art in `src/assets/projects/` is discovered at build time by filename stem; absent images use decorative CSS/icon artwork. Images are lazy-loaded with reserved aspect ratios.
 - Public access; no API, authentication, content collection, or added dependency.
 - Core page content, artwork, and navigation remain visible without JavaScript; animations and playground effects require hydration.
-- Latest blog integration verification: production build and route/link checks pass. TypeScript is blocked by `tests/workspace.browser.tsx` importing the owner-deleted test workspace. Astro checker is not installed; browser visual review was not performed.
+- Latest blog integration verification: production build and route/link checks pass. The obsolete deleted-workspace browser fixture has been retired; current verification is recorded in the task changelog. Astro checker is not installed; browser visual review was not performed.

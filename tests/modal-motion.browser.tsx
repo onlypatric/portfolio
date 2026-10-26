@@ -2,15 +2,13 @@
 import { useRef, useState, type ComponentType } from "react";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { Button } from "../src/_components/common/ohmygui/control/button/Button";
-import { ModalSurface, type ModalSurfaceProps } from "../src/_components/common/ohmygui/presentation/ModalSurface";
-import { Dialog } from "../src/_components/common/ohmygui/presentation/Dialog";
-import { Sheet } from "../src/_components/common/ohmygui/presentation/Sheet";
-import { Inspector } from "../src/_components/common/ohmygui/presentation/Inspector";
-import { FullScreenCover } from "../src/_components/common/ohmygui/presentation/FullScreenCover";
-import { ConfirmationDialog } from "../src/_components/common/ohmygui/presentation/ConfirmationDialog";
-import { CommandPalette } from "../src/_components/common/ohmygui/presentation/CommandPalette";
-import { modalTriggerRect } from "../src/_components/common/ohmygui/presentation/_modal-motion";
+import { Button } from "../src/ohmygui/control/button/Button";
+import { ModalSurface, type ModalSurfaceProps } from "../src/ohmygui/presentation/ModalSurface";
+import { Dialog } from "../src/ohmygui/presentation/Dialog";
+import { FullScreenCover } from "../src/ohmygui/presentation/FullScreenCover";
+import { ConfirmationDialog } from "../src/ohmygui/presentation/ConfirmationDialog";
+import { CommandPalette } from "../src/ohmygui/presentation/CommandPalette";
+import { modalTriggerRect } from "../src/ohmygui/presentation/_modal-motion";
 
 export async function runModalMotionChecks() {
   const host = document.createElement("section"), stage = document.createElement("div"), report = document.createElement("pre");
@@ -45,7 +43,7 @@ export async function runModalMotionChecks() {
     return <><Button ref={trigger} data-trigger="" style={{ marginInlineStart: 15, marginBlockStart: 35 }} onClick={() => setOpen(true)}>Open prompt</Button>
       {(!conditional || open) && <Surface open={open} triggerRef={explicit ? trigger : undefined} openingAnimation={openingAnimation} closingAnimation={closingAnimation} title="Prompt" onClose={() => setOpen(false)} style={{ "--ui-duration-slow": "600ms" }}><input aria-label="Draft" autoFocus defaultValue="Keep this" /><Button>Inside</Button></Surface>}</>;
   }
-  const variants: ComponentType<ModalSurfaceProps>[] = [ModalSurface, Dialog, props => <Sheet {...props} placement="bottom" />, props => <Inspector {...props} placement="end" />, FullScreenCover,
+  const variants: ComponentType<ModalSurfaceProps>[] = [ModalSurface, Dialog, FullScreenCover,
     props => <ConfirmationDialog {...props} choices={[{ label: "Keep it" }]} />,
     props => <CommandPalette {...props} commands={[]} />];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;

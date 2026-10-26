@@ -1,17 +1,33 @@
-import { MaterialSurface } from "@/_components/common/ohmygui/drawing/MaterialSurface";
-import { Text } from "@/_components/common/ohmygui/content/Text";
-import { Button } from "@/_components/common/ohmygui/control/button/Button";
+import { Button, MaterialSurface, Picker, Surface, Text, VStack } from "@/ohmygui";
 import { useState } from "react";
-
 export default function Example() {
   const [opaque, setOpaque] = useState(false);
+  const [variant, setVariant] = useState<"light" | "dark" | "regular">("light");
   return (
-    <div style={{ padding: 24, borderRadius: 16, background: "linear-gradient(120deg, #244c3a, #bad0a6)" }}>
-      <MaterialSurface material={opaque ? false : { blur: "12px", opacity: .8 }} style={{ padding: 24, borderRadius: 12 }}>
-      <Text as="p" weight="semibold">A little depth.</Text>
-      <Text as="p">A translucent surface over a green gradient.</Text>
-      <Button size="sm" variant="outline" onClick={() => setOpaque(value => !value)}>{opaque ? "Enable material" : "Use opaque surface"}</Button>
+    <Surface tone="accent" padding="lg">
+      <MaterialSurface
+        material={opaque ? false : { blur: "16px", opacity: 0.7 }}
+        variant={variant}
+        padding="lg"
+        radius="lg"
+      >
+        <VStack gap="md" align="stretch">
+          <Text as="h3" variant="title">
+            A little depth.
+          </Text>
+          <Text as="p">
+            A material surface with shared padding and radius options.
+          </Text>
+          <Picker label="Tint variant" value={variant} onChange={(event) => setVariant(event.currentTarget.value as typeof variant)} items={[{ value: "light", label: "Light" }, { value: "dark", label: "Dark" }, { value: "regular", label: "Regular" }]} />
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setOpaque((value) => !value)}
+          >
+            {opaque ? "Enable material" : "Use opaque surface"}
+          </Button>
+        </VStack>
       </MaterialSurface>
-      </div>
+    </Surface>
   );
 }

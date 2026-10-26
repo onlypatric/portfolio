@@ -114,3 +114,10 @@
 - Added `public/_headers` with `Cache-Control: public, max-age=0, must-revalidate` for `/_astro/*`. The installed adapter recognizes this explicit policy and skips its automatic immutable rule. Existing assets remain browser-cacheable with revalidation; missing responses cannot be reused as fresh for a year.
 - Documented delivery behavior and recovery of already cached immutable failures. Updated the affected dashboard README. Previously cached failures still require a cache-bypassing reload; deployment is needed to publish the new policy.
 - Verification: production entry and all 35 imported JavaScript modules returned 200 with JavaScript content types; the entry matched the local build byte-for-byte. Production build passed (152 pages); local Wrangler HTTP checks returned the new header on both 200 and 404 asset responses. `git diff --check` passed. No deployment, browser session or test suites were run.
+
+## 2026-10-19 — Moved library and exposed root imports
+
+- Moved reusable UI to `src/ohmygui` as requested; `@/ohmygui` resolves to the public `index.tsx` barrel using the existing alias.
+- Re-exported every topic's public components/types, ModalSurface and shared configuration types. Preserved topic/leaf entry points and internal relative imports; no compatibility copy remains at the former location.
+- Updated application/catalog imports, fixture module paths, style-audit config/script and current documentation links. The independent workspace demonstrates root imports. Historical changelog paths remain unchanged.
+- Checks: `npm run check` passed (TypeScript, both consumer style audits, 162-page production build); `git diff --check` passed. No browser or test suite was run for this move.

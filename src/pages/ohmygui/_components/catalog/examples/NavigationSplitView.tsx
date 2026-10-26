@@ -1,22 +1,34 @@
-import { NavigationLink } from "@/_components/common/ohmygui/navigation/NavigationLink";
-import { NavigationSplitView } from "@/_components/common/ohmygui/navigation/NavigationSplitView";
-import { Padding } from "@/_components/common/ohmygui/layout/Padding";
-import { VStack } from "@/_components/common/ohmygui/layout/VStack";
-import { Badge } from "@/_components/common/ohmygui/content/Badge";
+import { useState } from "react";
+import { Badge, Button, Card, Group, NavigationSplitView, Text, VStack, type NavigationPane } from "@/ohmygui";
+
+const projects = ["Field guide", "Planting calendar", "Garden journal"];
 
 export default function Example() {
-  const [selected, setSelected] = useState("Notes");
+  const [selected, setSelected] = useState(projects[0]);
+  const [pane, setPane] = useState<NavigationPane>("content");
+
   return (
-    <NavigationSplitView viewport={false} style={{ height: 360 }} sidebarWidth={150} contentWidth={180} detailTransitionKey={selected} paneLabels={{ sidebar: "Library", content: "Components", detail: "Preview" }} sidebar={<Padding>
-      <NavigationLink href="/ohmygui">Library home</NavigationLink>
-      </Padding>} content={<Padding>
-      <VStack gap="sm">{["Notes", "Ideas", "Projects"].map(name => <Button key={name} variant={selected === name ? "secondary" : "ghost"} aria-pressed={selected === name} onClick={() => setSelected(name)}>{name}</Button>)}</VStack>
-      </Padding>} detail={<Padding>
-      <VStack gap="md">
-      <Badge variant="accent">{selected}</Badge>
-      </VStack>
-      </Padding>} />
+    <Group className="h-[360px]">
+      <NavigationSplitView mobilePane={pane} onMobilePaneChange={setPane}>
+        <NavigationSplitView.SideBar label="Projects" width="14rem">
+          <VStack gap="xs" align="stretch">
+            <Text variant="eyebrow">Garden studio</Text>
+            {projects.map(project => (
+              <Button key={project} variant={selected === project ? "secondary" : "ghost"}
+                aria-pressed={selected === project}
+                onClick={() => { setSelected(project); setPane("content"); }}>
+                {project}
+              </Button>
+            ))}
+          </VStack>
+        </NavigationSplitView.SideBar>
+        <NavigationSplitView.Content label="Project" transitionKey={selected}>
+          <Card header={<Text as="h3" variant="title">{selected}</Text>}>
+            <Badge variant="success" tone="soft">In progress</Badge>
+            <Text>Open Projects to switch gardens. The sidebar stays inside this view.</Text>
+          </Card>
+        </NavigationSplitView.Content>
+      </NavigationSplitView>
+    </Group>
   );
 }
-import { useState } from "react";
-import { Button } from "@/_components/common/ohmygui/control/button/Button";

@@ -2,8 +2,8 @@
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
 import { useRef, useState, type ReactNode } from "react";
-import { Animation, Bounce, Collapse, Fade, Flip, Float, Pulse, Reveal, Rotate, Scale, Shake, Slide, Stagger, Transition } from "../src/_components/common/ohmygui/behavior";
-import { Button } from "../src/_components/common/ohmygui/control/button/Button";
+import { Animation, Bounce, Collapse, Fade, Flip, Float, Pulse, Reveal, Rotate, Scale, Shake, Slide, Stagger, Transition } from "../src/ohmygui/behavior";
+import { Button } from "../src/ohmygui/control/button/Button";
 
 export async function runAnimationChecks() {
   const host = document.createElement("section"), report = document.createElement("pre"), stage = document.createElement("div");

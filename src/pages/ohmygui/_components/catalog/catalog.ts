@@ -4,6 +4,12 @@ export type CatalogEntry = { name: string; category: Category; description: stri
 
 export const catalog: CatalogEntry[] = [
   {
+    "name": "ColumnBrowser",
+    "category": "navigation",
+    "description": "Explore a hierarchy through resizable columns and optional detail previews.",
+    "slug": "column-browser"
+  },
+  {
     "name": "AlignmentGuide",
     "category": "layout",
     "description": "Offset one child without changing the alignment of its siblings.",
@@ -34,12 +40,6 @@ export const catalog: CatalogEntry[] = [
     "slug": "divider"
   },
   {
-    "name": "FlowLayout",
-    "category": "layout",
-    "description": "Let small pieces wrap naturally when space gets tight.",
-    "slug": "flow-layout"
-  },
-  {
     "name": "GeometryReader",
     "category": "layout",
     "description": "Observe the available space and render its live dimensions.",
@@ -64,12 +64,6 @@ export const catalog: CatalogEntry[] = [
     "slug": "hstack"
   },
   {
-    "name": "InsetContainer",
-    "category": "layout",
-    "description": "Constrain a region and give its content breathing room.",
-    "slug": "inset-container"
-  },
-  {
     "name": "Overlay",
     "category": "layout",
     "description": "Compose an isolated decorative or interactive overlay without blurring its host.",
@@ -82,40 +76,16 @@ export const catalog: CatalogEntry[] = [
     "slug": "padding"
   },
   {
-    "name": "SafeAreaInset",
-    "category": "layout",
-    "description": "Add spacing while respecting a device’s safe-area insets.",
-    "slug": "safe-area-inset"
-  },
-  {
     "name": "ScrollView",
     "category": "layout",
     "description": "Keep a long collection inside its own scroll region.",
     "slug": "scroll-view"
   },
   {
-    "name": "ScrollViewReader",
-    "category": "layout",
-    "description": "Move to a chosen child inside a scrollable collection.",
-    "slug": "scroll-view-reader"
-  },
-  {
     "name": "Spacer",
     "category": "layout",
     "description": "Let flexible space push neighboring items apart.",
     "slug": "spacer"
-  },
-  {
-    "name": "ViewFrame",
-    "category": "layout",
-    "description": "Give a piece of content explicit frame constraints.",
-    "slug": "view-frame"
-  },
-  {
-    "name": "ViewThatFits",
-    "category": "layout",
-    "description": "Select a compact or expanded composition at container breakpoints.",
-    "slug": "view-that-fits"
   },
   {
     "name": "VStack",
@@ -232,12 +202,6 @@ export const catalog: CatalogEntry[] = [
     "slug": "date-picker"
   },
   {
-    "name": "FieldGroup",
-    "category": "input",
-    "description": "Give related form fields a shared legend and hint.",
-    "slug": "field-group"
-  },
-  {
     "name": "FilePicker",
     "category": "input",
     "description": "Select local files and inspect names without uploading anything.",
@@ -254,18 +218,6 @@ export const catalog: CatalogEntry[] = [
     "category": "input",
     "description": "Represent a measured value within known bounds.",
     "slug": "gauge"
-  },
-  {
-    "name": "HelpLink",
-    "category": "input",
-    "description": "Offer contextual help through a normal accessible link.",
-    "slug": "help-link"
-  },
-  {
-    "name": "LabeledContent",
-    "category": "input",
-    "description": "Align a term and its associated value.",
-    "slug": "labeled-content"
   },
   {
     "name": "MultiDatePicker",
@@ -302,18 +254,6 @@ export const catalog: CatalogEntry[] = [
     "category": "input",
     "description": "Adjust a lower and upper bound as a controlled range.",
     "slug": "range-slider"
-  },
-  {
-    "name": "RenameButton",
-    "category": "input",
-    "description": "Edit a name inline and commit it explicitly.",
-    "slug": "rename-button"
-  },
-  {
-    "name": "SearchField",
-    "category": "input",
-    "description": "Provide a native search field with local suggestions.",
-    "slug": "search-field"
   },
   {
     "name": "SecureField",
@@ -364,12 +304,6 @@ export const catalog: CatalogEntry[] = [
     "slug": "toggle"
   },
   {
-    "name": "DataGrid",
-    "category": "collection",
-    "description": "Display structured data with local row selection.",
-    "slug": "data-grid"
-  },
-  {
     "name": "DisclosureGroup",
     "category": "collection",
     "description": "Expand a related piece of content using native disclosure semantics.",
@@ -418,16 +352,16 @@ export const catalog: CatalogEntry[] = [
     "slug": "outline-group"
   },
   {
-    "name": "RefreshableList",
-    "category": "collection",
-    "description": "Show pending and completion feedback while refreshing a list.",
-    "slug": "refreshable-list"
-  },
-  {
     "name": "Section",
     "category": "collection",
     "description": "Group content beneath a heading and an optional footer.",
     "slug": "section"
+  },
+  {
+    "name": "Sortable",
+    "category": "collection",
+    "description": "Reorder arbitrary keyed content by dragging, keyboard or a controlled order.",
+    "slug": "sortable"
   },
   {
     "name": "Table",
@@ -446,12 +380,6 @@ export const catalog: CatalogEntry[] = [
     "category": "collection",
     "description": "Render a structured row inside a native table.",
     "slug": "table-row"
-  },
-  {
-    "name": "VirtualizedCollection",
-    "category": "collection",
-    "description": "Keep a long fixed-height collection responsive by rendering visible rows.",
-    "slug": "virtualized-collection"
   },
   {
     "name": "Breadcrumbs",
@@ -520,18 +448,6 @@ export const catalog: CatalogEntry[] = [
     "slug": "tab-view"
   },
   {
-    "name": "Toolbar",
-    "category": "navigation",
-    "description": "Keep actions reachable as space narrows, with optional arrow-key navigation.",
-    "slug": "toolbar"
-  },
-  {
-    "name": "ToolbarItem",
-    "category": "navigation",
-    "description": "Place related action groups within their owning toolbar.",
-    "slug": "toolbar-item"
-  },
-  {
     "name": "Alert",
     "category": "presentation",
     "description": "Pair a status message with an explicit local action.",
@@ -574,12 +490,6 @@ export const catalog: CatalogEntry[] = [
     "slug": "full-screen-cover"
   },
   {
-    "name": "Inspector",
-    "category": "presentation",
-    "description": "Inspect contextual details in a dismissible side surface.",
-    "slug": "inspector"
-  },
-  {
     "name": "Menu",
     "category": "presentation",
     "description": "Choose from local actions using pointer or keyboard controls.",
@@ -598,22 +508,10 @@ export const catalog: CatalogEntry[] = [
     "slug": "modal-surface"
   },
   {
-    "name": "OverlayHost",
-    "category": "presentation",
-    "description": "Keep a non-modal overlay inside a scoped overlay host.",
-    "slug": "overlay-host"
-  },
-  {
     "name": "Popover",
     "category": "presentation",
     "description": "Reveal a small contextual note next to its trigger.",
     "slug": "popover"
-  },
-  {
-    "name": "Sheet",
-    "category": "presentation",
-    "description": "Present a short task in a bottom sheet.",
-    "slug": "sheet"
   },
   {
     "name": "Toast",
@@ -726,7 +624,7 @@ export const catalog: CatalogEntry[] = [
   {
     "name": "Draggable",
     "category": "behavior",
-    "description": "Attach a plain-text payload to a native drag source.",
+    "description": "Move keyed items between compatible containers with pointer, touch or keyboard controls.",
     "slug": "draggable"
   },
   {
@@ -878,5 +776,47 @@ export const catalog: CatalogEntry[] = [
     "category": "behavior",
     "description": "Interpolate between explicit entry and exit classes.",
     "slug": "transition"
-  }
+  },
+  {
+  "name": "ThemeScope",
+  "category": "drawing",
+  "description": "Scope a coherent palette, mode and density.",
+  "slug": "theme-scope"
+},
+  {
+  "name": "Surface",
+  "category": "drawing",
+  "description": "Choose shared surface appearance, tone and padding.",
+  "slug": "surface"
+},
+  {
+  "name": "Card",
+  "category": "collection",
+  "description": "Compose a polished card with header and footer slots.",
+  "slug": "card"
+},
+  {
+  "name": "Row",
+  "category": "collection",
+  "description": "Present consistent leading, title, detail and trailing content.",
+  "slug": "row"
+},
+  {
+  "name": "MetricSummary",
+  "category": "collection",
+  "description": "Present a numeric summary with semantic typography.",
+  "slug": "metric-summary"
+},
+  {
+  "name": "AvatarGroup",
+  "category": "content",
+  "description": "Group stable identity avatars with accessible overlap.",
+  "slug": "avatar-group"
+},
+  {
+  "name": "CommandTrigger",
+  "category": "input",
+  "description": "Open application search with a responsive command affordance.",
+  "slug": "command-trigger"
+}
 ];

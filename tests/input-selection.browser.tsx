@@ -2,7 +2,7 @@
 import { type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { Checkbox, Toggle, RadioGroup, SegmentedPicker, Form, FieldGroup } from "../src/_components/common/ohmygui/input";
+import { Checkbox, Toggle, RadioGroup, SegmentedPicker, Form } from "../src/ohmygui/input";
 
 export async function runSelectionInputChecks() {
   const host = document.createElement("section"), stage = document.createElement("div"), report = document.createElement("pre");
@@ -45,7 +45,7 @@ export async function runSelectionInputChecks() {
         assert(q<HTMLInputElement>('[value="first"]').checked && !q<HTMLInputElement>('[value="second"]').checked, "Controlled group ignored parent rejection");
         await render(<Form><Group {...collection as any} name="choice" required /></Form>); assert(!q<HTMLFormElement>("form").checkValidity(), "Required group accepted no selection");
       }
-      await render(<Form><FieldGroup legend="Unavailable" disabled><Toggle label="Switch" name="quiet" /><RadioGroup items={options} name="radio" /><SegmentedPicker choices={options} name="segment" /></FieldGroup></Form>);
+      await render(<Form><fieldset disabled><Toggle label="Switch" name="quiet" /><RadioGroup items={options} name="radio" /><SegmentedPicker choices={options} name="segment" /></fieldset></Form>);
       for (const input of stage.querySelectorAll<HTMLInputElement>("input")) { assert(input.matches(":disabled"), "Native fieldset disabling lost"); await click(input); assert(!input.checked, "Inherited disabled input changed"); }
       assert([...new FormData(q<HTMLFormElement>("form"))].length === 0, "Disabled options submitted");
     });

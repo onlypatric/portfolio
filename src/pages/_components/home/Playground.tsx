@@ -1,10 +1,10 @@
 import { useId, useState } from 'react';
 import { ArrowClockwiseIcon, ShuffleIcon, HeartIcon, PlayIcon } from '@phosphor-icons/react';
-import { HStack, VStack } from '@/_components/common/ohmygui/layout';
-import { Text } from '@/_components/common/ohmygui/content';
-import { Toggle, Slider, Button, SegmentedPicker } from '@/_components/common/ohmygui/input';
-import { Animation, type MotionEffect } from '@/_components/common/ohmygui/behavior';
-import type { UIStyle } from '@/_components/common/ohmygui';
+import { HStack, VStack } from '@/ohmygui/layout';
+import { Text } from '@/ohmygui/content';
+import { Toggle, Slider, Button, SegmentedPicker } from '@/ohmygui/input';
+import { Animation, type MotionEffect } from '@/ohmygui/behavior';
+import type { UIStyle } from '@/ohmygui';
 
 const palettes = {
   moss: { label: 'Moss', accent: '#cfdfa7', sky: '#d9ddbb', hill: '#879970', front: '#425c48', glow: '#f6e7b5' },

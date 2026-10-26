@@ -1,13 +1,15 @@
-import { Background } from "@/_components/common/ohmygui/layout/Background";
-import { Padding } from "@/_components/common/ohmygui/layout/Padding";
-import { Text } from "@/_components/common/ohmygui/content/Text";
+import { HStack, Padding, Surface, Text } from "@/ohmygui";
 
 export default function Example() {
   return (
-    <Background fill="var(--ui-selection)" style={{ borderRadius: 16 }}>
-      <Padding padding="xl">
-      <Text>Extra-large padding from the theme.</Text>
-      </Padding>
-      </Background>
+    <HStack gap="sm" align="center" wrap role="group" aria-label="Padding size comparison">
+      {(["xs", "sm", "md", "lg", "xl"] as const).map((padding) => (
+        <Surface key={padding} tone="paper" padding="none" radius="sm">
+          <Padding padding={padding}>
+            <Text>{padding}</Text>
+          </Padding>
+        </Surface>
+      ))}
+    </HStack>
   );
 }

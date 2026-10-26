@@ -1,12 +1,32 @@
-import { HStack } from "@/_components/common/ohmygui/layout/HStack";
-import { Avatar } from "@/_components/common/ohmygui/content/Avatar";
+import { useState } from "react";
+import { Avatar, HStack, Toggle, VStack } from "@/ohmygui";
 
 export default function Example() {
+  const [showImage, setShowImage] = useState(true);
+
   return (
-    <HStack gap="md" wrap>
-      <Avatar initials="OG" alt="OhMyGUI" size="lg" />
-      <Avatar initials="AL" alt="Alex Lee" shape="rounded" size={64} />
-      <Avatar initials="MP" alt="Morgan Park" shape="square" />
+    <VStack gap="md" align="stretch">
+      <Toggle label="Use image source" checked={showImage} onChange={(event) => setShowImage(event.currentTarget.checked)} />
+      <HStack gap="md" align="center" wrap>
+        <Avatar
+          src={showImage ? "/ohmygui/landscape.svg" : undefined}
+          initials="OG"
+          alt="OhMyGUI landscape"
+          size="lg"
+          palette="sage"
+          presence="online"
+        />
+        <Avatar
+          initials="AL"
+          alt="Alex Lee"
+          shape="rounded"
+          size={64}
+          palette="auto"
+          identity="alex-lee"
+          presence="away"
+        />
+        <Avatar initials="MP" alt="Morgan Park" shape="square" />
       </HStack>
+    </VStack>
   );
 }

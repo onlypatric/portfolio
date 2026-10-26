@@ -2,7 +2,7 @@
 import { useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
-import { Slider, RangeSlider, Stepper, Form, FieldGroup, Button } from "../src/_components/common/ohmygui/input";
+import { Slider, RangeSlider, Stepper, Form, Button } from "../src/ohmygui/input";
 
 export async function runNumericInputChecks() {
   const host = document.createElement("section"), stage = document.createElement("div"), report = document.createElement("pre");
@@ -57,7 +57,7 @@ export async function runNumericInputChecks() {
     await fill(bounded, "25"); bounded.blur(); await wait(); assert(bounded.value === "25", "Multi-digit entry failed");
   });
   await check("Disabled/read-only controls and inherited fieldsets reject pointer, button and keyboard changes", async () => {
-    await render(<Form><Stepper label="Read only" name="step" defaultValue={5} readOnly /><Slider label="Read only range" name="slide" value={50} readOnly /><FieldGroup legend="Disabled" disabled><RangeSlider lowName="low" highName="high" /><Stepper label="Inherited" name="inherited" defaultValue={3} /></FieldGroup></Form>);
+    await render(<Form><Stepper label="Read only" name="step" defaultValue={5} readOnly /><Slider label="Read only range" name="slide" value={50} readOnly /><fieldset disabled><RangeSlider lowName="low" highName="high" /><Stepper label="Inherited" name="inherited" defaultValue={3} /></fieldset></Form>);
     const step = q<HTMLInputElement>('[name="step"]'); await click(q<HTMLButtonElement>('[aria-label="Increase"]')); assert(step.value === "5", "Read-only stepper changed");
     const slide = q<HTMLInputElement>('[name="slide"]'), key = new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true, cancelable: true }); slide.dispatchEvent(key); assert(key.defaultPrevented, "Read-only range keyboard path is active");
     const rail = q<HTMLElement>('[data-slot="rail"]'); rail.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: 100 })); await wait();

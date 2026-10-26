@@ -1,7 +1,19 @@
-import { Link } from "@/_components/common/ohmygui/content/Link";
+import { HStack, Link } from "@/ohmygui";
 
 export default function Example() {
   return (
-    <Link href="/ohmygui/navigation-split-view">Explore NavigationSplitView →</Link>
+    <HStack gap="md" wrap align="center">
+      <Link href="/ohmygui/navigation-split-view">Default link</Link>
+      <Link href="/ohmygui/sidebar" variant="quiet">
+        Quiet link
+      </Link>
+      <Link
+        href="/ohmygui/examples/team-dashboard"
+        variant="button"
+        target="_blank"
+      >
+        Open example
+      </Link>
+    </HStack>
   );
 }

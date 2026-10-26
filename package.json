@@ -8,7 +8,10 @@
     "build": "astro build",
     "preview": "npm run build && wrangler dev",
     "generate-types": "wrangler types",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "typecheck": "tsc --noEmit --pretty false",
+    "check:styles": "node src/ohmygui/tooling/style-audit.mjs",
+    "check": "npm run typecheck && npm run check:styles && npm run build"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.0",
@@ -24,9 +27,12 @@
     "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
+    "@astrojs/compiler-rs": "^0.5.1",
+    "@babel/parser": "^7.29.9",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "postcss": "^8.5.29",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "wrangler": "^4.151.1"

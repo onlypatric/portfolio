@@ -1,8 +1,18 @@
-import { Icon } from "@/_components/common/ohmygui/content/Icon";
-import { Label } from "@/_components/common/ohmygui/content/Label";
+import { HStack, Icon, Label } from "@/ohmygui";
 
 export default function Example() {
   return (
-    <Label icon={<Icon name="sparkle" size={24} />} title="A little attention to detail" />
+    <HStack gap="lg" wrap align="center">
+      <Label
+        icon={<Icon name="sparkle" size={24} />}
+        title="A little attention to detail"
+      />
+      <Label
+        icon={<Icon name="arrow-right" size={20} />}
+        iconPosition="trailing"
+      >
+        Read the field guide
+      </Label>
+    </HStack>
   );
 }

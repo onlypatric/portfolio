@@ -6,7 +6,7 @@ const server = await createServer({ configFile: false, server: { middlewareMode:
 const globals = ['document', 'matchMedia', 'getComputedStyle', 'MutationObserver', 'IntersectionObserver', 'CSS', 'requestAnimationFrame', 'cancelAnimationFrame'];
 const previous = new Map(globals.map(key => [key, Object.getOwnPropertyDescriptor(globalThis, key)]));
 try {
-  const { createMotionController } = await server.ssrLoadModule('/src/_components/common/ohmygui/behavior/_motion-controller.ts');
+  const { createMotionController } = await server.ssrLoadModule('/src/ohmygui/behavior/_motion-controller.ts');
   let frames = new Map(), nextFrame = 0, observers = [], reduced = false;
   const listeners = new Map();
   class Animation {

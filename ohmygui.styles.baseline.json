@@ -1,0 +1,1628 @@
+{
+  "note": "Reviewed shared legacy foundation debt only. New consumer styling cannot be waived by this baseline.",
+  "findings": [
+    {
+      "file": "src/layouts/BaseLayout.astro",
+      "line": 14,
+      "kind": "class",
+      "value": "dark",
+      "fingerprint": "0c4952b95238689f5f6c394efc0573e2078eee678a180a1b08b25c66283c835a"
+    },
+    {
+      "file": "src/layouts/BaseLayout.astro",
+      "line": 21,
+      "kind": "uncertain-class",
+      "value": "bodyClass",
+      "fingerprint": "95600a278d9eb5711c4d7bc3e18978f5b5a42601284f650360d1ce3a96a78934"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 1,
+      "kind": "uncertain-import",
+      "value": "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap",
+      "fingerprint": "ae92bff1755ee3a110c5969579c2487d7a1d8825d5ad3fba6852b08920cd4e1a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 6,
+      "kind": "css",
+      "selector": "@root",
+      "property": "--font-serif",
+      "value": "\"Fraunces\", serif",
+      "fingerprint": "d675cd5d3d74e64d8c8aa61cbbbc6f8d441ed0036168e1dce40f9cd78a812d77"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 11,
+      "kind": "css",
+      "selector": "html",
+      "property": "font-family",
+      "value": "var(--font-serif)",
+      "fingerprint": "6fbf094f832432ab1965a61b025d32620caf3616fc70bad9a743d0b5487c2695"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 16,
+      "kind": "css",
+      "selector": "*",
+      "property": "box-sizing",
+      "value": "border-box",
+      "fingerprint": "4fc2b0458c4c0b45a066983a9bc3f642b4fc7fad5e4119d529be1d869bb17fff"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 20,
+      "kind": "css",
+      "selector": "html,body",
+      "property": "margin",
+      "value": "0",
+      "fingerprint": "683ff640b063ab6c87c4afb4d1e611b64482f78f9d42e37c42b7826872876b79"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 21,
+      "kind": "css",
+      "selector": "html,body",
+      "property": "padding",
+      "value": "0",
+      "fingerprint": "7d228c339d64e101ccd58bd3669bc82b80574e85bb4ec8efb12c4a95d39e782b"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 25,
+      "kind": "css",
+      "selector": "body",
+      "property": "background-color",
+      "value": "black",
+      "fingerprint": "5b1eabe23076fc0ba7bd201721aaba847d7a4799374eb36ec9acccc80fb1a828"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 25,
+      "kind": "raw-color",
+      "selector": "body",
+      "property": "background-color",
+      "value": "black",
+      "fingerprint": "9288fe67c7aaa21de4d3f7f26a05ed41d178403c1f81058c185a1e7dc1338cf0"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 26,
+      "kind": "css",
+      "selector": "body",
+      "property": "color",
+      "value": "whitesmoke",
+      "fingerprint": "9f47df513b1c2d6f35127dcd5f2ca1677f1a267c40fedc33d6a502e49f489914"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 26,
+      "kind": "raw-color",
+      "selector": "body",
+      "property": "color",
+      "value": "whitesmoke",
+      "fingerprint": "56be659ac3b8f0fcb215fd7ab5677e9904b5ebd817d7c6c9ba5bb87cd1d77f37"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 41,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--accent",
+      "value": "oklch(60.16% 0.0826 112.77)",
+      "fingerprint": "fd68e2f53cf738bdd6367cf7ac6d6d9faa93836da09743092f1597a52baa1f6e"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 41,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--accent",
+      "value": "oklch(60.16% 0.0826 112.77)",
+      "fingerprint": "3253b290118b10ed592e13f589de1a165d4daecd4cc0c664427165921dfb0e87"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 42,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--accent-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "8504ad72c05c2747b56808af7f8c41c85bc060fa723b7f6fa6dbf3757874dd69"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 42,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--accent-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "03166359384ae057939343d6429b655913b2f67de85ac383c7bb221576ec88e5"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 43,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--background",
+      "value": "oklch(97.02% 0.0015 112.77)",
+      "fingerprint": "104f9f6faeed5ae759d1ba250f8ba3c1b9adb9f731ef40b67604b7104dccac3b"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 43,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--background",
+      "value": "oklch(97.02% 0.0015 112.77)",
+      "fingerprint": "4b6166393460574ea7a2d4fca53a1a7ae9b5a72f7779f2020cf4ae2e851c24e2"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 44,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--border",
+      "value": "oklch(90.00% 0.0015 112.77)",
+      "fingerprint": "1f2b62c40b8bafac547f2bf4edd5f00221014b0263f582f23329da0c6632fffa"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 44,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--border",
+      "value": "oklch(90.00% 0.0015 112.77)",
+      "fingerprint": "1aee70f708ea45000ede0dbb4043976db7e23b73f6c16e4b7fe53da68b087652"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 45,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--danger",
+      "value": "oklch(65.32% 0.2335 8.81)",
+      "fingerprint": "93f42f0145862377d9ed9335239fd3e18de452a59c9cbbba8f1df87753b3c0e3"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 45,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--danger",
+      "value": "oklch(65.32% 0.2335 8.81)",
+      "fingerprint": "e787842eac82ba97876695d7a4b3bb473ee963de037073b8912418dc692c904f"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 46,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--danger-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "e69aefe5a31c3349a098d3137635649f0309c65b300b45480ffb3b2c3a1158da"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 46,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--danger-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "157823ab04b4cd51d4da357766e869c60783dd101aa67660bdf471e45277fe99"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 47,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--default",
+      "value": "oklch(94.00% 0.0015 112.77)",
+      "fingerprint": "824dbc0c9cdb97af63a14f0d3dca245f99209119b80a1b2a440d42a573d19c73"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 47,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--default",
+      "value": "oklch(94.00% 0.0015 112.77)",
+      "fingerprint": "e295f42f0764f2980704dc04feffe9b94eb304cc7a8bdb113fdaad2dc69f34ba"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 48,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--default-foreground",
+      "value": "oklch(21.03% 0.0059 112.77)",
+      "fingerprint": "b6d18e30dfe754a5c809e18c9cd2f7973d6323d86cc89c489969cefac16dc8b8"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 48,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--default-foreground",
+      "value": "oklch(21.03% 0.0059 112.77)",
+      "fingerprint": "784fc3cf03c152a3e50d0e5ca4dc84ff87620689494f43bae115db40002bb09d"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 49,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--field-background",
+      "value": "oklch(100.00% 0.0008 112.77)",
+      "fingerprint": "4314bbe22dcb4e6193a9606d8ac06a682796a7bf1c7f66f79f092f7e64324117"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 49,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--field-background",
+      "value": "oklch(100.00% 0.0008 112.77)",
+      "fingerprint": "03b76c69c0fbabb7d6b8d2c2bb1b4018e1f495362bfe4c8e681fc13f0eba121a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 50,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--field-border",
+      "value": "transparent",
+      "fingerprint": "b60088074976f0d780e906fd6bcadf801569718a2a8d496521903484612a8f30"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 51,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--field-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "5fe46fe3d58977cce7ad70d4a5e9bb543d0d639434d7e2ebe7ee8869dcaaaedc"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 51,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--field-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "7c913572afaf0d60c86c7535eba75d735597b240bb05ce3a00f8788161759254"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 52,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--field-placeholder",
+      "value": "oklch(55.17% 0.0030 112.77)",
+      "fingerprint": "1de67c0b7acc6d764f057b9270b695f03510125fdada7c00e1d3d4bcc030df0f"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 52,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--field-placeholder",
+      "value": "oklch(55.17% 0.0030 112.77)",
+      "fingerprint": "65d0bef6bd883450860092d6d84bfb82d7f2da26fa627094c20dbcf01c3825eb"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 53,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--focus",
+      "value": "oklch(60.16% 0.0826 112.77)",
+      "fingerprint": "85dbba6afeeeddaa73129cd49adb1202c1072d7387d907febf2c8651c9111f88"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 53,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--focus",
+      "value": "oklch(60.16% 0.0826 112.77)",
+      "fingerprint": "ab6c593967f79649d969749d1e1c7df5477d0f02a8553f8505189cdc9b810a1a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 54,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "a5da8f851409eb63c67ddfd955fcc1197df465798f042a6da266f7daefab7fea"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 54,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "10b349e3383ed3e9fe6f10f463fde3e1efd0234c5c1e91f23dea1a7772423717"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 55,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--muted",
+      "value": "oklch(55.17% 0.0030 112.77)",
+      "fingerprint": "1b80c5d32f341c44b80a96c7a115673ccae7ac8471d1fb11db6c334b2c1ebad7"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 55,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--muted",
+      "value": "oklch(55.17% 0.0030 112.77)",
+      "fingerprint": "b14e3e797a9edbb4c140f95ce7814e80f5d680926007a4ae83399487f23c40c6"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 56,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--overlay",
+      "value": "oklch(100.00% 0.0004 112.77)",
+      "fingerprint": "ab434456a12fb998d3889d924df4cda1456dcc9a40ac72778ab0fb3b8720d4dc"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 56,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--overlay",
+      "value": "oklch(100.00% 0.0004 112.77)",
+      "fingerprint": "5f5de260ae4f8991c6af9861459ecfdf7f1cb2a60a89fc9ea13d6ac47cc4028a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 57,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--overlay-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "ec0c739ca7d42d239adcef59cd02067fdf122c0e8654f554174de4463fb23642"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 57,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--overlay-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "3b8f443961922ce77dd46b812d2971d33e8fc2b86c0778613e548e193db29c0e"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 58,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--scrollbar",
+      "value": "oklch(87.10% 0.0015 112.77)",
+      "fingerprint": "1e536e0bfd60342f8db34f683d959bf03c671a077f9b468227fe68d22e3270ef"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 58,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--scrollbar",
+      "value": "oklch(87.10% 0.0015 112.77)",
+      "fingerprint": "0390db50199ac7d1e45298cbeb9aab13ac7d80cb59228291556427c4185fbd16"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 59,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--segment",
+      "value": "oklch(100.00% 0.0015 112.77)",
+      "fingerprint": "cb8f492cc49f62cb73a3b1b6221e989fa9da17553d6bf44bffed0ee33595b41a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 59,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--segment",
+      "value": "oklch(100.00% 0.0015 112.77)",
+      "fingerprint": "7fd2129f282f686cad88d7995c0735ba2cde7a127dd9e05efb25d07402ada04b"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 60,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--segment-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "09c38ddfe7ea69d2613c5fb69d20821f508efe1d90951a193e6b1d0c2ce70d70"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 60,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--segment-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "2f33f96374a3646398e2f430c5b8e6b447fd77e55444e19c0d075fc6974781b0"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 61,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--separator",
+      "value": "oklch(92.00% 0.0015 112.77)",
+      "fingerprint": "38d2d0e98eca4e591867a350fc4e290a6ffa0d4e2080a49d43933d795f23f84a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 61,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--separator",
+      "value": "oklch(92.00% 0.0015 112.77)",
+      "fingerprint": "8d59219ca5855a1a72c4396a34d4c9dec203e1e03b5150e406f856716124d86a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 62,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--success",
+      "value": "oklch(73.29% 0.1941 133.88)",
+      "fingerprint": "4763d5d6774258151993409c438b524d2c6b3010471e30517d25f668574cd94f"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 62,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--success",
+      "value": "oklch(73.29% 0.1941 133.88)",
+      "fingerprint": "768fed8fa95cc4f538915efbb6c1174e1542fdffb65847979cd238c8f06d7281"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 63,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--success-foreground",
+      "value": "oklch(21.03% 0.0059 133.88)",
+      "fingerprint": "35fd44943510f0cab3741f008ba26e4075cc34d947be54e22a2e9e7855b97fce"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 63,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--success-foreground",
+      "value": "oklch(21.03% 0.0059 133.88)",
+      "fingerprint": "209cdfcf229cf49db4bd3af597d18868eac0b0927374822b7558857a13d40385"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 64,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface",
+      "value": "oklch(100.00% 0.0008 112.77)",
+      "fingerprint": "5d89f77825f0d53283e7c7c667144767185512c48685224abd25f9959b97631e"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 64,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface",
+      "value": "oklch(100.00% 0.0008 112.77)",
+      "fingerprint": "bfc47101113edda7714c09ed7ad9f1f030601ce229b5e740117e002a8193d5f4"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 65,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "d622876717e439696e8218c588f4f011b33a0236bd6ce928e2a3e0000a2dc680"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 65,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "e3a5354c57b60a800330ddc256c38733241695edf01ed3bc5f0cc6e5aa9527b3"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 66,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-secondary",
+      "value": "oklch(95.24% 0.0012 112.77)",
+      "fingerprint": "6e13b8abfbdb3040d99e215f40b9afc9295c244ced81b313f6e78dfdfbc66173"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 66,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-secondary",
+      "value": "oklch(95.24% 0.0012 112.77)",
+      "fingerprint": "46a52e0fc021830d7267549d0e964feaec75fc37b7cdf83d6c251c75146de323"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 67,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-secondary-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "c79d8e233b39123c09966c07ddc04e8dd40267269b0fee15f10b3b782014733c"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 67,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-secondary-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "7caa5e9ed1abc4d687b87c5fa55a733b4a592b57bdd963d071b1da4e2bdfa2d6"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 68,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-tertiary",
+      "value": "oklch(93.73% 0.0012 112.77)",
+      "fingerprint": "18b73c694fc8101d7d69d7e1bdfdf2bf5b7768c21af5ddea99df694654bf8239"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 68,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-tertiary",
+      "value": "oklch(93.73% 0.0012 112.77)",
+      "fingerprint": "0bee740121f5a8e15a75ebdb059e9f2ee7ad330d81067ff13ba97b5caab5bd3a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 69,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-tertiary-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "21b42d04cbe27bb38181828e4957ac2a012582e9742ddb7250c85c07277e15e5"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 69,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--surface-tertiary-foreground",
+      "value": "oklch(21.03% 0.0015 112.77)",
+      "fingerprint": "3cb21e7934c0afa220ebcb272f0e7e594518fcf49b291ea085d224a3b1a89c03"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 70,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--warning",
+      "value": "oklch(78.19% 0.1590 55.40)",
+      "fingerprint": "cdcd4c964b547055923e05e82732d1187e8e8baf2036b8fcd9847cb587dd8b25"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 70,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--warning",
+      "value": "oklch(78.19% 0.1590 55.40)",
+      "fingerprint": "d4b2e2135f3c447bd6f25ebc1fc6b46589c8f6b46cc2f45eb46d9681806caaab"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 71,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--warning-foreground",
+      "value": "oklch(21.03% 0.0059 55.40)",
+      "fingerprint": "bc5b8f180c83e146f8a3468c49e61393ba8e84686fda3ef4e8574d1c3029d968"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 71,
+      "kind": "raw-color",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--warning-foreground",
+      "value": "oklch(21.03% 0.0059 55.40)",
+      "fingerprint": "ab464c9881f277fb6028b1891ca2af464d2958cac21875d462bd05fafe27caa2"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 74,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--radius",
+      "value": "0.75rem",
+      "fingerprint": "2cd49c2081c23527222b984ab199e5cb3b9b5ad8b845e9d4b1b91c2a77809dae"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 75,
+      "kind": "css",
+      "selector": ":root,\n.light,\n.default,\n[data-theme=\"light\"],\n[data-theme=\"default\"]",
+      "property": "--field-radius",
+      "value": "0.75rem",
+      "fingerprint": "800c9bf5e4ff19bf4f92570ae73e5c7edb8e7e0fe464a4fc984d2f443b7c4496"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 81,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "color-scheme",
+      "value": "dark",
+      "fingerprint": "e308890897cd8a29dc891b5b108fcb35225740036d4886bbb720670e28c03de2"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 83,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--accent",
+      "value": "oklch(60.16% 0.0826 112.77)",
+      "fingerprint": "54c9131de0eeff120d9fed3cf0cf33946d06afbbea1040ab96021fa71f1128bb"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 83,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--accent",
+      "value": "oklch(60.16% 0.0826 112.77)",
+      "fingerprint": "90bd9575518636e24b0731fd4e455a6a4666e2c8ae1018006d6872f552f25e81"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 84,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--accent-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "36643d9f9ca793756e3d6018f368f635870ae11bb509b288a615e10c7604aaf9"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 84,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--accent-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "6ef60fc9845e3e535fa3d7725c220d288f8af36fe1bba51d353ce35f054885b1"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 85,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--background",
+      "value": "oklch(12.00% 0.0015 112.77)",
+      "fingerprint": "407aae06828b6d9cd9ed88a9fd76aae1bd57d41349a319f26e0c3f9160f19fa4"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 85,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--background",
+      "value": "oklch(12.00% 0.0015 112.77)",
+      "fingerprint": "f4b5efdd4791f2bd600d15d64910605767a589e74839471a1a97f48fe41431f7"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 86,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--border",
+      "value": "oklch(28.00% 0.0015 112.77)",
+      "fingerprint": "c29995d4d279bd2870a8034108023319848c71ef32c8fbc111bdf7d534604b2c"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 86,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--border",
+      "value": "oklch(28.00% 0.0015 112.77)",
+      "fingerprint": "ab48f79139f35c2be6d8893a4968632558c63ab8b21e2cece6e6d5af89dcf63b"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 87,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--danger",
+      "value": "oklch(59.40% 0.1973 7.70)",
+      "fingerprint": "946d13c0b8eea108008d059faa33fdbd95317ada8a1bfdbdb3fd909ac723987c"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 87,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--danger",
+      "value": "oklch(59.40% 0.1973 7.70)",
+      "fingerprint": "896462c09fe5df1fdd8dbdea632229ce3182ffbd0afac00d41403b5a25208f6d"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 88,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--danger-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "1b3538a637cdd0f4fa9a383716882333c8da00891ae5d3d0af364c60b3ea89b2"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 88,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--danger-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "13f75c5c9c76d1b4ebef8d93d2177a804412e5b2ed5ebfe732bab246e4597112"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 89,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--default",
+      "value": "oklch(27.40% 0.0015 112.77)",
+      "fingerprint": "4d59014426f20585f64a210308f00cd3210dffc66f534871b7723224c41e0a4e"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 89,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--default",
+      "value": "oklch(27.40% 0.0015 112.77)",
+      "fingerprint": "924dea5336c9cb4cc70832733bef5a4d8bea17e101a69f5542519319eed1ebaf"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 90,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--default-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "8ee0ff054eba27c35be38ec563405c55dbfe5f6d278ea4f868f373c2bf12f44e"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 90,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--default-foreground",
+      "value": "oklch(99.11% 0 0)",
+      "fingerprint": "e7e0e58ab9eb113694c68d3271bcec45616f50d27302538445d3146746f68d6c"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 91,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--field-background",
+      "value": "oklch(21.03% 0.0030 112.77)",
+      "fingerprint": "ea7f16fdb199b6a135bb557dc696517efacb65f208568c42a1d1820151288f41"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 91,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--field-background",
+      "value": "oklch(21.03% 0.0030 112.77)",
+      "fingerprint": "2813f396518646ff9526ed0598d15fd5a0d352419bbd0a45f0958a02d017de09"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 92,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--field-border",
+      "value": "transparent",
+      "fingerprint": "d1d7c2757fa8e32405a092c7e70df8ffbbb9903ef2b2bea5ba5beae8ea78f8de"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 93,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--field-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "979495e5f0d49f5464b74644601e292c6a028ba0df4354d1f0b534c52ae9d71f"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 93,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--field-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "ea7303da1d8efbc2750321eea4b1a4857a935f90c32630a801f9a2facf55c167"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 94,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--field-placeholder",
+      "value": "oklch(70.50% 0.0030 112.77)",
+      "fingerprint": "bdc46da8f70218cfc969bb63d00501cf844abdeb9c549168c405368c867cc838"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 94,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--field-placeholder",
+      "value": "oklch(70.50% 0.0030 112.77)",
+      "fingerprint": "4c090f05e216ce5c067a86c03b78b4878b1ce1481d7c482c4e97176d377473ed"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 95,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--focus",
+      "value": "oklch(60.16% 0.0826 112.77)",
+      "fingerprint": "bf34764c291aab7a1b49419736fceb83eeee00b501d32303348ee9f98415b542"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 95,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--focus",
+      "value": "oklch(60.16% 0.0826 112.77)",
+      "fingerprint": "0b0bba02097f144bdd7b062b8a5ffb110c667aef342bdf61225752201b5c745d"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 96,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "dc8f44bbd2006724fbd255c7f38a8be84485fa61f1bfef4436192e080c0c5066"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 96,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "dc3d5eea4db20db209be2610b22c5a1bfa8521164576df8c603272ed1bd643b1"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 97,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--muted",
+      "value": "oklch(70.50% 0.0030 112.77)",
+      "fingerprint": "5d9393e7bdf7ead0a43f8b61ddc032ad2d47d2eb02c1fa70a9fcb3875cf65610"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 97,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--muted",
+      "value": "oklch(70.50% 0.0030 112.77)",
+      "fingerprint": "51260aafd0d9b8a70ae293daf38001bd0b4742cc8ae5c4acc86c4325e72e0381"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 98,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--overlay",
+      "value": "oklch(21.03% 0.0030 112.77)",
+      "fingerprint": "7739c1daa1da3c69de542ea2e05a0ef759d3cc2291720d5ae22de380cc6b7644"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 98,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--overlay",
+      "value": "oklch(21.03% 0.0030 112.77)",
+      "fingerprint": "fae61c066bc0731343b617f2283da3f6fe62a15a882a4fb88576bccd2f817ad3"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 99,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--overlay-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "16dcc64ef1e9c716f9911e762069ee48cb8c3f02f55cb3910384ba132fc21e90"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 99,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--overlay-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "433981ef6dc9ded2f3cd345e87c8f62b49de95f06e2a76501313b74a8c01f188"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 100,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--scrollbar",
+      "value": "oklch(70.50% 0.0015 112.77)",
+      "fingerprint": "bd17a1a563538b279c7ec7420b4094bca9f146b455e139fb15c3cf45528abc9c"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 100,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--scrollbar",
+      "value": "oklch(70.50% 0.0015 112.77)",
+      "fingerprint": "35a97ba1b9e407263e1d79cdfbf1178372068ac445346849887d847fceafaf73"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 101,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--segment",
+      "value": "oklch(39.64% 0.0015 112.77)",
+      "fingerprint": "b1cb678698f596426b24fb939cc5ea7e5468f9f2daf9ad9d4858195388f7e463"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 101,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--segment",
+      "value": "oklch(39.64% 0.0015 112.77)",
+      "fingerprint": "7dfb2d3f152651854f6908948ddebb7ddf89c6840d0ecd16312a7326461f2c3a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 102,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--segment-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "7d44e66f422ddf6f9fe12f932fd674c416e37886ca64f1815969b6b64c67a483"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 102,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--segment-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "d08dd1cd3573c52a8eabab116ad87667f5cc741146353e1b51017cf8bab77a29"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 103,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--separator",
+      "value": "oklch(25.00% 0.0015 112.77)",
+      "fingerprint": "15f3834aeb74e4461f381a7451f8419023b2ee3175a1e6d296810656fae68871"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 103,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--separator",
+      "value": "oklch(25.00% 0.0015 112.77)",
+      "fingerprint": "33c72184057607b94e915bf92bc090847449e46cdfbafbb3fd9b270af06c9bc9"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 104,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--success",
+      "value": "oklch(73.29% 0.1941 133.88)",
+      "fingerprint": "cfcf118573cd71b5f803d013680e64fac08b2e938db2f56c403c5ebbceace77d"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 104,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--success",
+      "value": "oklch(73.29% 0.1941 133.88)",
+      "fingerprint": "f5ea481a293705313ab3dc1468503127fa60ba7989d3d967b24b860a6baa5c0e"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 105,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--success-foreground",
+      "value": "oklch(21.03% 0.0059 133.88)",
+      "fingerprint": "97a6637d36621aec4239aa0cccb4c5b33cb4a9c82bae062142681978d6ee1979"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 105,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--success-foreground",
+      "value": "oklch(21.03% 0.0059 133.88)",
+      "fingerprint": "e0eb4cbdc2c4d0955538ce7f06708bf61e5c040b433a8b60596a5e02c6f915c9"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 106,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface",
+      "value": "oklch(21.03% 0.0030 112.77)",
+      "fingerprint": "c67179047822019b6f6a1f8085acf3de62664da73cbdcd8fe5e0f9907e6797e5"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 106,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface",
+      "value": "oklch(21.03% 0.0030 112.77)",
+      "fingerprint": "e0f4bd58690f21a3487f48e27d1e6067c6327280c2f0e94af2066ddbeea3e3df"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 107,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "8a1bfb7e0cffa08ff75e819dcedda4d42bb1d3d4d8ef552e55c26358515cb2a9"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 107,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "abdf13714e19608bc57309114dc44a16b1498ea4738a90ed3d8239706bbc2d0f"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 108,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-secondary",
+      "value": "oklch(25.70% 0.0023 112.77)",
+      "fingerprint": "345d168f41b4c841e942fb6c971462c6a06af16b1c64c9c2ef5af75b89cf41bc"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 108,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-secondary",
+      "value": "oklch(25.70% 0.0023 112.77)",
+      "fingerprint": "1fdd8673a3078da0633ce548806373e47c432576f9a11fc308b2eb6ce8ad7759"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 109,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-secondary-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "39d5549cd635c2923c510048f292eb5b165c12077a7d5354b187fc46dafa83f0"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 109,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-secondary-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "5cf6a6c2ca5675150601172aadd64f03408eca1e5f0f337ea2ee534d214120a8"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 110,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-tertiary",
+      "value": "oklch(27.21% 0.0023 112.77)",
+      "fingerprint": "5bf4840296dfdc8798dfca5d8e8548d9af5cc9144ff5344699835cc770aeab9a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 110,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-tertiary",
+      "value": "oklch(27.21% 0.0023 112.77)",
+      "fingerprint": "a4deb937e403671ad5c373b0240128921b38a8dd44647ee61ba8f198f477d420"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 111,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-tertiary-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "1e90b830479681eaa37ce0a19235a73938c6c870f839e433d14f34ea9fb9ff01"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 111,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--surface-tertiary-foreground",
+      "value": "oklch(99.11% 0.0015 112.77)",
+      "fingerprint": "065382eb7dbbc8216b42238830473684f21e66086a498f52028140048aea6fd0"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 112,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--warning",
+      "value": "oklch(82.03% 0.1392 59.41)",
+      "fingerprint": "2451e4316825cf3a9c6a19a6ee73a5143698c19584ba6624ee6e4f3c81b1d48d"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 112,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--warning",
+      "value": "oklch(82.03% 0.1392 59.41)",
+      "fingerprint": "adac904d603a77e234b6aed17337ad85f405ccb1b1bc40c13b634dd2fe0c4122"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 113,
+      "kind": "css",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--warning-foreground",
+      "value": "oklch(21.03% 0.0059 59.41)",
+      "fingerprint": "3c21e0b6c30c653b62e8688ba918f9fb4a4f25d783e3986470959377dfa86e96"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 113,
+      "kind": "raw-color",
+      "selector": ".dark,\n[data-theme=\"dark\"]",
+      "property": "--warning-foreground",
+      "value": "oklch(21.03% 0.0059 59.41)",
+      "fingerprint": "c91bcd0cf0d7383e0a472ddadc3bedfd152688c40dc8c985d57f8f801b2f0e97"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 118,
+      "kind": "css",
+      "selector": "from",
+      "property": "transform",
+      "value": "scale(0.15, 0.18)",
+      "fingerprint": "59113105e60710990fbeb7e8f63472eb0d35236008e853f11bb8728052434c5b"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 121,
+      "kind": "css",
+      "selector": "to",
+      "property": "transform",
+      "value": "scale(1)",
+      "fingerprint": "86b6098f10f0d1b88a41a41bd0740feaae73835d245efc865ebb649ea99aa46f"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 127,
+      "kind": "css",
+      "selector": "from",
+      "property": "transform",
+      "value": "scale(1)",
+      "fingerprint": "7ef067be7af254170899b4a71cb8b6e31ed7e4fc0de258586ff0827c4156f042"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 130,
+      "kind": "css",
+      "selector": "to",
+      "property": "transform",
+      "value": "scale(0.15, 0.18)",
+      "fingerprint": "53c57174bb98fd1b919891320f05be64455ae8373d04e01c0bb4f8bda87876d6"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 135,
+      "kind": "css",
+      "selector": "from",
+      "property": "opacity",
+      "value": "0",
+      "fingerprint": "f1596570e8826976c0acf7b6d9ba1a2f20966b58900d36952b1b2a00ee08460d"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 136,
+      "kind": "css",
+      "selector": "to",
+      "property": "opacity",
+      "value": "1",
+      "fingerprint": "4ff3d36326a613b0027041bbb0047d7a24c7bff2d2c594e7117a2f18bba77d2d"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 140,
+      "kind": "css",
+      "selector": "from",
+      "property": "opacity",
+      "value": "1",
+      "fingerprint": "3f1cf82792d63fe1b97ab9d7591b14e6148e4a6d3dff8b291f1eba32caa20b94"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 141,
+      "kind": "css",
+      "selector": "to",
+      "property": "opacity",
+      "value": "0",
+      "fingerprint": "4b60ad7d7d47a7e87246ed221227398ffc6354a6eb13083f872ae1a003504ed7"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 145,
+      "kind": "css",
+      "selector": ".menu-dropdown__popover",
+      "property": "transform-origin",
+      "value": "var(--trigger-anchor-point, top left)",
+      "fingerprint": "b60602ed69908917bd786ae0aab9df7803feafee7dfbee7f7fcae68ec66cd6ea"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 149,
+      "kind": "css",
+      "selector": ".menu-dropdown__popover[data-entering=\"true\"]",
+      "property": "animation",
+      "value": "menu-dropdown-enter 300ms cubic-bezier(0.16, 1, 0.3, 1) both",
+      "fingerprint": "c4dc4bc20aaf6e7a40312fe840d9928dc92269dcc8c7b97d048f814fa0a749fc"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 153,
+      "kind": "css",
+      "selector": ".menu-dropdown__popover[data-exiting=\"true\"]",
+      "property": "animation",
+      "value": "menu-dropdown-exit 240ms cubic-bezier(0.4, 0, 1, 1) both",
+      "fingerprint": "5e994abd76b0a0dc5025962b26e32de0aa7759b43a69d5553cde9f01b5aae894"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 157,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(1)",
+      "property": "--menu-enter-delay",
+      "value": "55ms",
+      "fingerprint": "e95fdb9e58aa54b915f77155744058e653c7fa690db5d4431e844efe17b7b475"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 157,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(1)",
+      "property": "--menu-enter-delay",
+      "value": "55ms",
+      "fingerprint": "e3f778f60c03fd8a8552e3eb3aa5d0e1346943adea78e2b295fd21186e3c9250"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 158,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(1)",
+      "property": "--menu-exit-delay",
+      "value": "75ms",
+      "fingerprint": "45786dee34c55241fe59f53bdbc3b94c8f409c8fded74640747d363054ff2f04"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 158,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(1)",
+      "property": "--menu-exit-delay",
+      "value": "75ms",
+      "fingerprint": "df4c68ef866a8a94748735960793c1ba72d54972b02e612b6983189e8395d667"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 162,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(2)",
+      "property": "--menu-enter-delay",
+      "value": "90ms",
+      "fingerprint": "f34cd4c1cccca9938830a9b024bc910314c53857ef51d5cdb6d5702c21340efb"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 162,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(2)",
+      "property": "--menu-enter-delay",
+      "value": "90ms",
+      "fingerprint": "61074f390de46e68c68f0272246415ce938d760efe37adb421dd5ea6d0e90782"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 163,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(2)",
+      "property": "--menu-exit-delay",
+      "value": "50ms",
+      "fingerprint": "1cc643d41172c304c28ec40b3d62c812384aa883fa283d8130aa8912a2cbb83e"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 163,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(2)",
+      "property": "--menu-exit-delay",
+      "value": "50ms",
+      "fingerprint": "7d96b046604b8cc4e3b0fd66c46b4d5ca5e3d92e23df5dfa022d38f26caadaa3"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 167,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(3)",
+      "property": "--menu-enter-delay",
+      "value": "125ms",
+      "fingerprint": "ad8f2712df303d21a6005384a897a73078d8e2b0f7beeeef5d6a07d96db18b6f"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 167,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(3)",
+      "property": "--menu-enter-delay",
+      "value": "125ms",
+      "fingerprint": "457e582a8719809d4eb1a23acfd3fd83538ce2d0e151d7015870cdd9598766a8"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 168,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(3)",
+      "property": "--menu-exit-delay",
+      "value": "25ms",
+      "fingerprint": "05afff93ebbe33d6d542dbe6105b37d6142a90258d36bbaaa1754568352266f4"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 168,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(3)",
+      "property": "--menu-exit-delay",
+      "value": "25ms",
+      "fingerprint": "8b666980e0deb1f7dfbcf9adffe21dee94c48f80a8ddeb67c363412923c3631a"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 172,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(4)",
+      "property": "--menu-enter-delay",
+      "value": "160ms",
+      "fingerprint": "031d1b2f21ff676173ebf02cbe4761d00149873475b2a35758db9b790313de82"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 172,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(4)",
+      "property": "--menu-enter-delay",
+      "value": "160ms",
+      "fingerprint": "a83ca09e4ba3bbb3a8eaee8c8c51bfd2c99b48c90c9f3389f6979631991cd621"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 173,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(4)",
+      "property": "--menu-exit-delay",
+      "value": "0ms",
+      "fingerprint": "67925c3d165364b60285e151bd68f69934fd1a0182cafbaa7e5d6d4915a23ef8"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 173,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(4)",
+      "property": "--menu-exit-delay",
+      "value": "0ms",
+      "fingerprint": "9ed06a181e0a742cac099b137ea8e9a2bc98279dccd63789674ab143e678ec99"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 177,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(n + 5)",
+      "property": "--menu-enter-delay",
+      "value": "195ms",
+      "fingerprint": "e2379ae99470f85c7b504c5234da691d91f503ecbd28eea1f0c01c38109ede78"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 177,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(n + 5)",
+      "property": "--menu-enter-delay",
+      "value": "195ms",
+      "fingerprint": "2ac7001401800a6d052382ba42c76465954d92d26ce4dc5cc11a23ab6d182329"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 178,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(n + 5)",
+      "property": "--menu-exit-delay",
+      "value": "0ms",
+      "fingerprint": "f59f1189ab7ddd325356957c84d34423c938b82de38751d349acbe8ed9027bcb"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 178,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu > [data-slot=\"menu-item\"]:nth-child(n + 5)",
+      "property": "--menu-exit-delay",
+      "value": "0ms",
+      "fingerprint": "51b2355e847d3eaab8b8ee59a8b26868cd5cd03376f69365bc7338eb1c4db52b"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 182,
+      "kind": "css",
+      "selector": ".menu-dropdown__popover[data-entering=\"true\"] > .menu-dropdown__menu > [data-slot=\"menu-item\"]",
+      "property": "animation",
+      "value": "menu-dropdown-item-enter 140ms ease-out var(--menu-enter-delay, 55ms) both",
+      "fingerprint": "9f48ea9ebff08352a49948d948fc8ddd7d435bd6528e417ed5de5b152998f6d7"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 182,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__popover[data-entering=\"true\"] > .menu-dropdown__menu > [data-slot=\"menu-item\"]",
+      "property": "animation",
+      "value": "menu-dropdown-item-enter 140ms ease-out var(--menu-enter-delay, 55ms) both",
+      "fingerprint": "d841aed3c69fdb4406dac54c0429adf97a926c5243712fa55b705848147b8798"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 186,
+      "kind": "css",
+      "selector": ".menu-dropdown__popover[data-exiting=\"true\"] > .menu-dropdown__menu > [data-slot=\"menu-item\"]",
+      "property": "animation",
+      "value": "menu-dropdown-item-exit 95ms ease-in var(--menu-exit-delay, 0ms) both",
+      "fingerprint": "b63d0966983b137c0f8a2ca28ad7b473ad5fa656cb375092042e1f240d929a17"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 186,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__popover[data-exiting=\"true\"] > .menu-dropdown__menu > [data-slot=\"menu-item\"]",
+      "property": "animation",
+      "value": "menu-dropdown-item-exit 95ms ease-in var(--menu-exit-delay, 0ms) both",
+      "fingerprint": "72a22610973e407332cff618f09fcec85a82d3912449fde60270a9b63f49d837"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 190,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu [data-slot=\"menu-item\"]",
+      "property": "transition",
+      "value": "background-color 150ms ease, transform 250ms var(--ease-out-quart), box-shadow 150ms var(--ease-out)",
+      "fingerprint": "191b02bacbf4c46c98a9c147280d320d6c34201e0c0d70e958e76dee0433b9ad"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 190,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu [data-slot=\"menu-item\"]",
+      "property": "transition",
+      "value": "background-color 150ms ease, transform 250ms var(--ease-out-quart), box-shadow 150ms var(--ease-out)",
+      "fingerprint": "ed8faae502114ef7839bdc6369dda784ad23ed6c01c7bb4bcaecb1357242f014"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 194,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu [data-slot=\"menu-item\"]:is(:hover, [data-hovered=\"true\"], [data-focused=\"true\"], [data-pressed=\"true\"], [data-selected=\"true\"])",
+      "property": "background-color",
+      "value": "color-mix(in oklab, var(--accent) 50%, transparent)",
+      "fingerprint": "ede7e518e48a75be427c002862dd9190b3b19685f53ddcd3ef81bd83fb3bc385"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 194,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu [data-slot=\"menu-item\"]:is(:hover, [data-hovered=\"true\"], [data-focused=\"true\"], [data-pressed=\"true\"], [data-selected=\"true\"])",
+      "property": "background-color",
+      "value": "color-mix(in oklab, var(--accent) 50%, transparent)",
+      "fingerprint": "d5f164630a3f80fbd7ae816d7b802d942d1134eb35d9a34c661e1ad0f2ec8e43"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 199,
+      "kind": "css",
+      "selector": ".menu-dropdown__popover:is([data-entering=\"true\"], [data-exiting=\"true\"])",
+      "property": "animation",
+      "value": "none",
+      "fingerprint": "20d53823d134ddc81a2c73605ab60e354f2cec30beabdab8fffbcac415040f79"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 203,
+      "kind": "css",
+      "selector": ".menu-dropdown__popover:is([data-entering=\"true\"], [data-exiting=\"true\"]) > .menu-dropdown__menu > [data-slot=\"menu-item\"]",
+      "property": "animation",
+      "value": "none",
+      "fingerprint": "bc01668bed2e1bc013828ff5d6d20e678402e78e28d47bb83b0bbd4ca1c041c9"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 203,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__popover:is([data-entering=\"true\"], [data-exiting=\"true\"]) > .menu-dropdown__menu > [data-slot=\"menu-item\"]",
+      "property": "animation",
+      "value": "none",
+      "fingerprint": "993ca265a0322e59bcc0d9802d5139f83accd2a25b0d72bdd185d6a06b578ae5"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 207,
+      "kind": "css",
+      "selector": ".menu-dropdown__menu [data-slot=\"menu-item\"]",
+      "property": "transition",
+      "value": "none",
+      "fingerprint": "6652919a363a4cdf74cced43ef64d9b1ba3db55e4e8cb68cfe0cb651c1cc65b0"
+    },
+    {
+      "file": "src/styles/global.css",
+      "line": 207,
+      "kind": "internal-override",
+      "selector": ".menu-dropdown__menu [data-slot=\"menu-item\"]",
+      "property": "transition",
+      "value": "none",
+      "fingerprint": "61085540e55208662eae07ec6411f7b7fa35632b32849db7574ce52493b73ba0"
+    }
+  ]
+}

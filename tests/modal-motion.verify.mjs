@@ -5,8 +5,8 @@ import { createServer } from "vite";
 
 const server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, optimizeDeps: { noDiscovery: true }, appType: "custom" });
 try {
-  const base = "/src/_components/common/ohmygui/presentation/";
-  for (const name of ["ModalSurface", "Dialog", "Sheet", "Inspector", "ConfirmationDialog", "CommandPalette", "FullScreenCover"]) {
+  const base = "/src/ohmygui/presentation/";
+  for (const name of ["ModalSurface", "Dialog", "ConfirmationDialog", "CommandPalette", "FullScreenCover"]) {
     const Component = (await server.ssrLoadModule(base + name + ".tsx"))[name];
     const html = render(h(Component, { open: true, title: "Readable prompt", triggerRef: createRef(), openingAnimation: false, closingAnimation: false, choices: [], commands: [] }, "Useful content"));
     assert.match(html, /<dialog[^>]*open=""/);
@@ -25,5 +25,5 @@ try {
   }
   assert.match(modalOpeningFrames(null, target)[0].transform, /scale\(0.96\)/);
   assert.match(modalOpeningFrames(null, target, "rotate(2deg)").at(-1).transform, /rotate\(2deg\)/);
-  console.log("PASS modal opening: seven inherited APIs, SSR/no-JS readability, no leaked props, trigger-centered geometry, uniform bounded scale and fallback");
+  console.log("PASS modal opening: remaining inherited APIs, SSR/no-JS readability, no leaked props, trigger-centered geometry, uniform bounded scale and fallback");
 } finally { await server.close(); }

@@ -1,8 +1,14 @@
 # Navigation browser checks
 
+## Keyed drag and arbitrary-content sorting
+
+`node tests/drag-sort.verify.mjs` checks SSR, compound child/empty constraints, duplicate/missing/invalid keys, legacy source compatibility, accessible handles and controlled/default sorting. Its Vite cache is isolated from Astro dev.
+
+On a live OhMyGUI showcase, schedule `import('/tests/drag-sort.browser.tsx').then(m => m.runDragSortChecks())` with setTimeout and close DevTools before it begins; the actual page must own focus. Ten groups cover keyboard order/cancellation, retained fields/focus, controlled requests, native key filters, empty cross-container transfers, touch-style pointer events/hit testing/cleanup, RTL/isolation/disabled handles, nested/legacy rejection, bounded edge scrolling/pending removal and reduced-motion cleanup. The fixture removes itself and restores its matchMedia test double. Pointer/native events in these fixtures are synthesized against real DOM/layout; physical touch, OS drag behavior, screen-reader announcements and other browsers remain separate acceptance work.
+
 ## Split-view navigation continuity
 
-Run `node tests/split-view.verify.mjs` for SSR/native-link semantics and enhancement-only prop forwarding. On Astro dev run `import('/tests/split-view.browser.tsx').then(m => m.runSplitViewChecks())`. Seven focused groups cover pagehide/remount persistence, separate keys, initially hidden/compact restoration, retained DOM/drafts/scroll during destination motion, opt-out, malformed/blocked storage, growing content/user interruption and reduced motion (scoped test doubles restored afterward). Fixtures and temporary storage keys are removed. This is focused split-view coverage, not a full-library browser run; native full-page showcase navigation should also be checked for matching sidebar offset and disclosure geometry.
+Run `node tests/split-view.verify.mjs` for compound/legacy pane composition, SSR/native-link semantics and enhancement-only prop forwarding; its Vite cache is isolated from the live app. On Astro dev run `import('/tests/split-view.browser.tsx').then(m => m.runSplitViewChecks())`. Nine focused groups cover bounded button-open drawers, outside-page access/focus dismissal/return, RTL/transformed containers, rapid reversal/desktop resize, pagehide/remount persistence, separate keys, hidden/compact restoration, retained DOM/drafts/scroll during destination motion, opt-out, malformed/blocked storage, growing content/user interruption and reduced motion (scoped test doubles restored afterward). Fixtures and temporary storage keys are removed. Run after HMR settles, with the actual page focused: schedule the import with setTimeout and close DevTools before it starts; Chrome may suppress native focus events while DevTools owns focus. This is focused split-view coverage, not a full-library browser run; native full-page showcase navigation should also be checked for matching sidebar offset and disclosure geometry.
 
 ## Popup-motion follow-up
 
@@ -14,7 +20,7 @@ The shared popup motion/custom Picker follow-up uses source review and workspace
 
 `node tests/date-picker.verify.mjs` checks locale preference resolution, week starts/direction, deterministic native SSR fallback and unchanged date/time form contracts. Schedule `import('/tests/date-picker.browser.tsx').then(m => m.runDatePickerChecks()).then(r => window.dateResult = r)` with the page focused; call `dateResult.dispose()` afterward. Six groups cover localized selection/native events/form refs, controlled rejection/reset/validation/disabled/readOnly/autofocus, browser languagechange/explicit locale/opt-out, leap/month/year navigation/steps/bounds, Arabic digits/RTL/message overrides/layout/Popover fallback/cleanup and actual hydration. Preference/API doubles are scoped and restored; no OS language settings change. The full family runner now includes these groups (47 total).
 
-`node tests/input-fields.verify.mjs` checks the six shared field contracts and FieldGroup descriptions through SSR. On Astro dev:
+`node tests/input-fields.verify.mjs` checks the shared field contracts through SSR. On Astro dev:
 
 ```js
 import("/tests/input-fields.browser.tsx").then(m => m.runInputFieldChecks())
@@ -142,19 +148,10 @@ import("/tests/showcase-shell.browser.tsx").then(m => m.runShowcaseShellChecks()
 
 This checks that docking/floating adds no top strip, avoids header overlaps, preserves focus, and keeps 375px pane navigation usable.
 
-The rebuilt `/test` workspace also has focused checks:
-
-```js
-import("/tests/workspace.browser.tsx").then(m => m.runWorkspaceChecks())
-```
-
-These verify the overview links and landmark, desktop sidebar collapse, idea selection,
-native dialog/save/cancel/focus restoration, and 375px pane switching without overflow.
-Fixtures are removed automatically after the run. The original navigation suite below
-continues to test shared component behavior independently of the page design.
+The retired `/test` workspace fixture was removed with its stale imports. Shared navigation checks remain available independently on a live showcase page.
 
 1. Run the existing Astro dev command (npm run dev).
-2. Open /test/navigation in a browser and open its developer console.
+2. Open /ohmygui/navigation-split-view in a browser and open its developer console.
 3. Execute:
 
 ```js
@@ -164,6 +161,8 @@ import("/tests/navigation.browser.tsx").then(m => m.runNavigationChecks())
 The suite mounts isolated React fixtures, exercises them against the real browser DOM/layout, and prints pass/fail results on the page and in the console. It returns a dispose() method; refreshing the page also removes the fixtures. Run after file edits have settled (development HMR can reload the page during a run).
 
 Coverage includes all 13 navigation components: 320–1024px container breakpoints, pane switching/scroll retention, nested split isolation, controlled collapse/focus recovery, disabled route links, breadcrumb disclosure, tab overflow/keyboard/RTL, search debounce/composition/submit/reset, toolbar key ownership, resize orientation/bounds/reset, title wrapping and stack semantics.
+
+`node tests/breadcrumbs.verify.mjs` checks Breadcrumbs.Item composition without a browser: fragments/conditional children, rich labels, native attributes, merged classes, retained overflow ancestors, disabled/current-page semantics, invalid children and NavigationStack's existing array adapter.
 
 To check reduced motion, use the browser's developer-tool Rendering emulation for prefers-reduced-motion: reduce, then rerun. The suite checks computed transition duration against the active preference.
 
@@ -200,3 +199,7 @@ After `npm run build`, run `node tests/showcase-theme.verify.mjs`. It checks the
 ## Motion inside animated tab panes
 
 Run `node tests/motion-visibility.verify.mjs` for the shared controller regression where four Stagger cards mount while a parent WAAPI fade is at opacity zero. Controlled API substitutes advance the fade without DOM/intersection notifications and check repeated remounts, preserved delays, no polling of static/paused/unrelated/offscreen parents, cleanup and reduced motion. This is deterministic controller coverage, not a browser paint test. `node tests/animation.verify.mjs` checks existing motion SSR/presets.
+
+## Design-system refactor acceptance
+
+Run `npm run typecheck`, `npm run check:styles` and `npm run build` for this pass. Browser runners and visual comparisons have not been run for the design-system migration. The exact deferred matrix is in `src/ohmygui/_docs/design-system/BROWSER-CHECKLIST.md`; source inventory is in EXAMPLE-AUDIT.md. The catalog contract now includes the theme topic; the obsolete fixture for deleted `/test` was retired, not excluded from TypeScript.

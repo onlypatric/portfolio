@@ -9,8 +9,8 @@ const read = path => readFileSync(path, "utf8");
 const showcaseSource = read(root + "/Showcase.tsx");
 assert.doesNotMatch(showcaseSource.slice(showcaseSource.indexOf("  return <")), /<\/?[a-z][\w-]*(?:\s|\/?>)/, "Showcase composes OhMyGUI components, not intrinsic JSX elements");
 const catalog = JSON.parse(read(root + "/catalog.ts").split("export const catalog: CatalogEntry[] = ")[1].replace(/;\s*$/, ""));
-const library = "src/_components/common/ohmygui";
-const categories = ["layout", "content", "input", "collection", "navigation", "presentation", "drawing", "behavior"];
+const library = "src/ohmygui";
+const categories = ["layout", "content", "input", "collection", "navigation", "presentation", "drawing", "behavior", "theme"];
 const exported = categories.flatMap(category => [...read(library + "/" + category + "/index.ts").matchAll(/^export \{ (\w+) \}/gm)].map(match => match[1]));
 exported.push("ModalSurface");
 assert.deepEqual(catalog.map(item => item.name).sort(), exported.sort(), "Every library component has a view");
@@ -25,7 +25,7 @@ for (const [index, path] of pages.entries()) {
   assert.equal(new Set(ids).size, ids.length, path + ": duplicate ids");
   if (index) {
     const entry = catalog[index - 1], source = read(root + "/examples/" + entry.name + ".tsx");
-    assert.match(source, new RegExp("<" + entry.name + "(?:[\\s/>])"), entry.name + ": target really used");
+    assert.match(source, new RegExp("<" + entry.name + "(?:[.\\s/>])"), entry.name + ": target really used");
     const panel = html.slice(html.indexOf("showcase-source-panel"));
     const code = panel.match(/<code\b[^>]*>([\s\S]*?)<\/code>/)?.[1];
     assert.equal(decode(code ?? ""), source, entry.name + ": displayed source equals executable file");

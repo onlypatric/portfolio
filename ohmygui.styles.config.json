@@ -1,0 +1,11 @@
+{
+  "libraryRoot": "src/ohmygui",
+  "aliasRoot": "src",
+  "baseline": "ohmygui.styles.baseline.json",
+  "sharedLegacyFiles": ["src/layouts/BaseLayout.astro", "src/styles/global.css"],
+  "exceptions": [],
+  "consumers": [
+    { "name": "team-dashboard", "entries": ["src/pages/ohmygui/examples/team-dashboard.astro"], "budget": { "declarations": 20, "selectors": 3, "bytes": 2048 } },
+    { "name": "independent-workspace", "entries": ["src/pages/ohmygui/examples/workspace.astro"], "budget": { "declarations": 20, "selectors": 3, "bytes": 2048 } }
+  ]
+}
